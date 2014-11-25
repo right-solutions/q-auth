@@ -14,7 +14,7 @@
 
 
       <!-- Title (string) -->
-      <%= render :partial=>"field", :locals=>{:object=>@designation,
+      <%= render :partial=>"layouts/common/field", :locals=>{:object=>@designation,
                                               :object_name=>'designation',
                                               :field_name=>'title',
                                               :display_name=>'Title',
@@ -24,7 +24,7 @@
                                               :place_holder=>"e.g: Sr. Manager"} %>
 
       <!-- Responsibilities (text) -->
-      <%= render :partial=>"field", :locals=>{:object=>@designation,
+      <%= render :partial=>"layouts/common/field", :locals=>{:object=>@designation,
                                               :object_name=>'designation',
                                               :field_name=>'responsibilities',
                                               :display_name=>'Responsibilities',

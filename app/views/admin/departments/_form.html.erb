@@ -14,7 +14,7 @@
 
 
       <!-- Name (string) -->
-      <%= render :partial=>"field", :locals=>{:object=>@department,
+      <%= render :partial=>"layouts/common/field", :locals=>{:object=>@department,
                                               :object_name=>'department',
                                               :field_name=>'name',
                                               :display_name=>'Name',
@@ -24,7 +24,7 @@
                                               :place_holder=>"Enter the name of the department"} %>
 
       <!-- Description (text) -->
-      <%= render :partial=>"field", :locals=>{:object=>@department,
+      <%= render :partial=>"layouts/common/field", :locals=>{:object=>@department,
                                               :object_name=>'department',
                                               :field_name=>'description',
                                               :display_name=>'Description',

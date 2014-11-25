@@ -14,7 +14,7 @@
 
 
       <!-- Name (string) -->
-      <%= render :partial=>"field", :locals=>{:object=>@user,
+      <%= render :partial=>"layouts/common/field", :locals=>{:object=>@user,
                                               :object_name=>'user',
                                               :field_name=>'name',
                                               :display_name=>'Name',
@@ -24,7 +24,7 @@
                                               :place_holder=>"e.g: Black."} %>
 
       <!-- Username (string) -->
-      <%= render :partial=>"field", :locals=>{:object=>@user,
+      <%= render :partial=>"layouts/common/field", :locals=>{:object=>@user,
                                               :object_name=>'user',
                                               :field_name=>'username',
                                               :display_name=>'Username',
@@ -34,7 +34,7 @@
                                               :place_holder=>"e.g: joe.black."} %>
 
       <!-- Email (string) -->
-      <%= render :partial=>"field", :locals=>{:object=>@user,
+      <%= render :partial=>"layouts/common/field", :locals=>{:object=>@user,
                                               :object_name=>'user',
                                               :field_name=>'email',
                                               :display_name=>'Email',
@@ -73,7 +73,7 @@
       </div>
 
       <!-- Designation (string) -->
-      <%= render :partial=>"field", :locals=>{:object=>@user,
+      <%= render :partial=>"layouts/common/field", :locals=>{:object=>@user,
                                               :object_name=>'user',
                                               :field_name=>'designation_overridden',
                                               :display_name=>'Designation',
@@ -83,7 +83,7 @@
                                               :place_holder=>"Custom Designation"} %>
 
       <!-- Phone (string) -->
-      <%= render :partial=>"field", :locals=>{:object=>@user,
+      <%= render :partial=>"layouts/common/field", :locals=>{:object=>@user,
                                               :object_name=>'user',
                                               :field_name=>'phone',
                                               :display_name=>'Phone',
@@ -93,7 +93,7 @@
                                               :place_holder=>"e.g: +91-9880-181-181."} %>
 
       <!-- Linked In (string) -->
-      <%= render :partial=>"field", :locals=>{:object=>@user,
+      <%= render :partial=>"layouts/common/field", :locals=>{:object=>@user,
                                               :object_name=>'user',
                                               :field_name=>'linkedin',
                                               :display_name=>'Linked In',
@@ -102,7 +102,7 @@
                                               :required=>false,
                                               :place_holder=>"Copy paste linked in url here."} %>
       <!-- Skype (string) -->
-      <%= render :partial=>"field", :locals=>{:object=>@user,
+      <%= render :partial=>"layouts/common/field", :locals=>{:object=>@user,
                                               :object_name=>'user',
                                               :field_name=>'skype',
                                               :display_name=>'Skype',
