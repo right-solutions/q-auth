@@ -19,12 +19,9 @@
 				<%= link_to raw("<i class=\"fa fa-dashboard\"></i> Dashboard"), user_dashboard_path %>
 			</li>
 
-			<li class="<%= nav_class("user/team") %>">
-				<%= link_to raw("<i class=\"fa fa-dashboard\"></i> Team"), team_path %>
-			</li>
 
 			<% if @current_admin %>
-
+				
 				<li class="nav-header">Admin</li>
 
 				<li class="<%= nav_class("admin/users") %>">

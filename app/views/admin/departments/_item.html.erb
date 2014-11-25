@@ -5,8 +5,8 @@
       <%= display_image(department, :picture, "50px") %>
     </div>
     <div class="pull-left" style="width:80%;">
-      <%= link_to department.name, admin_department_path(department), :remote=>true, :class=>"text-color-blue font-size-14" %>
-      <div class="text-color-gray font-size-11"> <%= scrap_word(department.description, 120) %></div>
+      <%= link_to department.name, admin_department_path(department), :remote=>true, :class=>"text-color-blue fs-14" %>
+      <div class="text-color-gray fs-11"> <%= scrap_word(department.description, 120) %></div>
     </div>
 
 </div>
