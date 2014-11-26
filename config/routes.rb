@@ -66,6 +66,8 @@ QAuth::Application.routes.draw do
     get   '/dashboard',         to: "dashboard#index",   as:  :dashboard # Landing page after sign in
     get   '/settings',          to: "settings#index",   as:  :settings
     get   '/profile',           to: "profile#index",   as:  :profile
+    get   '/edit',              to: "profile#edit", as: :edit
+    put   '/update',              to: "profile#update", as: :update
   end
 
   # User Pages for teams and user profiles
