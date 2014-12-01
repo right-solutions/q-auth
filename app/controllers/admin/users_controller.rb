@@ -1,7 +1,8 @@
 class Admin::UsersController < Admin::BaseController
 
   #authorize_actions_for Item, :actions => {:index => :delete}
-
+  before_filter :get_user, :only => [:masquerade]
+  
   # GET /users
   # GET /users.js
   # GET /users.json
@@ -169,6 +170,15 @@ class Admin::UsersController < Admin::BaseController
     end
   end
 
+   def masquerade
+    if ["development", "it", "test"].include?(Rails.env)
+      message = translate("users.masquerade", user: @users_masq.name)
+      session[:last_user_id] = current_user.id
+      session[:id] = @users_masq.id
+      redirect_to user_dashboard_path
+    end
+  end
+
   private
 
   def set_navs
@@ -179,7 +189,6 @@ class Admin::UsersController < Admin::BaseController
     # Fetching the users
     relation = User.where("")
     @filters = {}
-
     if params[:query]
       @query = params[:query].strip
       relation = relation.search(@query) if !@query.blank?
@@ -193,6 +202,11 @@ class Admin::UsersController < Admin::BaseController
 
     return true
 
+  end
+
+  def get_user
+    @users_masq = User.find(params[:id]) if params[:id]
+    @users_masq = User.find(params[:user_id]) if params[:user_id]
   end
 
 end

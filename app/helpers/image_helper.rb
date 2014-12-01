@@ -27,6 +27,22 @@ module ImageHelper
     return image_tag photo.image_url, :style=>"width:#{width}px;", :width=>"#{width}", :class=>""
   end
 
+  def display_profile_picture(user, width=116, height=116, form=nil)
+    if user && user.profile_picture.present?
+      content_tag :div, :class=>"mask-img-bdr-rounded", :style=>"width:#{width}px;height:#{height}px;" do
+        image_tag user.profile_picture.image.url, :style=>"width:#{width}px;", :id=> display_profile_picture_id(user, form) ,:class => "profile" ,:alt => ''
+      end
+    else
+      content_tag :div, :class=>"mask-img-bdr-rounded", :style=>"width:#{width}px;height:#{height}px;" do
+        image_tag "icons/default-user-116.png", :style=>"width:#{width}px;", :id => display_profile_picture_id(user, form),:alt => ''
+      end
+    end
+  end
+
+  def display_profile_picture_id(user, form=nil)
+    (user && user.profile_picture.present?) ? "#{form}img_profile_picture_#{user.id}" : "#{form}img_uploaded_profile_picture"
+  end
+
   ## Returns new photo url or edit existing photo url based on
   #  object is associated with photo or not
   # == Examples

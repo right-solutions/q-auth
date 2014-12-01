@@ -42,6 +42,7 @@ QAuth::Application.routes.draw do
 
     resources :users do
       get :change_status, on: :member
+      get 'masquerade'
     end
 
     resources :projects do
@@ -56,6 +57,7 @@ QAuth::Application.routes.draw do
     resources :departments
     resources :designations
 
+
   end
 
   # ------------
@@ -68,6 +70,7 @@ QAuth::Application.routes.draw do
     get   '/profile',           to: "profile#index",   as:  :profile
     get   '/edit',              to: "profile#edit", as: :edit
     put   '/update',              to: "profile#update", as: :update
+    resources :images
   end
 
   # User Pages for teams and user profiles

@@ -2,13 +2,12 @@ module Public
   class UserSessionsController < ApplicationController
 
     before_filter :require_user, :only => :sign_out
-    before_filter :redirect_to_appropriate_page_if_signed_in, :only => :sign_in
     before_filter :set_navs
 
     layout 'sign_in'
 
     def sign_in
-
+      redirect_to_appropriate_page_after_sign_in if @current_user
     end
 
     ## This method will accept a proc, execute it and render the json
@@ -29,7 +28,7 @@ module Public
           @alert = translate("authentication.user_is_#{@user.status.downcase}")
           store_flash_message("#{@heading}: #{@alert}", :error)
 
-          redirect_to_sign_url
+          redirect_after_unsuccessful_authentication
           return
 
         # Check if the password matches
@@ -42,7 +41,7 @@ module Public
           @alert = translate("authentication.invalid_login")
           store_flash_message("#{@heading}: #{@alert}", :error)
 
-          redirect_to_sign_url
+          redirect_after_unsuccessful_authentication
           return
         end
 
@@ -55,11 +54,7 @@ module Public
 
         session[:id] = @user.id
 
-        if params[:redirect_back_url]
-          redirect_to params[:redirect_back_url]
-        else
-          redirect_to_appropriate_page_after_sign_in
-        end
+        redirect_to_appropriate_page_after_sign_in
 
       # If the user with provided email doesn't exist
       else
@@ -70,7 +65,8 @@ module Public
         @alert = translate("authentication.user_not_found")
         store_flash_message("#{@heading}: #{@alert}", :error)
 
-        redirect_to_sign_url
+        redirect_after_unsuccessful_authentication
+
       end
 
     end
@@ -85,8 +81,8 @@ module Public
       @current_user.update_attribute :auth_token, SecureRandom.hex
 
       session.delete(:id)
-
-      redirect_to_sign_url
+      restore_last_user
+      redirect_after_unsuccessful_authentication
 
     end
 
@@ -94,15 +90,6 @@ module Public
 
     def set_navs
       set_nav("Login")
-    end
-
-    def redirect_to_sign_url
-      params_hsh = {
-        client_app: params[:client_app],
-        redirect_back_url: params[:redirect_back_url]
-      }
-      url = add_query_params(user_sign_in_url, params_hsh)
-      redirect_to url
     end
 
   end
