@@ -1,6 +1,6 @@
 module Public
   class UserSessionsController < ApplicationController
-  
+    
     before_filter :require_user, :only => :sign_out
     before_filter :redirect_to_appropriate_page_if_signed_in, :only => :sign_in
     before_filter :set_navs
@@ -54,7 +54,6 @@ module Public
         store_flash_message("#{@heading}: #{@alert}", :success)
         
         session[:id] = @user.id
-      
         redirect_to_appropriate_page_after_sign_in
       
       # If the user with provided email doesn't exist
@@ -72,16 +71,14 @@ module Public
     end
     
     def sign_out
-      
+
       @heading = translate("authentication.success")
       @alert = translate("authentication.logged_out_successfully")
       store_flash_message("#{@heading}: #{@alert}", :notice)
-      
       # Reseting the auth token for user when he logs out.
       @current_user.update_attribute :auth_token, SecureRandom.hex
-      
       session.delete(:id)
-      
+      return if restore_last_user
       redirect_to user_sign_in_url
       
     end

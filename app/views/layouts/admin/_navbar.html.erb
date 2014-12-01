@@ -117,30 +117,44 @@
 		</li><!-- / dropdown -->
 
 		<% if @current_user %>
-			<li class="dropdown user-name">
-				<a class="dropdown-toggle" data-toggle="dropdown"><img src="/assets/theme/avatarSeven.png" class="user-avatar" alt="" /><%= @current_user.display_name %></a>
-				<ul class="dropdown-menu right inbox user">
-					<li class="user-avatar">
-						<img src="/assets/theme/avatarSeven.png" class="user-avatar" alt="<%= @current_user.display_name %>" />
-						<%= @current_user.display_name %>
-					</li>
-					<li>
-						<i class="fa fa-user avatar"></i>
-						<div class="message">
-							<%= link_to "My Profile", user_profile_path, :class=>"username float-left" %>
-						</div>
-					</li>
-					<li>
-						<i class="fa fa-cogs avatar"></i>
-						<div class="message">
-							<%= link_to "Account Settings", user_settings_path, :class=>"username float-left" %>
-						</div>
-					</li>
-					<li>
-						<%= link_to raw("<i class=\"fa fa-power-off\"></i> Sign Out"), user_sign_out_path, :method => :delete %>
-					</li>
-				</ul>
-			</li><!-- / dropdown -->
+		<li class="dropdown user-name">
+			<a class="dropdown-toggle" data-toggle="dropdown" style="padding-bottom:44px">
+				<div class="profile-pic-name pull-left">
+					<div class="img-wrap">
+						<%= display_profile_picture(@current_user, 35, 35) %>
+					</div>
+					<span><%= @current_user.display_name %></span>
+				</div>
+			</a>
+
+
+			<ul class="dropdown-menu right inbox user">
+				<li class="user-avatar profile-pic">
+					<!-- <img src="/assets/theme/avatarSeven.png" class="user-avatar" alt="<%= @current_user.display_name %>" /> -->
+					<div class="row"></div>
+					<div class="img-wrap col-sm-3">
+						<%= display_profile_picture(@current_user, 50, 50)%>
+					</div>
+					<div class="col-sm-9 pt-20 pull-right text-center"> 
+					<%= @current_user.display_name %></div>
+				</li>
+				<li>
+					<i class="fa fa-user avatar"></i>
+					<div class="message">
+						<%= link_to "My Profile", user_profile_path, :class=>"username float-left" %>
+					</div>
+				</li>
+				<li>
+					<i class="fa fa-cogs avatar"></i>
+					<div class="message">
+						<%= link_to "Account Settings", user_settings_path, :class=>"username float-left" %>
+					</div>
+				</li>
+				<li>
+					<%= link_to raw("<i class=\"fa fa-power-off\"></i> Sign Out"), user_sign_out_path, :method => :delete %>
+				</li>
+			</ul>
+		</li><!-- / dropdown -->
 		<% end %>
 	</ul><!-- / Top right user menu -->
 
