@@ -42,6 +42,7 @@ QAuth::Application.routes.draw do
 
     resources :users do
       get :change_status, on: :member
+      get 'masquerade'
     end
 
     resources :projects do
@@ -55,6 +56,7 @@ QAuth::Application.routes.draw do
     resources :images
     resources :departments
     resources :designations
+
 
   end
 

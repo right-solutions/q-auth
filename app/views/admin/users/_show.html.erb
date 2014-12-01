@@ -24,6 +24,12 @@
           <div class="text-color-green fs-11"><i class="fa fa-map-marker"></i> <%= location %> </div>
         <% end %>
 
+
+             <% if ["development", "it", "test"].include?(Rails.env) %>
+               <%= link_to "Masquerade", admin_user_masquerade_path(@user),data: { confirm: "Are you sure? Do you really want to logout current session and login as #{@user.name}?" }, :class=>"btn btn-danger btn-xs ml-10 mt-10 pull-right" %>
+             <% end %>
+
+
       </div>
     </div>
   </div>

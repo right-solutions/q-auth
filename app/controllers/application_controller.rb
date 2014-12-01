@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   include ActionController::HttpAuthentication::Token::ControllerMethods
 
   ## This filter method is used to fetch current user
-  before_filter :current_user
+  before_filter :current_user  
 
   def redirect_to_appropriate_page_after_sign_in
     if @current_user
@@ -45,6 +45,18 @@ class ApplicationController < ActionController::Base
       @alert = translate("authentication.permission_denied")
       store_flash_message("#{@heading}: #{@alert}", :errors)
       redirect_to user_sign_in_url
+    end
+  end
+
+  def restore_last_user
+    if session[:last_user_id].present?
+      last_user = User.find_by_id(session[:last_user_id])
+      session.destroy()
+      if last_user.present?
+        session[:id] = last_user.id
+         redirect_to user_dashboard_path
+      end
+      last_user
     end
   end
 
