@@ -8,6 +8,9 @@
 
   <%= form_tag create_user_session_path, :role=>"form" do %>
 
+    <%= hidden_field_tag :client_app, params[:client_app] if params[:client_app] %>
+    <%= hidden_field_tag :redirect_back_url, params[:redirect_back_url] if params[:redirect_back_url] %>
+
     <div id="div_flash_message">
       <%= render :partial=>"/layouts/common/flash_message" -%>
     </div>

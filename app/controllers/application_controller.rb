@@ -5,6 +5,8 @@ class ApplicationController < ActionController::Base
   include ParamsParserHelper
   include FlashHelper
   include NavigationHelper
+  include TitleHelper
+  include UrlHelper
   include ActionController::HttpAuthentication::Token::ControllerMethods
 
   ## This filter method is used to fetch current user
