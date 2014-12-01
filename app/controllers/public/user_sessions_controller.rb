@@ -8,7 +8,6 @@ module Public
     layout 'sign_in'
 
     def sign_in
-      
     end
     
     ## This method will accept a proc, execute it and render the json 
@@ -28,7 +27,6 @@ module Public
           @heading = translate("authentication.error")
           @alert = translate("authentication.user_is_#{@user.status.downcase}")
           store_flash_message("#{@heading}: #{@alert}", :error)
-          
           redirect_to user_sign_in_url
           return
           
@@ -41,7 +39,6 @@ module Public
           @heading = translate("authentication.error")
           @alert = translate("authentication.invalid_login")
           store_flash_message("#{@heading}: #{@alert}", :error)
-          
           redirect_to user_sign_in_url
           return
         end
@@ -52,7 +49,6 @@ module Public
         @heading = translate("authentication.success")
         @alert = translate("authentication.logged_in_successfully")
         store_flash_message("#{@heading}: #{@alert}", :success)
-        
         session[:id] = @user.id
         redirect_to_appropriate_page_after_sign_in
       
@@ -64,7 +60,6 @@ module Public
         @heading = translate("authentication.error")
         @alert = translate("authentication.user_not_found")
         store_flash_message("#{@heading}: #{@alert}", :error)
-        
         redirect_to user_sign_in_url
       end
       
