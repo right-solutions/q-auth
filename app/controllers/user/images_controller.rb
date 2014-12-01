@@ -92,7 +92,6 @@ class User::ImagesController < User::BaseController
   def update
 
     # Get the image object and assign new image path to it
-    binding.pry
     image_type = params[:image_type] || "Image::Base"
     @image = image_type.constantize.find(params[:id])
 
