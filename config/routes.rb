@@ -70,6 +70,7 @@ QAuth::Application.routes.draw do
     get   '/profile',           to: "profile#index",   as:  :profile
     get   '/edit',              to: "profile#edit", as: :edit
     put   '/update',              to: "profile#update", as: :update
+    resources :images
   end
 
   # User Pages for teams and user profiles
