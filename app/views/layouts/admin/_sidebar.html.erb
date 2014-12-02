@@ -52,7 +52,6 @@
 
 			<li class="nav-header">API</li>
 			<li> 
-				<% binding.pry %>
 				<%= link_to raw("<i class=\"fa fa-anchor\"></i> User Detail"), user_detail_path(@current_user.auth_token), :method => :get, :target => "_blank" if @current_user %>
 			</li>
 
