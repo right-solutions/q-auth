@@ -95,13 +95,13 @@ class User < ActiveRecord::Base
   #
   # Exclude some attributes info from json output.
   def to_json(options={})
-    options[:except] ||= ConfigCenter::User::ExcludedJsonAttributes
+    options[:except] ||= ConfigCenter::User::EXCLUDED_JSON_ATTRIBUTES
     super(options)
   end
 
   # Exclude some attributes info from json output.
   def as_json(options={})
-    options[:except] ||= ConfigCenter::User::ExcludedJsonAttributes
+    options[:except] ||= ConfigCenter::User::EXCLUDED_JSON_ATTRIBUTES
     super(options)
   end
 

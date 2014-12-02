@@ -14,6 +14,7 @@ QAuth::Application.routes.draw do
 
   # My Profile
   put    '/api/v1/my_profile'  =>  "api/v1/my_profile#update",  :as => :my_profile
+  get    '/api/v1/user_detail/:auth_token'  =>  "api/v1/my_profile#user_detail",  :as => :user_detail
 
   # ----------------------------
   # Doorkeeper - Oauth Provider

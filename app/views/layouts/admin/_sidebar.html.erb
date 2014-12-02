@@ -50,6 +50,12 @@
 				<%= link_to raw("<i class=\"fa fa-power-off\"></i> Sign Out"), user_sign_out_path, :method => :delete %>
 			</li>
 
+			<li class="nav-header">API</li>
+			<li> 
+				<%= link_to raw("<i class=\"fa fa-anchor\"></i> User Detail"), user_detail_path(@current_user.auth_token), :method => :get, :target => "_blank" if @current_user %>
+			</li>
+
+
 		</ul>
 
 	</div><!-- /Wrapper -->
