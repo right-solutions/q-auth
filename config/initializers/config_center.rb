@@ -81,5 +81,20 @@ module ConfigCenter
 
   end
 
+  module QApps
+    QAUTH_URL = "http://localhost:9001"
+    QPROJECTS_URL = "http://localhost:9002"
+    QTIME_URL = "http://localhost:9003"
+    QLEAVES_URL = "http://localhost:9004"
+    QMEETING_URL = "http://localhost:9005"
+    QASSETS_URL = "http://localhost:9006"
+
+    QMESSAGES_URL = "http://localhost:9008"
+    QSECURE_URL = "http://localhost:9007"
+    QSERVERS_URL = "http://localhost:9009"
+    QRECRUIT_URL = "http://localhost:9010"
+    QCAREER_URL = "http://localhost:9011"
+  end
+
 
 end

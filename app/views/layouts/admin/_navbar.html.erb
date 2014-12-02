@@ -4,7 +4,8 @@
 
 	<!-- Top right user menu -->
 	<ul class="nav navbar-nav user-menu pull-right">
-		<!-- First nav user item -->
+
+		<!-- Messages -->
 		<li class="dropdown hidden-xs hidden-md">
 			<a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i></a>
 			<ul class="dropdown-menu right inbox">
@@ -53,70 +54,100 @@
 			</ul>
 		</li><!-- /dropdown -->
 
-		<!-- Second nav user item -->
-		<li class="dropdown hidden-xs hidden md">
-			<a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i></a>
-			<ul class="dropdown-menu right notifications">
-				<li class="dropdown-menu-title">
-					Notifications
-				</li>
+		<!-- Q-Apps Links -->
+		<li class="dropdown user-name">
+			<a class="dropdown-toggle" data-toggle="dropdown" style="padding-bottom:44px">
+				<div class="profile-pic-name pull-left">
+					<i class="fa fa-user avatar"></i>
+					<span>Q-Apps</span>
+				</div>
+			</a>
+
+			<ul class="dropdown-menu right inbox user">
+
+				<li></li>
+
 				<li>
-					<i class="fa fa-cog avatar text-success"></i>
+					<i class="fa fa-user avatar"></i>
 					<div class="message">
-						<span class="username text-success">New settings activated</span>
-						<span class="time pull-right"> 06:58 PM</span>
-					</div>
-				</li>
-				<li>
-					<i class="fa fa-shopping-cart avatar text-danger"></i>
-					<div class="message">
-						<span class="username text-danger">You have 2 returns</span>
-						<span class="time pull-right"> 04:29 PM</span>
-					</div>
-				</li>
-				<li>
-					<i class="fa fa-user avatar text-success"></i>
-					<div class="message">
-						<span class="username text-success">New User registered</span>
-						<span class="time pull-right"> Yesterday</span>
-					</div>
-				</li>
-				<li>
-					<i class="fa fa-comment avatar text-info"></i>
-					<div class="message">
-						<span class="username text-info">New Comment received</span>
-						<span class="time pull-right"> Yesterday</span>
-					</div>
-				</li>
-				<li>
-					<i class="fa fa-cog avatar text-warning"></i>
-					<div class="message">
-						<span class="username text-warning">User deleted</span>
-						<span class="time pull-right"> 2 days ago</span>
-					</div>
-				</li>
-				<li>
-					<i class="fa fa-dollar avatar"></i>
-					<div class="message">
-						<span class="username">Earned 200 points</span>
-						<span class="time pull-right">3 days ago</span>
-					</div>
-				</li>
-				<li>
-					<i class="fa fa-hdd avatar text-danger"></i>
-					<div class="message">
-						<span class="username text-danger">Memory size exceeded </span>
-						<span class="time pull-right"> 1 week ago</span>
+						<%= link_to "Q-Auth", ConfigCenter::QApps::QAUTH_URL, :class=>"username float-left" %>
 					</div>
 				</li>
 
-				<li class="dropdown-menu-footer">
-					<a href="#">View All Notifications</a>
+				<li>
+					<i class="fa fa-dashboard avatar"></i>
+					<div class="message">
+						<%= link_to "Q-Projects", ConfigCenter::QApps::QPROJECTS_URL, :class=>"username float-left" %>
+					</div>
+				</li>
+
+				<li>
+					<i class="fa fa-clock-o avatar"></i>
+					<div class="message">
+						<%= link_to "Q-Time", ConfigCenter::QApps::QTIME_URL, :class=>"username float-left" %>
+					</div>
+				</li>
+
+				<li>
+					<i class="fa fa-bars avatar"></i>
+					<div class="message">
+						<%= link_to "Q-Leaves", ConfigCenter::QApps::QLEAVES_URL, :class=>"username float-left" %>
+					</div>
+				</li>
+
+				<li>
+					<i class="fa fa-slideshare avatar"></i>
+					<div class="message">
+						<%= link_to "Q-Meeting", ConfigCenter::QApps::QMEETING_URL, :class=>"username float-left" %>
+					</div>
+				</li>
+
+				<li>
+					<i class="fa fa-cubes avatar"></i>
+					<div class="message">
+						<%= link_to "Q-Assets", ConfigCenter::QApps::QASSETS_URL, :class=>"username float-left" %>
+					</div>
+				</li>
+
+				<li>
+					<i class="fa fa-comments-o avatar"></i>
+					<div class="message">
+						<%= link_to "Q-Messages", ConfigCenter::QApps::QMESSAGES_URL, :class=>"username float-left" %>
+					</div>
+				</li>
+
+				<li>
+					<i class="fa fa-check-square avatar"></i>
+					<div class="message">
+						<%= link_to "Q-Secure", ConfigCenter::QApps::QSECURE_URL, :class=>"username float-left" %>
+					</div>
+				</li>
+
+				<li>
+					<i class="fa fa-cloud avatar"></i>
+					<div class="message">
+						<%= link_to "Q-Servers", ConfigCenter::QApps::QSERVERS_URL, :class=>"username float-left" %>
+					</div>
+				</li>
+
+				<li>
+					<i class="fa fa-graduation-cap avatar"></i>
+					<div class="message">
+						<%= link_to "Q-Recruit", ConfigCenter::QApps::QRECRUIT_URL, :class=>"username float-left" %>
+					</div>
+				</li>
+
+				<li>
+					<i class="fa fa-file-text avatar"></i>
+					<div class="message">
+						<%= link_to "Q-Career", ConfigCenter::QApps::QCAREER_URL, :class=>"username float-left" %>
+					</div>
 				</li>
 			</ul>
 		</li><!-- / dropdown -->
 
 		<% if @current_user %>
+		<!-- User Drop Down Links -->
 		<li class="dropdown user-name">
 			<a class="dropdown-toggle" data-toggle="dropdown" style="padding-bottom:44px">
 				<div class="profile-pic-name pull-left">
@@ -135,7 +166,7 @@
 					<div class="img-wrap col-sm-3">
 						<%= display_profile_picture(@current_user, 50, 50)%>
 					</div>
-					<div class="col-sm-9 pt-20 pull-right text-center"> 
+					<div class="col-sm-9 pt-20 pull-right text-center">
 					<%= @current_user.display_name %></div>
 				</li>
 				<li>
