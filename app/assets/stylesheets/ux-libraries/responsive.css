@@ -79,19 +79,19 @@
     display: block;
   }
   h3.panel-title {
-    font-size: 12px;
+    font-size: 16px;
     font-weight: 200;
   }
 }
 /* Higher than 992 (desktop devices)
 ====================================================================== */
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
-  
+
 }
 /* Tablet Portrait (devices and browsers)
 ====================================================================== */
 @media only screen and (min-width: 768px) and (max-width: 991px) {
-  
+
 }
 /* All Mobile Sizes (devices and browser)
 ====================================================================== */
@@ -172,7 +172,7 @@
     font-size: 12px;
     display: block;
   }
-  /* Profile 
+  /* Profile
   	---------------------------------------------------------------------------------------------- */
   .profile-head img,
   .profile-head {
@@ -197,7 +197,7 @@
 /* Mobile Landscape Size to Tablet Portrait (devices and browsers)
 ====================================================================== */
 @media only screen and (min-width: 480px) and (max-width: 767px) {
-  
+
 }
 /* Mobile Portrait Size to Mobile Landscape Size (devices and browsers)
 =================================================================== */
@@ -219,7 +219,7 @@
 =================================================================== */
 @media (max-width: 1367px) {
   h3.panel-title {
-    font-size: 12px;
+    font-size: 16px;
     font-weight: 200;
   }
 }

@@ -1,5 +1,5 @@
 
-/* 
+/*
 *	 Author: Vijay Kumar
 *	 Template: Archon - Flat & Responsive Bootstrap Admin Template
 *	 Version: 1.0
@@ -30,7 +30,7 @@
 }
 
 .panel-profile > .panel-body > .basic-profile {
-  background-color: #ecf3f4;
+  /*background-color: #ecf3f4;*/
 }
 
 .panel-profile > .panel-body > .basic-profile img {
