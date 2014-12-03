@@ -24,8 +24,8 @@ class User::ImagesController < User::BaseController
   def edit
 
     ## Fetching the image object
-    # image_type = params[:image_type] || "Image::Base"
-    # @image = image_type.constantize.find(params[:id])
+    image_type = params[:image_type] || "Image::Base"
+    @image = image_type.constantize.find(params[:id])
     
     respond_to do |format|
       format.html { get_collections and render :index }
