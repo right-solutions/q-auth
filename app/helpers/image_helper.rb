@@ -1,7 +1,7 @@
 module ImageHelper
-  
+
   def display_image(object, photo_association_name=:photo, width=80)
-    
+
     if width.is_a?(String)
       if width.include?("px")
         width_val = width.split("px").first
@@ -15,14 +15,14 @@ module ImageHelper
       width_val = width
       width_string = "#{width.to_i}px"
     end
-    
-    if object.respond_to?(photo_association_name) && object.send(photo_association_name)
+
+    if object.respond_to?(photo_association_name) && object.send(photo_association_name) && object.send(photo_association_name).persisted?
       return image_tag object.send(photo_association_name).image_url, :style=>"width:#{width_string};"
     else
-      return image_tag "http://placehold.it/#{width_val}x#{width_val}", :class=>""
+      return image_tag "http://placehold.it/#{width_val}x#{width_val}", :class=>"", :style=>"width:#{width}"
     end
-  end  
-  
+  end
+
   def display_photo(photo, width=100)
     return image_tag photo.image_url, :style=>"width:#{width}px;", :width=>"#{width}", :class=>""
   end
@@ -50,10 +50,10 @@ module ImageHelper
   #   => "/admin/images/new" OR
   #   => "/admin/images/1/edit"
   def upload_image_link(object, redirect_url, photo_association_name=:photo)
-    
+
     photo_object = nil
     photo_object =  object.send(photo_association_name) if object.respond_to?(photo_association_name)
-    
+
     if photo_object.present?
       edit_admin_image_path(photo_object,
                                  :redirect_url => redirect_url,
@@ -68,5 +68,5 @@ module ImageHelper
                                  :image_type => photo_object.class.name)
     end
   end
-  
+
 end

@@ -19,7 +19,7 @@
 			</li>
 
 			<% if @current_admin %>
-				
+
 				<li class="nav-header">Admin</li>
 
 				<li class="<%= nav_class("admin/users") %>">
@@ -38,11 +38,11 @@
 
 			<li class="nav-header">Account</li>
 
-			<li class="<%= nav_class("account/profile") %>">
+			<li class="<%= nav_class("user/profile") %>">
 				<%= link_to raw("<i class=\"fa fa-user\"></i> My Profile"), user_profile_path %>
 			</li>
 
-			<li class="<%= nav_class("account/settings") %>">
+			<li class="<%= nav_class("user/settings") %>">
 				<%= link_to raw("<i class=\"fa fa-cogs avatar\"></i> Account Settings"), user_settings_path %>
 			</li>
 
@@ -51,7 +51,7 @@
 			</li>
 
 			<li class="nav-header">API</li>
-			<li> 
+			<li>
 				<%= link_to raw("<i class=\"fa fa-anchor\"></i> User Detail"), user_detail_path(@current_user.auth_token), :method => :get, :target => "_blank" if @current_user %>
 			</li>
 
