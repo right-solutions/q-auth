@@ -69,4 +69,24 @@ module ImageHelper
     end
   end
 
+  def upload_user_image_link(object, redirect_url, photo_association_name=:photo)
+
+    photo_object = nil
+    photo_object =  object.send(photo_association_name) if object.respond_to?(photo_association_name)
+
+    if photo_object.present?
+      edit_user_image_path(photo_object,
+                                 :redirect_url => redirect_url,
+                                 :imageable_id => object.id,
+                                 :imageable_type => object.class.to_s,
+                                 :image_type => photo_object.class.name)
+    else
+      photo_object = object.send("build_#{photo_association_name}")
+      new_user_image_path(:redirect_url => redirect_url,
+                                 :imageable_id => object.id,
+                                 :imageable_type => object.class.to_s,
+                                 :image_type => photo_object.class.name)
+    end
+  end
+
 end
