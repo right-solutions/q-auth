@@ -11,10 +11,9 @@
 			<div class="panel-body">
 			<div class="col-lg-9">
 			<%= image_tag @user.profile_picture.image_url, :class=>"standard_image", :style => "height: 275px; width: 275px;" %>
-					<%= link_to 'Change photo',"#",
-                  :remote => true, :class => "btn btn-primary btn-xs" %>
+			<%= link_to 'Change photo', upload_image_link(@user, user_edit_path, :profile_picture), :remote => true, :class => "btn btn-primary btn-xs" %>
 				<%#= link_to display_image(@user, :profile_picture),
-                  upload_image_link(@user, admin_user_path(@user), :profile_picture),
+                  upload_image_link(@user, user_image_path(@user), :profile_picture),
                   :remote => true %>
 				</div>
 			</div>
