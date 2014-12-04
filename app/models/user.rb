@@ -35,7 +35,7 @@ class User < ActiveRecord::Base
     :confirmation => true
 
   validates_confirmation_of :password, :if => proc {|user| user.new_record? || (user.new_record? == false and user.password.present?)}
-
+  validates :status, :inclusion => {:in => ConfigCenter::User::STATUS_LIST, :presence_of => :status, :message => "%{value} valid name..." }
   # Callbacks
   before_create :generate_auth_token, :assign_default_password_if_nil
 
