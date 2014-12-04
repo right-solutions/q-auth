@@ -17,9 +17,12 @@ RSpec.describe Designation, :type => :model do
   end
 
   it "should search the designation" do
-    value = "Title"
-    search = value.downcase
-    data = Designation.where("title.downcase = ?", search).all || Designation.where("responsibilities.downcase = ?", search).all
-    expect(data).to be_truthy
+
+    Designation.create(:title =>"Developer", :responsibilities =>"Test data");
+    Designation.create(:title =>"Tester", :responsibilities =>"Test data1");
+    Designation.create(:title =>"Designer", :responsibilities =>"Test data2");
+    Designation.create(:title =>"Architect", :responsibilities =>"Test data3");
+    expect(Designation.search("Test data")).to be_truthy
+    expect(Designation.search("Some data")).to be_empty
   end
 end
