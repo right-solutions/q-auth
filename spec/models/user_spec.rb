@@ -165,6 +165,17 @@ RSpec.describe User, :type => :model do
       User.find_by_email_or_username("ramuser1").should == user
       User.find_by_email_or_username("Ram").should be_nil
     end
+
+    it "should search the users" do
+
+    User.create(:name =>"Ram", :email =>"something.123@domain.com");
+    User.create(:name =>"Ram1", :email =>"something.1234@domain.com");
+    User.create(:name =>"Ram2", :email =>"something.1235@domain.com");
+    User.create(:name =>"Ram3", :email =>"something.1236@domain.com");
+    expect(Designation.search("something.123@domain.com")).to be_truthy
+    expect(Designation.search("Some data")).to be_empty
+  end
+
 end
 
 
