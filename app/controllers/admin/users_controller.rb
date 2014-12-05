@@ -1,8 +1,7 @@
 class Admin::UsersController < Admin::BaseController
 
-  #authorize_actions_for Item, :actions => {:index => :delete}
   before_filter :get_user, :only => [:masquerade]
-  
+
   # GET /users
   # GET /users.js
   # GET /users.json

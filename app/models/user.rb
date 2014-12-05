@@ -143,7 +143,7 @@ class User < ActiveRecord::Base
   #   >>> user.is_admin?
   #   => true
   def is_admin?
-    user_type == 'admin'
+    user_type == 'admin' || user_type == 'super_admin'
   end
 
   # * Return true if the user is either a Q-Auth Admin

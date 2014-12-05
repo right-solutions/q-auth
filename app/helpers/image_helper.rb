@@ -19,7 +19,7 @@ module ImageHelper
     if object.respond_to?(photo_association_name) && object.send(photo_association_name) && object.send(photo_association_name).persisted?
       return image_tag object.send(photo_association_name).image_url, :style=>"width:#{width_string};"
     else
-      return image_tag "http://placehold.it/#{width_val}x#{width_val}", :class=>"", :style=>"width:#{width}"
+      return image_tag "http://placehold.it/#{width_val}x#{width_val}", :style=>"width:#{width}"
     end
   end
 

@@ -40,8 +40,6 @@ module AuthenticationHelper
     return @current_user if @current_user
     # Check if the user exists with the auth token present in session
     @current_user = User.find_by_id(session[:id])
-    @current_admin = @current_user if @current_user and (@current_user.is_super_admin? || @current_user.is_admin?)
-    @current_user
   end
 
   # This method is usually used as a before filter to secure some of the actions which requires the user to be signed in.
@@ -58,7 +56,18 @@ module AuthenticationHelper
   # This method is usually used as a before filter from admin controllers to ensure that the logged in user is an admin
   def require_admin
     current_user
-    unless @current_admin
+    unless @current_user.is_admin?
+      @heading = translate("authentication.error")
+      @alert = translate("authentication.permission_denied")
+      store_flash_message("#{@heading}: #{@alert}", :errors)
+      redirect_to default_sign_in_url
+    end
+  end
+
+  # This method is usually used as a before filter from admin controllers to ensure that the logged in user is a super admin
+  def require_super_admin
+    current_user
+    unless @current_user.is_super_admin?
       @heading = translate("authentication.error")
       @alert = translate("authentication.permission_denied")
       store_flash_message("#{@heading}: #{@alert}", :errors)
