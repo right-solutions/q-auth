@@ -13,8 +13,8 @@ FactoryGirl.define do
     designation_overridden "alert"
     linkedin "RaviShankar"
     skype "RaviShankar"
-    department_id "1"
-    designation_id "1"
+    department
+    designation
     biography "A programmer by profession. A student of history and music by passion. Uses Ruby, Python and Javascript. Work as an Web Architect for Qwinix"
     password_digest { SecureRandom.hex }
     password ConfigCenter::Defaults::PASSWORD

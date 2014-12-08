@@ -2,6 +2,8 @@ require 'spec_helper'
 
 describe Admin::UsersController, :type => :controller do
 
+  let(:designation) {FactoryGirl.create(:designation, :title => "senior Developer")}
+  let(:department) {FactoryGirl.create(:department, :name => "testing")}
   let(:user) {FactoryGirl.create(:user)}
   let(:admin_user) {FactoryGirl.create(:admin_user)}
   let(:user_1) {FactoryGirl.create(:user)}
@@ -26,8 +28,8 @@ describe Admin::UsersController, :type => :controller do
          linkedin: "RaviShankar",
          skype: "RaviShankar",
          status: "pending",
-         department_id: "1",
-         designation_id: "1"
+         department_id: department.id,
+         designation_id: designation.id
        }
      }
      post :create, user_params
@@ -45,8 +47,8 @@ end
 describe "PUT update" do
   it "assigns the requested user as @user" do
    put :update, {:id => user.to_param, :user => {"name" => "Raghu",
-     "username" => "Raghavendre","email" => "adam@trimediatlantic.com","phone" => "333-093-3334","password" => ConfigCenter::Defaults::PASSWORD,"password_confirmation" => ConfigCenter::Defaults::PASSWORD,"designation_overridden" => "alert","linkedin" => "RaviShankar","skype" => "RaviShankar","status" => "pending","department_id" => "1",
-     "designation_id" => "1"}}
+     "username" => "Raghavendre","email" => "adam@trimediatlantic.com","phone" => "333-093-3334","password" => ConfigCenter::Defaults::PASSWORD,"password_confirmation" => ConfigCenter::Defaults::PASSWORD,"designation_overridden" => "alert","linkedin" => "RaviShankar","skype" => "RaviShankar","status" => "pending","department_id" => department.id,
+     "designation_id" => designation.id}}
      assigns(:user).should eq(user)
    end
  end
@@ -70,7 +72,7 @@ end
 
 describe "GET index" do
     it "assigns all practice as @practise" do
-      [user_1, user_2]
+      [designation,user_1, user_2]
       get :index
       assigns(:users).should eq([admin_user, user_1, user_2])
     end
