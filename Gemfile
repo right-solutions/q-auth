@@ -70,8 +70,6 @@ group :development, :test do
   gem "quiet_assets"
 end
 
-gem 'rails_12factor', group: :production
-
 group :it, :staging, :development, :test, :uat, :production do
   gem 'ruby-progressbar'
   gem "colorize"
