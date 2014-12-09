@@ -1,6 +1,6 @@
-require "spec_helper"
+require "rails_helper"
 
-describe Api::V1::AuthenticationsController, :type => :controller do
+RSpec.describe Api::V1::AuthenticationsController, :type => :controller do
   describe "routing" do
 
     it "routes /api/v1/id/sign_in to the api/v1/sign_in controller and create action" do

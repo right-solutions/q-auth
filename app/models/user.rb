@@ -71,10 +71,20 @@ class User < ActiveRecord::Base
 
   # Exclude some attributes info from json output.
   def as_json(options={})
+    inclusion_list = []
+    inclusion_list << {:department => {:except => ConfigCenter::Defaults::EXCLUDED_JSON_ATTRIBUTES}} if department.present?
+    inclusion_list << {:designation => {:except => ConfigCenter::Defaults::EXCLUDED_JSON_ATTRIBUTES}} if designation.present?
+    options[:include] ||= inclusion_list
+
     exclusion_list = []
     exclusion_list += ConfigCenter::Defaults::EXCLUDED_JSON_ATTRIBUTES
     exclusion_list += ConfigCenter::User::EXCLUDED_JSON_ATTRIBUTES
     options[:except] ||= exclusion_list
+
+    options[:methods] = []
+    options[:methods] << :designation_title
+    options[:methods] << :department_name
+
     super(options)
   end
 
@@ -91,26 +101,20 @@ class User < ActiveRecord::Base
                                         LOWER(phone) LIKE LOWER('%#{query}%')")
                         }
 
-  # Instance variables
-  #
-  # Exclude some attributes info from json output.
-  def to_json(options={})
-    options[:except] ||= ConfigCenter::User::EXCLUDED_JSON_ATTRIBUTES
-    super(options)
-  end
-
-  # Exclude some attributes info from json output.
-  def as_json(options={})
-    options[:except] ||= ConfigCenter::User::EXCLUDED_JSON_ATTRIBUTES
-    super(options)
-  end
-
   # * Return full name
   # == Examples
   #   >>> user.display_name
   #   => "Joe Black"
   def display_name
     "#{name}"
+  end
+
+  def department_name
+    department.blank? ? nil : department.name
+  end
+
+  def designation_title
+    designation.blank? ? nil : designation.title
   end
 
   # * Return the designation text

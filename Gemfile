@@ -65,7 +65,7 @@ group :development, :test do
   gem "spork", "~> 1.0rc"
   gem "better_errors"
   gem "binding_of_caller"
-  gem 'rspec-rails' # Needed for rake stats to calculate test coverage
+  gem 'rspec-rails', '~> 3.0' # Needed for rake stats to calculate test coverage
   gem "awesome_print"
   gem "quiet_assets"
 end

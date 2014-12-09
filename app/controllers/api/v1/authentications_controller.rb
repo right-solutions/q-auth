@@ -2,7 +2,7 @@ module Api
   module V1
     class AuthenticationsController < Api::V1::BaseController
 
-      skip_before_filter :require_user, :only => :create
+      skip_before_filter :require_auth_token, :only => :create
 
       def create
 
