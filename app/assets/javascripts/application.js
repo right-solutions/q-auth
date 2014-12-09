@@ -15,7 +15,12 @@
 //
 //= require humdrum/bootstrap.min
 //= require humdrum/utilities
-
+//= require theme/jquery/jquery.gritter
+//= require humdrum/photo_upload_helpers
+//= require jquery-fileupload/basic
+//= require jquery-fileupload/vendor/tmpl
+//= require cropper
+//= require dev_scripts
 // 
 // For jQery validations - http://jqueryvalidation.org/documentation/
 //= require jquery.validate

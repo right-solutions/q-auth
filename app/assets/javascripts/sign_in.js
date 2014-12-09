@@ -27,6 +27,12 @@
 //= require theme/jquery/jquery.dataTables.min
 //= require theme/jquery/jquery.sortable
 //= require theme/jquery/jquery.gritter
+//= require theme/jquery/jquery.gritter
+//= require humdrum/photo_upload_helpers
+//= require jquery-fileupload/basic
+//= require jquery-fileupload/vendor/tmpl
+//= require cropper
+//= require dev_scripts
 //
 // Archon JS 
 //
