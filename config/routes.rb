@@ -1,6 +1,5 @@
 QAuth::Application.routes.draw do
 
-
   ## ----------
   ## APIs
   ## ----------

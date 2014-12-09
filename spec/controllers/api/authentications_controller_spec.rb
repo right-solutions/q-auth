@@ -43,7 +43,7 @@ RSpec.describe Api::V1::AuthenticationsController, :type => :controller do
         expect(response_body["data"]["department_name"]).to  eq("Politics")
         expect(response_body["data"]["user_type"]).to  eq(nil)
         expect(response_body["data"]["biography"]).to  eq("Father of the nation, India")
-        expect(response_body["data"]["auth_token"]).to  eq(nil)
+        expect(response_body["data"]["auth_token"]).to  eq(approved_user.auth_token)
         expect(response_body["data"]["password"]).to  eq(nil)
         expect(response_body["data"]["password_digest"]).to  eq(nil)
 
@@ -130,8 +130,6 @@ RSpec.describe Api::V1::AuthenticationsController, :type => :controller do
 
         post "create", credentials, :format =>:json
         response_body = JSON.parse(response.body)
-
-        binding.pry
 
         expect(response.status).to  eq(200)
         expect(response_body["success"]).to  eq(true)

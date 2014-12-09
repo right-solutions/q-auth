@@ -27,7 +27,6 @@ module ApiHelper
   def render_json_response(proc_code)
 
     begin
-      #raise AuthenticationError unless @current_user
       proc_code.call
       @status ||= 200
       @success = @success == false ? (false) : (true)

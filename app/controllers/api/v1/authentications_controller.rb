@@ -33,6 +33,7 @@ module Api
           # If successfully authenticated.
           @alert = I18n.translate("authentication.logged_in_successfully")
           @data = @user
+          @success = true
 
         end
         render_json_response(proc_code)

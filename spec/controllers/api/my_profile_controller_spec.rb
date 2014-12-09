@@ -43,7 +43,7 @@ RSpec.describe Api::V1::MyProfileController, :type => :controller do
         expect(response_body["data"]["department_name"]).to  eq("Politics")
         expect(response_body["data"]["user_type"]).to  eq(nil)
         expect(response_body["data"]["biography"]).to  eq("Father of the nation, India")
-        expect(response_body["data"]["auth_token"]).to  eq(nil)
+        expect(response_body["data"]["auth_token"]).to  eq(approved_user.auth_token)
         expect(response_body["data"]["password"]).to  eq(nil)
         expect(response_body["data"]["password_digest"]).to  eq(nil)
 
@@ -124,7 +124,7 @@ RSpec.describe Api::V1::MyProfileController, :type => :controller do
         expect(response_body["data"]["department_name"]).to  eq("Indian Politics")
         expect(response_body["data"]["user_type"]).to  eq(nil)
         expect(response_body["data"]["biography"]).to  eq(biography)
-        expect(response_body["data"]["auth_token"]).to  eq(nil)
+        expect(response_body["data"]["auth_token"]).to  eq(approved_user.auth_token)
         expect(response_body["data"]["password"]).to  eq(nil)
         expect(response_body["data"]["password_digest"]).to  eq(nil)
 
@@ -185,7 +185,7 @@ RSpec.describe Api::V1::MyProfileController, :type => :controller do
         approved_user
         request.env['HTTP_AUTHORIZATION'] = token
         invalid_info = valid_user_information.dup
-        invalid_info[:user][:password] = nil
+        invalid_info[:user][:password] = "invalid password"
 
         put "update", invalid_info, :format =>:json
 
@@ -197,27 +197,29 @@ RSpec.describe Api::V1::MyProfileController, :type => :controller do
         expect(response_body["alert"]).to eq("Sorry, there are errors with the information you provided. Please review the data you have entered.")
         expect(response_body["data"]["errors"]["name"]).to  eq("ValidationError")
         expect(response_body["data"]["errors"]["description"]).to  eq("Sorry, there are errors with the information you provided. Please review the data you have entered.")
-        expect(response_body["data"]["errors"]["details"]).to  eq({"password"=>["can't be blank"]})
+        expect(response_body["data"]["errors"]["details"]).to  eq({"password"=>["is invalid"]})
       end
 
-      # it "should return error for invalid password confirmation" do
-      #   approved_user
-      #   request.env['HTTP_AUTHORIZATION'] = token
-      #   invalid_info = valid_user_information.dup
-      #   invalid_info[:user][:password_confirmation] = nil
+      it "should return error for invalid password confirmation" do
+        approved_user
+        request.env['HTTP_AUTHORIZATION'] = token
+        invalid_info = valid_user_information.dup
+        invalid_info[:user][:password] = "password 1"
+        invalid_info[:user][:password_confirmation] = "password 2"
 
-      #   put "update", invalid_info, :format =>:json
+        put "update", invalid_info, :format =>:json
 
-      #   response_body = JSON.parse(response.body)
+        response_body = JSON.parse(response.body)
 
-      #   expect(response.status).to  eq(200)
-      #   expect(response_body.keys).to  eq(["success", "alert", "data"])
-      #   #expect(response_body["success"]).to eq(false)
-      #   expect(response_body["alert"]).to eq("Sorry, there are errors with the information you provided. Please review the data you have entered.")
-      #   expect(response_body["data"]["errors"]["name"]).to  eq("ValidationError")
-      #   expect(response_body["data"]["errors"]["description"]).to  eq("Sorry, there are errors with the information you provided. Please review the data you have entered.")
-      #   expect(response_body["data"]["errors"]["details"]).to  eq({"password_confirmation"=>["can't be blank"]})
-      # end
+        expect(response.status).to  eq(200)
+        expect(response_body.keys).to  eq(["success", "alert", "data"])
+        expect(response_body["success"]).to eq(false)
+        expect(response_body["alert"]).to eq("Sorry, there are errors with the information you provided. Please review the data you have entered.")
+        expect(response_body["data"]["errors"]["name"]).to  eq("ValidationError")
+        expect(response_body["data"]["errors"]["description"]).to  eq("Sorry, there are errors with the information you provided. Please review the data you have entered.")
+        expect(response_body["data"]["errors"]["details"]["password"]).to  eq(["is invalid"])
+        expect(response_body["data"]["errors"]["details"]["password_confirmation"]).to  eq(["doesn't match Password"])
+      end
 
     end
   end

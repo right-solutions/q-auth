@@ -8,6 +8,7 @@ module Api
           if @current_user
             @data = @current_user
           else
+            @success = false
             @alert = I18n.translate("response.authentication_error")
             raise AuthenticationError
           end
@@ -29,11 +30,15 @@ module Api
             department = Department.find_by_name(params[:user][:department])
             @user.department = department if department
           end
+          @user.password = params[:user][:password] if params[:user][:password]
+          @user.password_confirmation = params[:user][:password_confirmation] if params[:user][:password_confirmation]
+
           if @user.valid?
             @user.save
             @data = @user
             @alert = I18n.translate("registration.success")
           else
+            @success = false
             @alert = I18n.translate("response.validation_error")
             @errors = @user.errors
             raise ValidationError

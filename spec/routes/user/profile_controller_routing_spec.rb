@@ -1,19 +1,25 @@
-require "spec_helper"
+require "rails_helper"
 
 describe User::SettingsController, :type => :controller do
-  describe "routing" do
-
-    it "routes /user/profile to the user/profile controller and index action" do
-      { :get => "user/profile" }.should route_to(:controller => "user/profile", :action => "index")
-    end
-
-    it "routes /user/edit to the user/profile controller and edit action" do
-      { :get => "user/edit" }.should route_to(:controller => "user/profile", :action => "edit")
-    end
-
-    it "routes /user/update to the user/profile controller and update action" do
-      { :put => "user/update" }.should route_to(:controller => "user/profile", :action => "update")
-    end
-
+  it "index" do
+    expect(:get => "/user/profile").to route_to(
+      :controller => "user/profile",
+      :action => "index"
+    )
   end
+
+  it "edit" do
+    expect(:get => "/user/edit").to route_to(
+      :controller => "user/profile",
+      :action => "edit"
+    )
+  end
+
+  it "update" do
+    expect(:put => "/user/update").to route_to(
+      :controller => "user/profile",
+      :action => "update"
+    )
+  end
+
 end

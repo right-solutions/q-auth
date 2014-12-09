@@ -31,10 +31,8 @@ class User < ActiveRecord::Base
     :length => {:minimum => ConfigCenter::GeneralValidations::PASSWORD_MIN_LEN ,
     :maximum => ConfigCenter::GeneralValidations::PASSWORD_MAX_LEN},
     :format => {:with => ConfigCenter::GeneralValidations::PASSWORD_FORMAT_REG_EXP},
-    :if => proc {|user| user.new_record? || (user.new_record? == false and user.password.present?)},
-    :confirmation => true
+    :if => proc {|user| user.new_record? || (user.new_record? == false and user.password.present?)}
 
-  validates_confirmation_of :password, :if => proc {|user| user.new_record? || (user.new_record? == false and user.password.present?)}
   validates :status, :inclusion => {:in => ConfigCenter::User::STATUS_LIST, :presence_of => :status, :message => "%{value} valid name..." }
   # Callbacks
   before_create :generate_auth_token, :assign_default_password_if_nil
