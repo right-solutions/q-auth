@@ -10,6 +10,12 @@ FactoryGirl.define do
     name "Bob Miller"
     username
     email
+    phone "333-093-3334"
+    designation_overridden "alert"
+    linkedin "RaviShankar"
+    skype "RaviShankar"
+    department
+    designation
     biography "A programmer by profession. A student of history and music by passion. Uses Ruby, Python and Javascript. Work as an Web Architect for Qwinix"
 
     phone "1234567890"
