@@ -1,15 +1,15 @@
 class User::ImagesController < User::BaseController
-  
+
   skip_before_filter :set_navs, :parse_pagination_params, :edit
-  
-  # GET /istadium_admin/images/new
-  # GET /istadium_admin/images/new.json
+
+  # GET /admin/images/new
+  # GET /admin/images/new.json
   def new
-    ## Intitializing the image object 
-    
+    ## Intitializing the image object
+
     image_type = params[:image_type] || "Image::Base"
     @image = image_type.constantize.new
-    
+
     respond_to do |format|
       format.html { get_collections and render :index }
       format.json { render json: @image }
@@ -17,16 +17,16 @@ class User::ImagesController < User::BaseController
     end
   end
 
-  # GET /istadium_admin/images/1/edit
-  # GET /istadium_admin/images/1/edit.js
-  # GET /istadium_admin/images/1/edit.json
-  
+  # GET /admin/images/1/edit
+  # GET /admin/images/1/edit.js
+  # GET /admin/images/1/edit.json
+
   def edit
 
     ## Fetching the image object
     image_type = params[:image_type] || "Image::Base"
     @image = image_type.constantize.find(params[:id])
-    
+
     respond_to do |format|
       format.html { get_collections and render :index }
       format.json { render json: @image }
@@ -34,14 +34,14 @@ class User::ImagesController < User::BaseController
     end
   end
 
-  # POST /istadium_admin/images/
-  # POST /istadium_admin/images.js
-  # POST /istadium_admin/images.json
+  # POST /admin/images/
+  # POST /admin/images.js
+  # POST /admin/images.json
   def create
-    
+
     ## Creating the image object
     image_type = params[:image_type] || "Image::Base"
-    
+
     resource = params[:imageable_type].constantize.find params[:imageable_id]
     @image = image_type.constantize.new
 
@@ -49,36 +49,36 @@ class User::ImagesController < User::BaseController
     puts "@image: #{@image.to_yaml}".red
 
     @image.imageable = resource
-    
+
     @image.image = params[:image][:image]
-    
+
     ## Setting redirect url
     @redirect_url = params[:redirect_url] || root_url
-    
+
     ## Validating the data
     @image.valid?
-    
+
     respond_to do |format|
       if @image.errors.blank?
-        
+
         # Saving the admin object
         @image.save
-        
+
         # Setting the flash message
         message = translate("forms.created_successfully", :item => "Image")
         store_flash_message(message, :success)
-        
-        format.html { 
+
+        format.html {
           redirect_to @redirect_url, notice: message
         }
         format.json { render json: @image, status: :created, location: @admin }
         format.js {}
       else
-        
+
         # Setting the flash message
         message = @image.errors.full_messages.to_sentence
         store_flash_message(message, :alert)
-        
+
         format.html { render action: "new" }
         format.json { render json: @image.errors, status: :unprocessable_entity }
         format.js {}
@@ -86,9 +86,9 @@ class User::ImagesController < User::BaseController
     end
   end
 
-  # PUT /istadium_admin/images/1
-  # PUT /istadium_admin/images/1.js
-  # PUT /istadium_admin/images/1.json
+  # PUT /admin/images/1
+  # PUT /admin/images/1.js
+  # PUT /admin/images/1.json
   def update
 
     # Get the image object and assign new image path to it
@@ -128,5 +128,5 @@ class User::ImagesController < User::BaseController
       end
     end
   end
-    
+
 end
