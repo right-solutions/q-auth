@@ -1,11 +1,10 @@
-require "spec_helper"
+require "rails_helper"
 
 describe User::DashboardController, :type => :controller do
-  describe "routing" do
-
-    it "routes /admin/home to the admin/home controller and index action" do
-      { :get => "user/dashboard" }.should route_to(:controller => "user/dashboard", :action => "index")
-    end
-
+  it "index" do
+    expect(:get => "/user/dashboard").to route_to(
+      :controller => "user/dashboard",
+      :action => "index"
+    )
   end
 end

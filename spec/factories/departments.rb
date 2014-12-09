@@ -1,7 +1,6 @@
 FactoryGirl.define do
   factory :department do
-    name "Testing"
-    description "Test data"
-
+    name "Department Name"
+    description "Department responsibilities"
   end
 end

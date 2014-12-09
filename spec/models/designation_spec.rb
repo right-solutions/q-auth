@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 RSpec.describe Designation, :type => :model do
   let(:designation) {FactoryGirl.build(:designation)}

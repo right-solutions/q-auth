@@ -2,7 +2,7 @@ module Api
   module V1
     class AuthenticationsController < Api::V1::BaseController
 
-      skip_before_filter :require_user, :only => :create
+      skip_before_filter :require_auth_token, :only => :create
 
       def create
 
@@ -33,6 +33,7 @@ module Api
           # If successfully authenticated.
           @alert = I18n.translate("authentication.logged_in_successfully")
           @data = @user
+          @success = true
 
         end
         render_json_response(proc_code)

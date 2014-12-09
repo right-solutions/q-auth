@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :designation do
-    title "title"
-    responsibilities "Test data"
+    title "Designation Title"
+    responsibilities "Designation responsibilities"
   end
 end
