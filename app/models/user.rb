@@ -80,6 +80,7 @@ class User < ActiveRecord::Base
     options[:except] ||= exclusion_list
 
     options[:methods] = []
+    options[:methods] << :profile_image_url
     options[:methods] << :designation_title
     options[:methods] << :department_name
 
@@ -113,6 +114,10 @@ class User < ActiveRecord::Base
 
   def designation_title
     designation.blank? ? nil : designation.title
+  end
+
+  def profile_image_url
+    (profile_picture && profile_picture.image) ? profile_picture.image.url : nil
   end
 
   # * Return the designation text

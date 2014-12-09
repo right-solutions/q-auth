@@ -27,7 +27,7 @@ module AuthenticationHelper
   # This method should also handle the requests forwarded by the client for authentication
   def redirect_to_appropriate_page_after_sign_in
     if params[:redirect_back_url]
-      redirect_to params[:redirect_back_url]
+      redirect_to params[:redirect_back_url]+"?auth_token=#{@current_user.auth_token}"
     else
       redirect_to default_redirect_url_after_sign_in
     end
