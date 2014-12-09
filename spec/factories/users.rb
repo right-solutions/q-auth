@@ -27,4 +27,8 @@ FactoryGirl.define do
     status "blocked"
   end
 
+  factory :admin_user, parent: :user do
+    user_type "admin"
+  end
+
 end
