@@ -11,10 +11,10 @@ RSpec.describe Department, :type => :model do
 
   describe Department do
     it { should validate_presence_of :name }
-    it { should allow_value('User1').for(:name)}
+    it { should allow_value('Testing').for(:name)}
 
     it "should search the department" do
-      Department.create(:name =>"User1", :description =>"Test data");
+      Department.create(:name =>"HR", :description =>"Test data");
       expect(Department.search("Test data")).to be_truthy
       expect(Department.search("Some data")).to be_empty
     end
