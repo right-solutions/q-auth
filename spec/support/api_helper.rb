@@ -1,4 +1,4 @@
-module ApiHelper
+module ApiTestHelper
   include Rack::Test::Methods
 
   def app

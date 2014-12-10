@@ -25,7 +25,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-gem 'therubyracer', platforms: :ruby
+#gem 'therubyracer', platforms: :ruby
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -65,10 +65,12 @@ group :development, :test do
   gem "spork", "~> 1.0rc"
   gem "better_errors"
   gem "binding_of_caller"
-  gem 'rspec-rails' # Needed for rake stats to calculate test coverage
+  gem 'rspec-rails', '~> 3.0' # Needed for rake stats to calculate test coverage
   gem "awesome_print"
   gem "quiet_assets"
 end
+
+gem 'rails_12factor', group: :production
 
 group :it, :staging, :development, :test, :uat, :production do
   gem 'ruby-progressbar'

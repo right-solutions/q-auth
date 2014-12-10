@@ -33,20 +33,20 @@
   /*background-color: #ecf3f4;*/
 }
 
-.panel-profile > .panel-body > .basic-profile img {
+/*.panel-profile > .panel-body > .basic-profile img {
   float: left;
   margin-right: 20px;
 }
-
+*/
 .panel-profile > .panel-footer {
   background-color: #34495D;
   padding: 0px 14px !important;
 }
-.panel-profile > .panel-footer > .row > a:hover {
+.panel-profile > .panel-footer > .row > a.link:hover {
   background-color: #428bca;
   text-decoration: none;
 }
-.panel-profile > .panel-footer > .row > a {
+.panel-profile > .panel-footer > .row > a.link {
   color: #FFFFFF;
   text-align: center;
   border-right: 1px solid #0eb1c9;
@@ -91,6 +91,14 @@
   right: -4px;
   top: -4px;
   width: 82px;
+}
+
+.profile-image {
+  padding-left: 250px
+}
+
+.profile-image-button {
+  padding-left: 100px
 }
 
 /* Project Link Widget END  */

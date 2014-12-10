@@ -44,6 +44,7 @@ module Public
         end
 
         puts "#{@user.email} logged in".yellow
+        @current_user = @user
 
         # If successfully authenticated.
         @heading = translate("authentication.success")
