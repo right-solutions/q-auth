@@ -1,8 +1,8 @@
 <div id="my_profile">
   <h4>My Profile API</h4>
-  <p>This API accept username and password and will authenticate the user returning the user information.</p>
-  <p>URL: <code>/api/v1/my_profile</code></p>
-  <p>Header: <code>Auth Token</code></p>
+  <p>This API will accept the auth token and will return the user profile information including department, designation and profile image url.</p>
+  <p>URL: <code>GET /api/v1/my_profile</code></p>
+  <p>Header: <code>auth_token</code></p>
   <p>Sample Response: <code><%= link_to "Click Here to toggle", "#", :onclick=>"$('#sr-mp').toggle()" %></code></p>
   <pre id='sr-mp' style="display: none;">
     {
