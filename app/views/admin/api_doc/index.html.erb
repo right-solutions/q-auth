@@ -1,0 +1,26 @@
+<div class="row mt-20">
+  <div class="col-lg-2" style="position:fixed;">
+    <h4 class="mb-30">Index</h4>
+    <li class="mt-10"><%= link_to "Sign In", "#sign_in" %></li>
+    <li class="mt-10"><%= link_to "Sign Out", "#sign_out" %></li>
+    <li class="mt-10"><%= link_to "My Profile", "#my_profile" %></li>
+    <li class="mt-10"><%= link_to "Update Profile", "#update_profile" %></li>
+  </div>
+  <div class="col-lg-10 col-lg-offset-2">
+
+    <%# Displays to Manage the items %>
+    <div class="row mb-30">
+      <div class="fs-22 col-sm-6 hidden-xs"><i class='fa fa-anchor mr-10'></i>Q-Auth API Documentation</div>
+      <div class="fs-22 col-sm-6 text-align-center visible-xs"><i class='fa fa-building fa-lg mr-10'></i>Q-Auth API Documentation</div>
+    </div>
+
+    <%= render partial: "sign_in" %>
+    <div class="cl-20"></div>
+    <%= render partial: "sign_out" %>
+    <div class="cl-20"></div>
+    <%= render partial: "my_profile" %>
+    <div class="cl-20"></div>
+    <%= render partial: "update_profile" %>
+    <div class="cl-20"></div>
+  </div>
+</div>
