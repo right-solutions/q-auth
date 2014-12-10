@@ -16,9 +16,13 @@
 
       <div class="row">
         <div class="col-sm-5">
-          <%= link_to display_profile_picture(@user, 180, 180),
+        <%= display_profile_picture(@user, 180, 180) %>
+        <% if @user === current_user %>
+          <div class="text-center"><%= link_to "Change Picture",
                       upload_image_link(@user, delete_link, :profile_picture),
-                      :remote => true %>
+                      :remote => true  %>
+                      </div>
+                      <% end %>
         </div>
 
         <div class="col-sm-7">

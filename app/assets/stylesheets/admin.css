@@ -13,6 +13,7 @@
  *= require handycss.box.css
 
  *= require common/form.css
+ *= require cropper.css
 
  *= require ux-libraries/bootstrap/bootstrap
  *= require ux-libraries/archon

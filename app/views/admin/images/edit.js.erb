@@ -1,5 +1,7 @@
 // Show the new form in the right box.
-heading = "Add a photo";
+heading = "Edit a photo";
 bodyContent = "<%= escape_javascript(render(:partial=>"form")) %>";
 showModal(heading, bodyContent);
-validatePhotoForm();
+cropImage();
+deleteImages();
+ProfilePictureupload(false);
