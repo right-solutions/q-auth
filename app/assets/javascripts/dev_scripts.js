@@ -44,7 +44,6 @@ function cropNewImage() {
 }
 
 function ProfilePictureupload(change_url){
-  debugger;
   $('#user_form_photo').fileupload({
     dataType: "json",
     add: function(e, data) {
@@ -55,7 +54,6 @@ function ProfilePictureupload(change_url){
         data.context = $(tmpl("template-upload", file));
         $('#user_form_photo').append(data.context);
         if (change_url){
-          debugger;
           data.url = '/admin/images';
         }
         data.submit();
