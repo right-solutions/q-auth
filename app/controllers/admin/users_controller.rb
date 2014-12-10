@@ -60,10 +60,9 @@ class Admin::UsersController < Admin::BaseController
   # POST /users.json
   def create
     ## Creating the user object
-    @user = User.new(params[:user].permit(:name, :username, :email, :phone, :designation_overridden, :linkedin, :skype, :department_id, :designation_id))
+    @user = User.new(user_params)
     @user.password = ConfigCenter::Defaults::PASSWORD
     @user.password_confirmation = ConfigCenter::Defaults::PASSWORD
-
     ## Validating the data
     @user.valid?
 
@@ -78,7 +77,7 @@ class Admin::UsersController < Admin::BaseController
         store_flash_message(message, :success)
 
         format.html {
-          redirect_to user_url(@user), notice: message
+          redirect_to user_dashboard_url, notice: message
         }
         format.json { render json: @user, status: :created, location: @user }
         format.js {}
@@ -119,7 +118,7 @@ class Admin::UsersController < Admin::BaseController
         store_flash_message(message, :success)
 
         format.html {
-          redirect_to user_url(@user), notice: message
+          redirect_to user_dashboard_url, notice: message
         }
         format.json { head :no_content }
         format.js {}
@@ -161,7 +160,7 @@ class Admin::UsersController < Admin::BaseController
       store_flash_message(message, :success)
 
       format.html {
-        redirect_to users_url notice: message
+        redirect_to user_dashboard_url notice: message
       }
       format.json { head :no_content }
       format.js {}
@@ -206,6 +205,10 @@ class Admin::UsersController < Admin::BaseController
   def get_user
     @users_masq = User.find(params[:id]) if params[:id]
     @users_masq = User.find(params[:user_id]) if params[:user_id]
+  end
+
+  def user_params
+    params.require(:user).permit(:name, :username, :email, :phone, :designation_overridden, :linkedin, :skype, :department_id, :designation_id)
   end
 
 end
