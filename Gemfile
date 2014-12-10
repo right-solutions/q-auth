@@ -14,6 +14,8 @@ gem 'carrierwave'
 # Oauth provider 7 client
 gem 'doorkeeper', '~> 0.7.0'
 gem 'oauth2'
+gem 'rmagick', :require => 'RMagick'
+gem 'jquery-fileupload-rails'
 
 # Use SCSS for stylesheets
 # gem 'sass-rails'

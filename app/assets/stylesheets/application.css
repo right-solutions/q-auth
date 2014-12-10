@@ -14,6 +14,7 @@
  *= require handycss.box.css
 
  *= require common/form.css
+ *= require cropper.css
 
  *= require ux-libraries/humdrum/bootstrap
  *= require ux-libraries/humdrum/overrides-bootstrap
