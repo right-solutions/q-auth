@@ -75,4 +75,8 @@ QAuth::Application.routes.draw do
   get   '/team',               to: "user/team#index",   as:  :team
   get   '/profiles/:username',  to: "user/team#show",    as:  :profile
 
+  # API Test Page
+  get '/admin/api/documentation', to: "admin/api_doc#index",   as:  :admin_api_doc
+
+
 end
