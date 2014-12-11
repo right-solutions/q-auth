@@ -2,7 +2,7 @@
 <div class="web-stats info clearfix" style="margin-bottom:5px;padding:5px;height:70px;overflow:hidden;">
 
    	<div class="visible-md visible-lg pull-left mr-10" style="width:20%;max-height:50px;overflow:hidden;">
-      <%= display_image(user, :profile_picture, "50px") %>
+      <%= display_profile_picture(user,42,42) %>
    	</div>
    	<div class="pull-left" style="width:75%;">
    		<%= link_to user.display_name, admin_user_path(user), :remote=>true, :class=>"text-color-blue fs-14" %>

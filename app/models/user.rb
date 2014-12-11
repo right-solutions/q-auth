@@ -36,6 +36,7 @@ class User < ActiveRecord::Base
   validates :status, :inclusion => {:in => ConfigCenter::User::STATUS_LIST, :presence_of => :status, :message => "%{value} valid name..." }
   # Callbacks
   before_create :generate_auth_token, :assign_default_password_if_nil
+  
 
   # Associations
   belongs_to :designation

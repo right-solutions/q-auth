@@ -60,8 +60,8 @@
 			<% if @current_user.is_super_admin? %>
 
 				<li class="nav-header">API</li>
-				<li>
-					<%#= link_to raw("<i class=\"fa fa-anchor\"></i> User Detail"), user_detail_path(@current_user.auth_token), :method => :get, :target => "_blank" if @current_user %>
+				<li class="<%= nav_class("admin/api_doc") %>">
+					<%= link_to raw("<i class=\"fa fa-anchor\"></i> API Documentation"), admin_api_doc_path %>
 				</li>
 
 			<% end %>

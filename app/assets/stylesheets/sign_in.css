@@ -11,12 +11,11 @@
 
  *= require handycss.css
  *= require handycss.box.css
-
  *= require ux-libraries/bootstrap/bootstrap
  *= require ux-libraries/bootstrap/bootstrap-responsive
  *= require ux-libraries/font-awesome
  *= require_self
-
+ *= require cropper.css
  */
 
 .login-box {

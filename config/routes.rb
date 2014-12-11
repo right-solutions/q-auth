@@ -52,11 +52,15 @@ QAuth::Application.routes.draw do
       resources :project_links
     end
 
-    resources :images
-    resources :departments
-    resources :designations
+    resources :images do 
+      collection do
+       delete :destroy_pictures
+     end
+   end
+   resources :departments
+   resources :designations
 
-  end
+ end
 
   # ------------
   # User pages
@@ -68,11 +72,19 @@ QAuth::Application.routes.draw do
     get   '/profile',           to: "profile#index",   as:  :profile
     get   '/edit',              to: "profile#edit", as: :edit
     put   '/update',              to: "profile#update", as: :update
-    resources :images
-  end
+    resources :images do
+     collection do
+       delete :destroy_pictures
+     end
+   end
+ end
 
   # User Pages for teams and user profiles
   get   '/team',               to: "user/team#index",   as:  :team
   get   '/profiles/:username',  to: "user/team#show",    as:  :profile
+
+  # API Test Page
+  get '/admin/api/documentation', to: "admin/api_doc#index",   as:  :admin_api_doc
+
 
 end

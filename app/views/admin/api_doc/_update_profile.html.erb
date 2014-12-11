@@ -1,0 +1,43 @@
+<div id="update_profile">
+  <h4>Update Profile API</h4>
+  <p>This API accept username and password and will authenticate the user returning the user information.</p>
+  <p>URL: <code>POST /api/v1/update_profile</code></p>
+  <p>Haader: <code> auth_token </code></p>
+  <p>Params: <code> &ltall user params&gt</code></p>
+  <p>Sample Response: <code><%= link_to "Click Here to toggle", "#", :onclick=>"$('#sr-up').toggle()" %></code></p>
+  <pre id='sr-up' style="display: none;">
+    {
+      "success": true,
+      "alert": "You have successfully logged in",
+      "data": {
+          "id": 10,
+          "name": "Krishnaprasad Varma",
+          "username": "kvarma",
+          "email": "kvarma@qwinixtech.com",
+          "biography": null,
+          "phone": "9880181181",
+          "skype": "kpvarma27",
+          "linkedin": "krishnaprasadvarma",
+          "city": "Mysore",
+          "state": "Karnataka",
+          "country": "India",
+          "auth_token": "7d85dae46933e332324b5cbbc0cdb19f",
+          "user_type": "super_admin",
+          "profile_image_url": "/uploads/image/profile_picture/image/45/kvarma.jpg",
+          "designation_title": "Solutions Architect",
+          "department_name": "Engineering",
+          "department": {
+              "id": 1,
+              "name": "Engineering",
+              "description": "Test Description"
+          },
+          "designation": {
+              "id": 12,
+              "title": "Solutions Architect",
+              "responsibilities": "Test Data"
+          }
+      }
+    }
+  </pre>
+
+</div>
