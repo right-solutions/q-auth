@@ -9,9 +9,9 @@ set :log_level, :debug
 # is considered to be the first unless any hosts have the primary
 # property set.  Don't declare `role :all`, it's a meta role.
 
-role :app, %w{deploy@qauth.com}
-role :web, %w{deploy@qauth.com}
-role :db,  %w{deploy@qauth.com}
+role :app, %w{deploy@54.69.36.26}
+role :web, %w{deploy@54.69.36.26}
+role :db,  %w{deploy@54.69.36.26}
 
 
 # Extended Server Syntax
