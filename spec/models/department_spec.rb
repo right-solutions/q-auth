@@ -14,13 +14,13 @@ RSpec.describe Department, :type => :model do
   it { should have_one(:picture) }
 
   it "should search the department" do
-    Department.create(:name =>"Dep 1", :description =>"Apple");
-    Department.create(:name =>"Dep 2", :description =>"Mango");
+    Department.create(:name =>"Dep 1", :description =>"Apples");
+    Department.create(:name =>"Dep 2", :description =>"Mangoes");
     expect(Department.search("Dep 1")).to be_truthy
     expect(Department.search("Dep 2")).to be_truthy
     expect(Department.search("Dep")).to be_truthy
-    expect(Department.search("Apple")).to be_truthy
-    expect(Department.search("Mango")).to be_truthy
+    expect(Department.search("Apples")).to be_truthy
+    expect(Department.search("Mangoes")).to be_truthy
     expect(Department.search("No Data")).to be_empty
   end
 end
