@@ -14,7 +14,9 @@ gem 'carrierwave'
 # Oauth provider 7 client
 gem 'doorkeeper', '~> 0.7.0'
 gem 'oauth2'
+gem 'fog'
 gem 'rmagick', :require => 'RMagick'
+gem 'aws-sdk' # for heroku
 gem 'jquery-fileupload-rails'
 
 # Use SCSS for stylesheets
@@ -27,7 +29,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-#gem 'therubyracer', platforms: :ruby
+gem 'therubyracer', platforms: :ruby
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
