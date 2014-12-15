@@ -14,7 +14,9 @@ gem 'carrierwave'
 # Oauth provider 7 client
 gem 'doorkeeper', '~> 0.7.0'
 gem 'oauth2'
+gem 'fog'
 gem 'rmagick', :require => 'RMagick'
+gem 'aws-sdk' # for heroku
 gem 'jquery-fileupload-rails'
 
 # Use SCSS for stylesheets
