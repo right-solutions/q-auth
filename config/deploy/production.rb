@@ -34,7 +34,7 @@ set :ssh_options, {
    #verbose: :debug,
    keys: %w(~/.ssh/id_rsa),
    auth_methods: %w(publickey),
-   port: 1022
+   port: 22
 }
 #
 # And/or per server (overrides global)
