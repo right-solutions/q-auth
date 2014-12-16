@@ -2,8 +2,8 @@
 	<div class="col-md-3">
 		<%= display_profile_picture(@user, 180, 180) %>
 		<br/>
-		<div class="profile-image-button">
-      <%= link_to 'Change photo', upload_image_link(@user, user_edit_path, :profile_picture), :remote => true, :class => "btn btn-primary btn-xs" %>
+		<div>
+      <%= link_to 'Change photo', upload_image_link(@user, user_edit_path, :profile_picture), :remote => true, :style => "margin-left:40px;" %>
     </div>
   </div>
 
