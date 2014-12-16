@@ -1,3 +1,4 @@
 $("#my_profile_panel .panel-body").html("<%= escape_javascript(render :partial => 'form') %>")
 validateUserForm();
 $("div#my_profile_panel span.my-profile-title").text("Edit Profile");
+$("div#my_profile_panel h3.panel-title span.pull-right").text(" ");
