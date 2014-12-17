@@ -29,6 +29,12 @@
 
 			<% end %>
 
+      <li class="nav-header">Team</li>
+
+        <li class="<%= nav_class("user/members") %>">
+          <%= link_to raw("<i class=\"fa fa-group\"></i> Members"), user_members_path %>
+        </li>
+
 			<% if @current_user.is_super_admin? %>
 
 				<li class="nav-header">Configuration</li>
