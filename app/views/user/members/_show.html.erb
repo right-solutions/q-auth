@@ -49,11 +49,21 @@
     </tr>
     <tr>
       <td>Designation</td>
-      <td><%= @user.designation.title %></td>
+      <td>
+      <% if @user.designation.present? %>
+      <%= @user.designation.title %>
+      <%else%>
+      <%end%>
+      </td>
     </tr>
     <tr>
       <td>Department</td>
-      <td><%= @user.department.name %></td>
+      <td>
+      <% if @user.department.present? %>
+      <%= @user.department.name %>
+      <%else%>
+      <%end%>
+      </td>
     </tr>
   </tbody>
 </table>
