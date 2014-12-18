@@ -42,6 +42,14 @@
                                               :input_type=>'email',
                                               :required=>true,
                                               :place_holder=>"e.g: jblack@qwinixtech.com"} %>
+      <!-- Choose Status - Drop Down -->
+      <div class="form-group ">
+        <label for="inp_status" class="col-md-4 control-label">Status
+        </label>
+         <div class="col-md-8">
+         <%= select_tag(:status, options_for_select([['pending'], ['locked'], ['approved']], :selected => @user.status), :class => 'form-control', :name =>"user[status]", :id =>"inp_status") %>
+        </div>
+      </div>
 
       <!-- Choose Designation - Drop Down -->
       <div class="form-group ">
