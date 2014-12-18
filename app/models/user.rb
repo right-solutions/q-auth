@@ -36,7 +36,7 @@ class User < ActiveRecord::Base
   validates :status, :inclusion => {:in => ConfigCenter::User::STATUS_LIST, :presence_of => :status, :message => "%{value} valid name..." }
   # Callbacks
   before_create :generate_auth_token, :assign_default_password_if_nil
-  
+
 
   # Associations
   belongs_to :designation
@@ -81,9 +81,7 @@ class User < ActiveRecord::Base
     options[:except] ||= exclusion_list
 
     options[:methods] = []
-    options[:methods] << :profile_image_url
-    options[:methods] << :designation_title
-    options[:methods] << :department_name
+    options[:methods] << :profile_image
 
     super(options)
   end
@@ -117,8 +115,17 @@ class User < ActiveRecord::Base
     designation.blank? ? nil : designation.title
   end
 
-  def profile_image_url
-    (profile_picture && profile_picture.image) ? profile_picture.image.url : nil
+  def profile_image
+    if (profile_picture && profile_picture.image)
+      {
+        thumb: profile_picture.image.thumb.url,
+        medium: profile_picture.image.medium.url,
+        large: profile_picture.image.large.url,
+        original: profile_picture.image.url
+      }
+    else
+      {}
+    end
   end
 
   # * Return the designation text
