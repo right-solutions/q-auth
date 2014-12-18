@@ -1,0 +1,61 @@
+<div class="row">
+  <div class="col-md-3">
+    <%= display_profile_picture(@user, 180, 180) %>
+  </div>
+<div class="col-md-9">
+<table class="table table-condensed table-hover table-striped mt-20">
+  <thead>
+    <tr>
+      <th>Attribute</th>
+      <th>Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Name</td>
+      <td><%= @user.name %></td>
+    </tr>
+    <tr>
+      <td>Email</td>
+      <td><%= @user.email %></td>
+    </tr>
+    <tr>
+      <td>Username</td>
+      <td><%= @user.username %></td>
+    </tr>
+    <tr>
+      <td>Phone</td>
+      <td><%= @user.phone %></td>
+    </tr>
+    <tr>
+      <td>Skype Id</td>
+      <td><%= @user.skype %></td>
+    </tr>
+    <tr>
+      <td>Linkedin</td>
+      <td><%= @user.linkedin %></td>
+    </tr>
+    <tr>
+      <td>City</td>
+      <td><%= @user.city %></td>
+    </tr>
+    <tr>
+      <td>State</td>
+      <td><%= @user.state %></td>
+    </tr>
+    <tr>
+      <td>Country</td>
+      <td><%= @user.country %></td>
+    </tr>
+    <tr>
+      <td>Designation</td>
+      <td><%= @user.designation.title %></td>
+    </tr>
+    <tr>
+      <td>Department</td>
+      <td><%= @user.department.name %></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>

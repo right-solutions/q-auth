@@ -73,6 +73,7 @@ QAuth::Application.routes.draw do
     get   '/edit',              to: "profile#edit", as: :edit
     put   '/update',              to: "profile#update", as: :update
     get   '/members',           to: "members#index",   as:  :members
+    get   '/member/:id',           to: "members#show",   as:  :member
     resources :images do
      collection do
        delete :destroy_pictures

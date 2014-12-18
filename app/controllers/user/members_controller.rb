@@ -10,6 +10,16 @@ class User::MembersController < User::BaseController
     end
   end
 
+  def show
+    ## Creating the designation object
+    @user = User.find(params[:id])
+
+    respond_to do |format|
+      format.html { render :show }
+      format.js {}
+    end
+  end
+
   def set_navs
     set_nav("user/members")
   end
