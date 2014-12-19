@@ -35,7 +35,7 @@ class User::MembersController < User::BaseController
       relation = relation.search(@query) if !@query.blank?
     end
 
-    @per_page = params[:per_page] || "20"
+    @per_page = params[:per_page] || "21"
     @users = relation.order("name asc").page(@current_page).per(@per_page)
 
     ## Initializing the @user object so that we can render the show partial
