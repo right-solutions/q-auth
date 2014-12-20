@@ -1,4 +1,4 @@
-module AuthenticationHelper
+module AuthenticationSpecHelper
   def sign_in_as_a_valid_user(user = nil)
     sign_in_user = user || FactoryGirl.create(:approved_user)
     sign_in_user.reset_authentication_token! unless sign_in_user.authentication_token

@@ -45,22 +45,44 @@ module AuthenticationHelper
   # This method is usually used as a before filter to secure some of the actions which requires the user to be signed in.
   def require_user
     current_user
-    unless @current_user
-      @heading = translate("authentication.error")
-      @alert = translate("authentication.permission_denied")
-      store_flash_message("#{@heading}: #{@alert}", :errors)
-      redirect_to default_sign_in_url
+    if @current_user
+      unless @current_user
+        @heading = translate("authentication.error")
+        @alert = translate("authentication.permission_denied")
+        store_flash_message("#{@heading}: #{@alert}", :errors)
+        redirect_or_popup_to_default_sign_in_page
+      end
+    else
+      store_flash_message("Your session has been expired. Please Login.", :alert)
+      redirect_or_popup_to_default_sign_in_page
     end
   end
 
   # This method is usually used as a before filter from admin controllers to ensure that the logged in user is an admin
   def require_admin
     current_user
-    unless @current_user.is_admin?
-      @heading = translate("authentication.error")
-      @alert = translate("authentication.permission_denied")
-      store_flash_message("#{@heading}: #{@alert}", :errors)
-      redirect_to default_sign_in_url
+    if @current_user
+      unless @current_user.is_admin?
+        @heading = translate("authentication.error")
+        @alert = translate("authentication.permission_denied")
+        store_flash_message("#{@heading}: #{@alert}", :error)
+        redirect_or_popup_to_default_sign_in_page
+      end
+    else
+      store_flash_message("Your session has been expired. Please Login.", :alert)
+      redirect_or_popup_to_default_sign_in_page
+    end
+  end
+
+  def redirect_or_popup_to_default_sign_in_page
+    respond_to do |format|
+      format.html {
+        redirect_to default_sign_in_url
+      }
+      format.json { render json: {heading: @heading, alert: @alert} }
+      format.js {
+        render(:partial => 'public/user_sessions/popup_sign_in_form.js.erb', :handlers => [:erb], :formats => [:js])
+      }
     end
   end
 
