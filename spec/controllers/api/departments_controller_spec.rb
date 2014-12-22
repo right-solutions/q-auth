@@ -16,4 +16,11 @@ RSpec.describe Api::V1::DepartmentsController, :type => :controller do
       expect(assigns[:data]).to match_array(@data)
     end
   end
+  describe "GET #department" do
+    it "should return a department" do
+      get :show, :id => department.id
+      @data = Department.where("id = ?", department.id)
+      expect(assigns[:data]).to eq(@data.first)
+    end
+  end
 end
