@@ -10,9 +10,7 @@
     <h3 class="panel-title">
       <span class="my-profile-title">My Profile</span>
       <span class="pull-right">
-      <% if @current_user.user_type != "admin" %>
         <%= link_to "edit", user_edit_path, remote: true -%>
-      <% end %>
       </span>
     </h3>
   </div>
