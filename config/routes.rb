@@ -16,6 +16,10 @@ QAuth::Application.routes.draw do
   get    '/api/v1/members'            =>  "api/v1/members#index",  :as => :api_members
   get    '/api/v1/members/:id'        =>  "api/v1/members#show",   :as => :api_member
 
+  #Designation API
+  get    '/api/v1/designations'            =>  "api/v1/designations#index",  :as => :api_designations
+  get    '/api/v1/designation/:id'        =>  "api/v1/designations#show",   :as => :api_designation
+
   # ----------------------------
   # Doorkeeper - Oauth Provider
   # ----------------------------
