@@ -1,6 +1,6 @@
 <div id="department">
   <h4>Department API</h4>
-  <p>This API will displays the department details of particular user .</p>
+  <p>This API will return the details of a particular department. Pass the id as a parameter.</p>
   <p>URL: <code>GET /api/v1/departments/:id</code></p>
   <p>Sample Response: <code><%= link_to "Click Here to toggle", "#department", :onclick=>"$('#sr-dp').toggle()" %></code></p>
   <pre id='sr-dp' style="display: none;">
@@ -9,7 +9,7 @@
       "data": {
 
           "id": 15,
-          "name": "Ruby on Rails",
+          "name": "Operations",
           "description": "Test Data"
         }
     }
