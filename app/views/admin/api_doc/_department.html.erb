@@ -1,0 +1,18 @@
+<div id="department">
+  <h4>Department API</h4>
+  <p>This API will return the details of a particular department. Pass the id as a parameter.</p>
+  <p>URL: <code>GET /api/v1/departments/:id</code></p>
+  <p>Sample Response: <code><%= link_to "Click Here to toggle", "#department", :onclick=>"$('#sr-dp').toggle()" %></code></p>
+  <pre id='sr-dp' style="display: none;">
+    {
+      "success": true,
+      "data": {
+
+          "id": 15,
+          "name": "Operations",
+          "description": "Operations Team is the backbone of any organization. The Team is responsible for Human Resources Management, Recruitment, Admin Activities."
+        }
+    }
+  </pre>
+
+</div>
