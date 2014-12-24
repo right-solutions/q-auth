@@ -2,7 +2,7 @@
 <%# Renders a partial which is used to create a new photo %>
 
 <%= form_for(@image, :as => :image,
-            :url => (@image.new_record? ? admin_images_path : admin_image_path),
+            :url => (@image.new_record? ? user_images_path : user_image_path),
             :method => (@image.new_record? ? :post : :put),
             :html => {:id=>"form_photo",
               :class=>"mb-0 form-horizontal",
@@ -13,7 +13,7 @@
 
     <%= @image.errors[:base].to_sentence %>
 
-    <%= hidden_field_tag :faction, @image.new_record? ? admin_images_path : admin_image_path(@image) %>
+    <%= hidden_field_tag :faction, @image.new_record? ? user_images_path : user_image_path(@image) %>
     <%= hidden_field_tag :fmethod, @image.new_record? ? "POST" : "PUT" %>
 
     <%= hidden_field_tag :imageable_id, params[:imageable_id] %>
