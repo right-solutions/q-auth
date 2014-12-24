@@ -28,9 +28,12 @@
   </div>
 </div>
 </div>
-
+<% if @current_user.is_super_admin? %>
 <%= render :partial => "widgets/more_details", :locals=>{
   :data_model => @department,
+  :data_columns => [:id, :created_at, :updated_at],
+  :heading => "Technical Details",
   :display_footer => true,
   :edit_link => edit_admin_department_path(@department),
   :delete_link => admin_department_path(@department)} %>
+  <% end %>
