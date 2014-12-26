@@ -63,17 +63,84 @@
 
     </div>
   </div>
-  <div class="panel-footer">
-    <div class="row">
-      <!-- Display Action Buttons -->
-      <% if @current_user.is_admin? && ["development", "it", "test"].include?(Rails.env) %>
-        <%= link_to "Masquerade", admin_user_masquerade_path(@user),data: { confirm: "Are you sure? Do you really want to logout current session and login as #{@user.name}?" }, :class=>"btn btn-success btn-xs m-10 pull-left" %>
-      <% end %>
 
-      <%= link_to raw("<i class=\"icon-pencil icon-white mr-5\"></i> Edit"), edit_link, :class=>"btn btn-default btn-xs pull-right m-10 ", :remote=>true %>
-      <%= link_to raw("<i class=\"icon-remove \"></i> Delete"), delete_link, method: :delete, data: { confirm: 'Are you sure?' }, :class=>"btn btn-danger btn-xs pull-right m-10 ", :remote=>true %>
+  <div class="panel-footer">
+
+    <% if @current_user.is_admin? && ["development", "it", "test"].include?(Rails.env) %>
+      <%= link_to raw("<i class=\"fa fa-plug mr-5\"></i> Masquerade"), admin_user_masquerade_path(@user),
+          class: "btn btn-default btn-xs mt-10",
+          data: { confirm: "Are you sure? Do you really want to logout current session and login as #{@user.name}?" } %>
+    <% end %>
+    <div class="dropdown pull-right m-10">
+      <button class="btn btn-default btn-xs dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true" style="color:inherit;">
+        <%= raw("<i class=\"fa fa-cogs mr-5\"></i> Action") %>
+        <span class="caret"></span>
+      </button>
+
+      <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+
+        <% case @user.user_type %>
+        <% when "user", nil %>
+          <li role="presentation">
+            <%= link_to raw("<i class=\"fa fa-edit mr-5\"></i> Make Admin"), "#", :remote=>true, role: "menuitem", tabindex: "-1" %>
+          </li>
+
+          <% if @current_user.is_super_admin? %>
+            <li role="presentation">
+              <%= link_to raw("<i class=\"fa fa-edit mr-5\"></i> Make Super Admin"), "#", :remote=>true, role: "menuitem", tabindex: "-1" %>
+            </li>
+          <% end %>
+
+        <% when "admin" %>
+          <li role="presentation">
+            <%= link_to raw("<i class=\"fa fa-edit mr-5\"></i> Remove Admin"), "#", :remote=>true, role: "menuitem", tabindex: "-1" %>
+          </li>
+
+          <% if @current_user.is_super_admin? %>
+            <li role="presentation">
+              <%= link_to raw("<i class=\"fa fa-edit mr-5\"></i> Make Super Admin"), "#", :remote=>true, role: "menuitem", tabindex: "-1" %>
+            </li>
+          <% end %>
+        <% when "super_admin" %>
+          <li role="presentation">
+            <%= link_to raw("<i class=\"fa fa-edit mr-5\"></i> Make Admin"), "#", :remote=>true, role: "menuitem", tabindex: "-1" %>
+          </li>
+          <% if @current_user.is_super_admin? %>
+            <li role="presentation">
+              <%= link_to raw("<i class=\"fa fa-edit mr-5\"></i> Remove Super Admin"), "#", :remote=>true, role: "menuitem", tabindex: "-1" %>
+            </li>
+          <% end %>
+        <% end %>
+
+        <li role="presentation" class="divider"></li>
+
+          <% case @user.status %>
+          <% when "active" %>
+            <li role="presentation">
+              <%= link_to raw("<i class=\"fa fa-edit mr-5\"></i> Inactivate"), "#", :remote=>true, role: "menuitem", tabindex: "-1" %>
+              <%= link_to raw("<i class=\"fa fa-edit mr-5\"></i> Suspend"), "#", :remote=>true, role: "menuitem", tabindex: "-1" %>
+            </li>
+          <% when "inactive" %>
+            <%= link_to raw("<i class=\"fa fa-edit mr-5\"></i> Activate"), "#", :remote=>true, role: "menuitem", tabindex: "-1" %>
+          <% when "suspended" %>
+            <li role="presentation">
+              <%= link_to raw("<i class=\"fa fa-edit mr-5\"></i> Activate"), "#", :remote=>true, role: "menuitem", tabindex: "-1" %>
+            </li>
+          <% end %>
+
+        <li role="presentation" class="divider"></li>
+
+        <li role="presentation">
+          <%= link_to raw("<i class=\"fa fa-edit mr-5\"></i> Edit"), edit_link, :remote=>true, role: "menuitem", tabindex: "-1" %>
+        </li>
+        <li role="presentation">
+          <%= link_to raw("<i class=\"fa fa-trash mr-5\"></i> Delete"), delete_link, method: :delete, role: "menuitem", tabindex: "-1", data: { confirm: 'Are you sure?' }, :remote=>true %>
+        </li>
+      </ul>
     </div>
+    <div class="clearfix"></div>
   </div>
+
 </div>
 
 <div id="div_user_projects">
