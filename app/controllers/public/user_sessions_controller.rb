@@ -20,7 +20,7 @@ module Public
       if @user
         # Check if the user is not approved (pending, locked or blocked)
         # Will allow to login only if status is approved
-        if @user.status != ConfigCenter::User::APPROVED
+        if @user.status != ConfigCenter::User::ACTIVE
 
           puts "#{@user.email} id not approved".yellow
 
