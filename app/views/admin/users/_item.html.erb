@@ -6,7 +6,7 @@
       <%= display_profile_picture(user,42,42) %>
    	</div>
    	<div class="pull-left" style="width:75%;">
-   		<%= link_to user.display_name, admin_user_path(user), :remote=>true, :class=>"text-color-blue fs-14" %>
+   		<%= link_to scrap_word(user.display_name, 24), admin_user_path(user), :remote=>true, :class=>"text-color-blue fs-16" %>
 		  <div class="text-color-gray fs-12"><%= user.display_designation %></div>
     </div>
 

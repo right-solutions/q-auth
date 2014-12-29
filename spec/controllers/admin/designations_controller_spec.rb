@@ -7,46 +7,46 @@ describe Admin::DesignationsController, :type => :controller do
 
   before(:each) do
    session[:id] = super_admin_user.id
-  end
+ end
 
-  it "POST #create" do
-    designation_params = {
-      designation: {
-        title: "Developer",
-        responsibilities: "Quality code"
-      }
+ it "POST #create" do
+  designation_params = {
+    designation: {
+      title: "Developer",
+      responsibilities: "Quality code"
     }
+  }
 
-    post :create, designation_params
-    expect(Designation.count).to  eq 1
-  end
+  post :create, designation_params
+  expect(Designation.count).to  eq 1
+end
 
-  it "assigns all get_collections as @designations" do
-    get :index
-    assigns(:designations).should eq([designation])
-  end
+it "assigns all get_collections as @designations" do
+  get :index
+  expect(assigns[:designations]).to match_array([designation])
+end
 
-  it "GET #edit" do
-   get :edit, {:id => designation.id}
-   assigns(:designation).should eq(designation)
-  end
+it "GET #edit" do
+ get :edit, {:id => designation.id}
+ expect(assigns[:designation]).to eq(designation)
+end
 
-  it "GET #show" do
-   get :show, {:id => designation.id}
-   expect(assigns(:designation)).to eq(designation)
-  end
+it "GET #show" do
+ get :show, {:id => designation.id}
+ expect(assigns(:designation)).to eq(designation)
+end
 
-  it "updates the requested designation" do
-    value = designation
-    patch :update, {:id => designation.id, :designation => { :title => "New title", :responsibilities =>"Tested data"}}
-    expect(value).should_not eq(designation)
-  end
+it "assigns the requested designation as @designation" do
+  value = designation
+  put :update, {:id => designation.id, :designation => { :title => "New title", :responsibilities =>"Tested data"}}
+  expect(assigns(:designation)).to eq(designation)
+end
 
-  it "destroys the requested designation" do
-    value = designation
-    expect do
-      delete :destroy, {:id => designation.id}
-    end.to change(Designation, :count).by(-1)
-  end
+it "destroys the requested designation" do
+  value = designation
+  expect do
+    delete :destroy, {:id => designation.id}
+  end.to change(Designation, :count).by(-1)
+end
 
 end

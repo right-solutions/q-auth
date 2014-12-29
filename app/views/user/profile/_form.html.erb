@@ -3,7 +3,7 @@
 		<%= display_profile_picture(@user, 180, 180) %>
 		<br/>
 		<div>
-      <%= link_to 'Change photo', upload_image_link(@user, user_edit_path, :profile_picture), :remote => true, :style => "margin-left:40px;" %>
+      <%= link_to 'Change photo', upload_user_image_link(@user, user_edit_path, :profile_picture), :remote => true, :style => "margin-left:40px;" %>
     </div>
   </div>
 

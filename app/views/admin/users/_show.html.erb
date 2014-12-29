@@ -25,7 +25,7 @@
         <div class="col-sm-7">
           <div class="mb-20 text-color-gray">
 
-            <div class="fs-18 text-color-blue pull-left">
+            <div class="fs-22 text-color-blue pull-left">
               <%= link_to @user.display_name, profile_path(username: @user.username) %>
             </div>
 
@@ -79,14 +79,6 @@
 <div id="div_user_projects">
   <%#= render :partial => "admin/users/projects/index", :locals=>{:user => @user} %>
 </div>
-
-<%= render :partial => "widgets/more_details", :locals=>{
-                      :data_model => @user,
-                      :data_columns => [:username, :email, :user_type, :biography, :status, :desigignation_overridden, ],
-                      :heading => "User Details",
-                      :display_footer => true,
-                      :edit_link => edit_link,
-                      :delete_link => delete_link} %>
 
 <% if @current_user.is_super_admin? %>
   <%= render :partial => "widgets/more_details", :locals=>{

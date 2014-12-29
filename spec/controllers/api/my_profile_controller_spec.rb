@@ -14,6 +14,7 @@ RSpec.describe Api::V1::MyProfileController, :type => :controller do
                                             state: "Karnataka",
                                             country: "India",
                                             designation: designation,
+                                            designation_overridden: "Leader of Opposition, Govt. India",
                                             department: department,
                                             linkedin: "mohandas_linkedin",
                                             biography: "Father of the nation, India") }
@@ -39,16 +40,14 @@ RSpec.describe Api::V1::MyProfileController, :type => :controller do
         expect(response_body["data"]["city"]).to  eq("Mysore")
         expect(response_body["data"]["state"]).to  eq("Karnataka")
         expect(response_body["data"]["country"]).to  eq("India")
-        expect(response_body["data"]["designation_title"]).to  eq("Leader")
-        expect(response_body["data"]["department_name"]).to  eq("Politics")
+        expect(response_body["data"]["designation"]["title"]).to  eq("Leader")
+        expect(response_body["data"]["designation_overridden"]).to  eq("Leader of Opposition, Govt. India")
+        expect(response_body["data"]["department"]["name"]).to  eq("Politics")
         expect(response_body["data"]["user_type"]).to  eq(nil)
         expect(response_body["data"]["biography"]).to  eq("Father of the nation, India")
         expect(response_body["data"]["auth_token"]).to  eq(approved_user.auth_token)
         expect(response_body["data"]["password"]).to  eq(nil)
         expect(response_body["data"]["password_digest"]).to  eq(nil)
-
-        expect(response_body["data"]["designation"]["title"]).to  eq("Leader")
-        expect(response_body["data"]["department"]["name"]).to  eq("Politics")
       end
     end
 
@@ -96,6 +95,7 @@ RSpec.describe Api::V1::MyProfileController, :type => :controller do
                                             country: "Bharath",
                                             department: department.name,
                                             designation: designation.title,
+                                            designation_overridden: "Leader of Opposition, Govt. India",
                                             linkedin: "mohandas_linkedin_12345",
                                             biography: biography}}}
 
@@ -120,8 +120,7 @@ RSpec.describe Api::V1::MyProfileController, :type => :controller do
         expect(response_body["data"]["city"]).to  eq("Calicut")
         expect(response_body["data"]["state"]).to  eq("Kerala")
         expect(response_body["data"]["country"]).to  eq("Bharath")
-        expect(response_body["data"]["designation_title"]).to  eq("National Leader")
-        expect(response_body["data"]["department_name"]).to  eq("Indian Politics")
+        expect(response_body["data"]["designation_overridden"]).to  eq("Leader of Opposition, Govt. India")
         expect(response_body["data"]["user_type"]).to  eq(nil)
         expect(response_body["data"]["biography"]).to  eq(biography)
         expect(response_body["data"]["auth_token"]).to  eq(approved_user.auth_token)

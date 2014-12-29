@@ -41,57 +41,57 @@ RSpec.describe User, :type => :model do
 
   it "should validate name lenght" do
 
-      user.name = "sg"*256
-      user.valid?
-      expect(user.errors[:name].size).to be 1
-      expect(user).to be_invalid
+    user.name = "sg"*256
+    user.valid?
+    expect(user.errors[:name].size).to be 1
+    expect(user).to be_invalid
 
-      user.name = "s"
-      user.valid?
-      expect(user.errors[:name].size).to be 1
-      expect(user).to be_invalid
+    user.name = "s"
+    user.valid?
+    expect(user.errors[:name].size).to be 1
+    expect(user).to be_invalid
 
-      user.name = "Ravi"
-      user.valid?
-      expect(user.errors[:name].size).to be 0
-      expect(user).to be_valid
+    user.name = "Ravi"
+    user.valid?
+    expect(user.errors[:name].size).to be 0
+    expect(user).to be_valid
 
   end
 
   it "should validate username lenght" do
 
-      user.username = "sg"*256
-      user.valid?
-      expect(user.errors[:username].size).to be 1
-      expect(user).to be_invalid
+    user.username = "sg"*256
+    user.valid?
+    expect(user.errors[:username].size).to be 1
+    expect(user).to be_invalid
 
-      user.username = "s"
-      user.valid?
-      expect(user.errors[:username].size).to be 1
-      expect(user).to be_invalid
+    user.username = "s"
+    user.valid?
+    expect(user.errors[:username].size).to be 1
+    expect(user).to be_invalid
 
-      user.username = "RaviShankar"
-      user.valid?
-      expect(user.errors[:username].size).to be 0
-      expect(user).to be_valid
+    user.username = "RaviShankar"
+    user.valid?
+    expect(user.errors[:username].size).to be 0
+    expect(user).to be_valid
   end
 
   it "should validate password lenght" do
 
-      user.password = "sgd"*256
-      user.valid?
-      expect(user.errors[:password].size).to be 2
-      expect(user).to be_invalid
+    user.password = "sgd"*256
+    user.valid?
+    expect(user.errors[:password].size).to be 2
+    expect(user).to be_invalid
 
-      user.password = "sgd"
-      user.valid?
-      expect(user.errors[:password].size).to be 2
-      expect(user).to be_invalid
+    user.password = "sgd"
+    user.valid?
+    expect(user.errors[:password].size).to be 2
+    expect(user).to be_invalid
 
-      user.password = "Password@1"
-      user.valid?
-      expect(user.errors[:password].size).to be 0
-      expect(user).to be_valid
+    user.password = "Password@1"
+    user.valid?
+    expect(user.errors[:password].size).to be 0
+    expect(user).to be_valid
   end
 
 
@@ -100,7 +100,7 @@ RSpec.describe User, :type => :model do
     ["name", "Ravi"].each do |n|
       user.name = n
       value = user.valid?
-       expect(value).to be_truthy
+      expect(value).to be_truthy
     end
 
     # checking invalid names
@@ -116,7 +116,7 @@ RSpec.describe User, :type => :model do
     ["Username_001", "user_name_002"].each do |n|
       user.username = n
       value = user.valid?
-       expect(value).to be_truthy
+      expect(value).to be_truthy
     end
 
     # checking invalid usernames
@@ -160,13 +160,13 @@ RSpec.describe User, :type => :model do
   end
 
   it "should find the user if email or username matches" do
-      user = FactoryGirl.create(:approved_user, name: "Ram", email: "something.123@domain.com", username: "ramuser1")
-      User.find_by_email_or_username("something.123@domain.com").should == user
-      User.find_by_email_or_username("ramuser1").should == user
-      User.find_by_email_or_username("Ram").should be_nil
-    end
+    user = FactoryGirl.create(:approved_user, name: "Ram", email: "something.123@domain.com", username: "ramuser1")
+    expect(User.find_by_email_or_username("something.123@domain.com")).to eq(user)
+    expect(User.find_by_email_or_username("ramuser1")).to eq(user)
+    expect(User.find_by_email_or_username("Ram")).to be_falsy
+  end
 
-    it "should search the users" do
+  it "should search the users" do
 
     User.create(:name =>"Ram", :email =>"something.123@domain.com");
     User.create(:name =>"Ram1", :email =>"something.1234@domain.com");
@@ -175,5 +175,3 @@ RSpec.describe User, :type => :model do
   end
 
 end
-
-

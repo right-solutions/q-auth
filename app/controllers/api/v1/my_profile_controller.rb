@@ -48,7 +48,7 @@ module Api
       end
 
       def user_params
-        params.require(:user).permit(:name, :username, :phone, :skype, :linkedin, :city, :state, :country, :biography, :password, :password_confirmation)
+        params.require(:user).permit(:name, :username, :phone, :skype, :linkedin, :city, :state, :country, :biography, :designation_overridden, :password, :password_confirmation)
       end
 
     end

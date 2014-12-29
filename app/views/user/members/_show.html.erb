@@ -13,47 +13,57 @@
   <tbody>
     <tr>
       <td>Name</td>
-      <td><%= @current_user.name %></td>
+      <td><%= @user.name %></td>
     </tr>
     <tr>
       <td>Email</td>
-      <td><%= @current_user.email %></td>
+      <td><%= @user.email %></td>
     </tr>
     <tr>
       <td>Username</td>
-      <td><%= @current_user.username %></td>
+      <td><%= @user.username %></td>
     </tr>
     <tr>
       <td>Phone</td>
-      <td><%= @current_user.phone %></td>
+      <td><%= @user.phone %></td>
     </tr>
     <tr>
       <td>Skype Id</td>
-      <td><%= @current_user.skype %></td>
+      <td><%= @user.skype %></td>
     </tr>
     <tr>
       <td>Linkedin</td>
-      <td><%= @current_user.linkedin %></td>
+      <td><%= @user.linkedin %></td>
     </tr>
     <tr>
       <td>City</td>
-      <td><%= @current_user.city %></td>
+      <td><%= @user.city %></td>
     </tr>
     <tr>
       <td>State</td>
-      <td><%= @current_user.state %></td>
+      <td><%= @user.state %></td>
     </tr>
     <tr>
       <td>Country</td>
-      <td><%= @current_user.country %></td>
+      <td><%= @user.country %></td>
     </tr>
     <tr>
       <td>Designation</td>
-      <td><%= @current_user.designation.title if @current_user.designation %></td>
+      <td>
+      <% if @user.designation.present? %>
+      <%= @user.designation.title %>
+      <%else%>
+      <%end%>
+      </td>
     </tr>
     <tr>
       <td>Department</td>
-      <td><%= @current_user.department.name if @current_user.department %></td>
+      <td>
+      <% if @user.department.present? %>
+      <%= @user.department.name %>
+      <%else%>
+      <%end%>
+      </td>
     </tr>
   </tbody>
 </table>

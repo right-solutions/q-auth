@@ -16,6 +16,15 @@ QAuth::Application.routes.draw do
   get    '/api/v1/members'            =>  "api/v1/members#index",  :as => :api_members
   get    '/api/v1/members/:id'        =>  "api/v1/members#show",   :as => :api_member
 
+
+  #department API
+  get    '/api/v1/departments'            =>  "api/v1/departments#index",  :as => :api_departments
+  get    '/api/v1/department/:id'            =>  "api/v1/departments#show",  :as => :api_department
+
+  #Designation API
+  get    '/api/v1/designations'            =>  "api/v1/designations#index",  :as => :api_designations
+  get    '/api/v1/designation/:id'        =>  "api/v1/designations#show",   :as => :api_designation
+
   # ----------------------------
   # Doorkeeper - Oauth Provider
   # ----------------------------
@@ -72,6 +81,8 @@ QAuth::Application.routes.draw do
     get   '/profile',           to: "profile#index",   as:  :profile
     get   '/edit',              to: "profile#edit", as: :edit
     put   '/update',              to: "profile#update", as: :update
+    get   '/members',           to: "members#index",   as:  :members
+    get   '/member/:id',           to: "members#show",   as:  :member
     resources :images do
      collection do
        delete :destroy_pictures
