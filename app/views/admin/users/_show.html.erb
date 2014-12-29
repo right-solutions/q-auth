@@ -82,32 +82,32 @@
         <% case @user.user_type %>
         <% when "user", nil %>
           <li role="presentation">
-            <%= link_to raw("<i class=\"fa fa-edit mr-5\"></i> Make Admin"), "#", :remote=>true, role: "menuitem", tabindex: "-1" %>
+            <%= link_to raw("<i class=\"fa fa-plus mr-5\"></i> Make Admin"), "#", :remote=>true, role: "menuitem", tabindex: "-1" %>
           </li>
 
           <% if @current_user.is_super_admin? %>
             <li role="presentation">
-              <%= link_to raw("<i class=\"fa fa-edit mr-5\"></i> Make Super Admin"), "#", :remote=>true, role: "menuitem", tabindex: "-1" %>
+              <%= link_to raw("<i class=\"fa fa-plus-square mr-5\"></i> Make Super Admin"), "#", :remote=>true, role: "menuitem", tabindex: "-1" %>
             </li>
           <% end %>
 
         <% when "admin" %>
           <li role="presentation">
-            <%= link_to raw("<i class=\"fa fa-edit mr-5\"></i> Remove Admin"), "#", :remote=>true, role: "menuitem", tabindex: "-1" %>
+            <%= link_to raw("<i class=\"fa fa-remove mr-5\"></i> Remove Admin"), "#", :remote=>true, role: "menuitem", tabindex: "-1" %>
           </li>
 
           <% if @current_user.is_super_admin? %>
             <li role="presentation">
-              <%= link_to raw("<i class=\"fa fa-edit mr-5\"></i> Make Super Admin"), "#", :remote=>true, role: "menuitem", tabindex: "-1" %>
+              <%= link_to raw("<i class=\"fa fa-plus-square mr-5\"></i> Make Super Admin"), "#", :remote=>true, role: "menuitem", tabindex: "-1" %>
             </li>
           <% end %>
         <% when "super_admin" %>
           <li role="presentation">
-            <%= link_to raw("<i class=\"fa fa-edit mr-5\"></i> Make Admin"), "#", :remote=>true, role: "menuitem", tabindex: "-1" %>
+            <%= link_to raw("<i class=\"fa fa-plus mr-5\"></i> Make Admin"), "#", :remote=>true, role: "menuitem", tabindex: "-1" %>
           </li>
           <% if @current_user.is_super_admin? %>
             <li role="presentation">
-              <%= link_to raw("<i class=\"fa fa-edit mr-5\"></i> Remove Super Admin"), "#", :remote=>true, role: "menuitem", tabindex: "-1" %>
+              <%= link_to raw("<i class=\"fa fa-remove mr-5\"></i> Remove Super Admin"), "#", :remote=>true, role: "menuitem", tabindex: "-1" %>
             </li>
           <% end %>
         <% end %>
@@ -117,14 +117,14 @@
           <% case @user.status %>
           <% when "active" %>
             <li role="presentation">
-              <%= link_to raw("<i class=\"fa fa-edit mr-5\"></i> Inactivate"), "#", :remote=>true, role: "menuitem", tabindex: "-1" %>
+              <%= link_to raw("<i class=\"fa fa-circle mr-5\"></i> Inactivate"), "#", :remote=>true, role: "menuitem", tabindex: "-1" %>
               <%= link_to raw("<i class=\"fa fa-edit mr-5\"></i> Suspend"), "#", :remote=>true, role: "menuitem", tabindex: "-1" %>
             </li>
           <% when "inactive" %>
-            <%= link_to raw("<i class=\"fa fa-edit mr-5\"></i> Activate"), "#", :remote=>true, role: "menuitem", tabindex: "-1" %>
+            <%= link_to raw("<i class=\"fa fa-circle-o mr-5\"></i> Activate"), "#", :remote=>true, role: "menuitem", tabindex: "-1" %>
           <% when "suspended" %>
             <li role="presentation">
-              <%= link_to raw("<i class=\"fa fa-edit mr-5\"></i> Activate"), "#", :remote=>true, role: "menuitem", tabindex: "-1" %>
+              <%= link_to raw("<i class=\"fa fa-circle-o mr-5\"></i> Activate"), "#", :remote=>true, role: "menuitem", tabindex: "-1" %>
             </li>
           <% end %>
 
