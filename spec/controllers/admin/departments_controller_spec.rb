@@ -24,15 +24,15 @@ describe Admin::DepartmentsController, :type => :controller do
     expect(Department.count).to  eq 1
   end
 
-  it "assigns all get_collections as @departments" do
+  it "assigns all departments as @departments" do
     [department_1,department_2]
     get :index
-    assigns(:departments).should eq([department_1,department_2])
+    expect(assigns[:departments]).to match_array([department_1,department_2])
   end
 
   it "GET #edit" do
     get :edit, {:id => department.id}
-    assigns(:department).should eq(department)
+    expect(assigns[:department]).to eq(department)
   end
 
   it "GET #show" do
@@ -40,10 +40,10 @@ describe Admin::DepartmentsController, :type => :controller do
     expect(assigns(:department)).to eq(department)
   end
 
-  it "updates the requested department" do
+  it "assigns the requested department as @department" do
     value = department
-    patch :update, {:id => department.id, :department => { :name => "User1", :description =>"Tested data"}}
-    expect(value).should_not eq(department)
+    put :update, {:id => department.to_param, :department => {:name =>"dep name", :description =>"updated test data"}}
+    expect(assigns(:department)).to eq(department)
   end
 
   it "destroys the requested department" do
