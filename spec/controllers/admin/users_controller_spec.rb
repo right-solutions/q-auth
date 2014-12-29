@@ -49,14 +49,14 @@ describe "PUT update" do
    put :update, {:id => user.to_param, :user => {"name" => "Raghu",
      "username" => "Raghavendre","email" => "adam@trimediatlantic.com","phone" => "333-093-3334","password" => ConfigCenter::Defaults::PASSWORD,"password_confirmation" => ConfigCenter::Defaults::PASSWORD,"designation_overridden" => "alert","linkedin" => "RaviShankar","skype" => "RaviShankar","status" => "pending","department_id" => department.id,
      "designation_id" => designation.id}}
-     assigns(:user).should eq(user)
+     expect(assigns(:user)).to eq (user)
    end
  end
 
  describe "GET edit" do
   it "assigns the requested user as @user" do
     get :edit, {:id => user.to_param}
-    assigns(:user).should eq(user)
+    expect(assigns(:user)).to eq (user)
   end
 end
 
@@ -71,11 +71,11 @@ end
 
 
 describe "GET index" do
-    it "assigns all practice as @practise" do
-      [designation,user_1, user_2]
-      get :index
-      assigns(:users).should eq([admin_user, user_1, user_2])
-    end
+  it "assigns all practice as @practise" do
+    [designation,user_1, user_2]
+    get :index
+    expect(assigns[:users]).to match_array([admin_user,user_1, user_2])
   end
+end
 
 end
