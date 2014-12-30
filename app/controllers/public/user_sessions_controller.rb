@@ -22,7 +22,7 @@ module Public
         # Will allow to login only if status is approved
         if @user.status != ConfigCenter::User::ACTIVE
 
-          puts "#{@user.email} id not approved".yellow
+          puts "#{@user.email} id not activated".yellow
 
           @heading = translate("authentication.error")
           @alert = translate("authentication.user_is_#{@user.status.downcase}")

@@ -139,7 +139,7 @@ namespace 'import' do
       end
 
       if user.valid? && (profile_picture.blank? || profile_picture.valid?)
-        puts "#{user.display_name} saved & approved".green if user.save! && user.approve!
+        puts "#{user.display_name} saved & activated".green if user.save! && user.active!
       else
         puts "Error! #{user.errors.full_messages.to_sentence}".red
       end
