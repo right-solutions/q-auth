@@ -14,6 +14,19 @@
       </span>
     </div><!-- /input-group -->
 
+      <%= label_tag :status, "Filter by status", :for => "status", :class=>"pull-left mr-10" %>
+        <% options = ConfigCenter::User::STATUS_LIST %>
+        <%= select_tag("status", options_for_select(options, params[:status] ), :class=>"form-control pull-left filter-select", "data-filter-type" => "status", :prompt => "All") %>
+
+        <%= label_tag :type, "Filter by type", :for => "user_type", :class=>"pull-left mr-10" %>
+        <% options = ["user", "admin", "super_admin"] %>
+        <%= select_tag("type", options_for_select(options, params[:type] ), :class=>"form-control pull-left filter-select", "data-filter-type" => "type", :prompt => "All") %>
+
+      <div class="col-xs-8">
+      <span class="input-group-btn">
+        <button type="submit" class="btn btn-default"><i class='fa fa-search mr-10'></i>Filter!</button>
+      </span>
+      </div>
     <%- end %>
 
   </div><!-- /.col-xs-6 -->

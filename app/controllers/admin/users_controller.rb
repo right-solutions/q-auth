@@ -192,6 +192,16 @@ class Admin::UsersController < Admin::BaseController
       relation = relation.search(@query) if !@query.blank?
     end
 
+    if params[:status]
+      @status = params[:status].strip
+      relation = relation.status(@status) if !@status.blank?
+    end
+
+    if params[:type]
+      @type = params[:type].strip
+      relation = relation.type(@type) if !@type.blank?
+    end
+
     @per_page = params[:per_page] || "20"
     @users = relation.order("name asc").page(@current_page).per(@per_page)
 

@@ -99,6 +99,10 @@ class User < ActiveRecord::Base
                                         LOWER(phone) LIKE LOWER('%#{query}%')")
                         }
 
+  scope :status, lambda { |status| where ("LOWER(status)='#{status}'") }
+  scope :type, lambda { |type| where ("LOWER(user_type)='#{type}'")
+                        }
+
   # * Return full name
   # == Examples
   #   >>> user.display_name
