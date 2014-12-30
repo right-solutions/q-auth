@@ -1,6 +1,7 @@
 class Admin::UsersController < Admin::BaseController
 
   before_filter :get_user, :only => [:masquerade]
+  before_filter :require_super_admin, only: [:make_admin, :make_super_admin, :remove_admin, :remove_super_admin]
 
   # GET /users
   # GET /users.js
@@ -192,6 +193,13 @@ class Admin::UsersController < Admin::BaseController
   end
 
   def remove_admin
+    @user = User.find(params[:user_id])
+    @user.user_type="user"
+    @user.save
+    redirect_to admin_users_url
+  end
+
+  def remove_super_admin
     @user = User.find(params[:user_id])
     @user.user_type="user"
     @user.save
