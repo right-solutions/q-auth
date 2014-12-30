@@ -102,7 +102,7 @@ class Admin::UsersController < Admin::BaseController
     @user = User.find(params[:id])
 
     ## Updating the @user object with params
-    @user.assign_attributes(params[:user].permit(:name, :username, :email, :phone, :designation_overridden, :linkedin, :skype, :department_id, :designation_id))
+    @user.assign_attributes(user_params)
 
     ## Validating the data
     @user.valid?

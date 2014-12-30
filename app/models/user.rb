@@ -49,12 +49,12 @@ class User < ActiveRecord::Base
       transition :inactive => :active
     end
 
-    event :suspend do
-      transition :active => :suspend
+    event :suspended do
+      transition :active => :suspended
     end
 
     event :active do
-      transition :suspend => :active
+      transition :suspended => :active
     end
 
   end
@@ -174,7 +174,7 @@ class User < ActiveRecord::Base
   # == Examples
   #   >>> user.pending?
   #   => true
-  def pending?
+  def inactive?
     (status == ConfigCenter::User::INACTIVE)
   end
 
@@ -182,7 +182,7 @@ class User < ActiveRecord::Base
   # == Examples
   #   >>> user.pending?
   #   => true
-  def approved?
+  def active?
     (status == ConfigCenter::User::ACTIVE)
   end
 
@@ -190,7 +190,7 @@ class User < ActiveRecord::Base
   # == Examples
   #   >>> user.blocked?
   #   => true
-  def blocked?
+  def suspended?
     (status == ConfigCenter::User::SUSPEND)
   end
 
@@ -199,7 +199,7 @@ class User < ActiveRecord::Base
   # == Examples
   #   >>> user.pending!
   #   => "pending"
-  def pending!
+  def inactive!
     self.update_attribute(:status, ConfigCenter::User::INACTIVE)
   end
 
@@ -208,7 +208,7 @@ class User < ActiveRecord::Base
   # == Examples
   #   >>> user.approve!
   #   => "approved"
-  def approve!
+  def active!
     self.update_attribute(:status, ConfigCenter::User::ACTIVE)
   end
 
@@ -217,7 +217,7 @@ class User < ActiveRecord::Base
   # == Examples
   #   >>> user.block!
   #   => "blocked"
-  def block!
+  def suspended!
     self.update_attribute(:status, ConfigCenter::User::SUSPEND)
   end
 
