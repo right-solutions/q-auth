@@ -197,9 +197,9 @@ class Admin::UsersController < Admin::BaseController
       relation = relation.status(@status) if !@status.blank?
     end
 
-    if params[:type]
-      @type = params[:type].strip
-      relation = relation.type(@type) if !@type.blank?
+    if params[:user_type]
+      @user_type = params[:user_type].strip
+      relation = relation.user_type(@user_type) if !@user_type.blank?
     end
 
     @per_page = params[:per_page] || "20"

@@ -100,7 +100,7 @@ class User < ActiveRecord::Base
                         }
 
   scope :status, lambda { |status| where ("LOWER(status)='#{status}'") }
-  scope :type, lambda { |type| where ("LOWER(user_type)='#{type}'")
+  scope :user_type, lambda { |user_type| where ("LOWER(user_type)='#{user_type}'")
                         }
 
   # * Return full name
