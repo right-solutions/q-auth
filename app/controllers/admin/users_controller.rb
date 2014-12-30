@@ -208,7 +208,7 @@ class Admin::UsersController < Admin::BaseController
   end
 
   def user_params
-    params.require(:user).permit(:name, :username, :email, :phone, :status, :designation_overridden, :linkedin, :skype, :department_id, :designation_id)
+    params.require(:user).permit(:name, :username, :email, :phone, :designation_overridden, :linkedin, :skype, :department_id, :designation_id)
   end
 
 end
