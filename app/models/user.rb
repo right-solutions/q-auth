@@ -49,12 +49,12 @@ class User < ActiveRecord::Base
       transition :inactive => :active
     end
 
-    event :suspend do
-      transition :active => :suspend
+    event :suspended do
+      transition :active => :suspended
     end
 
     event :active do
-      transition :suspend => :active
+      transition :suspended => :active
     end
 
   end

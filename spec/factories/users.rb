@@ -33,16 +33,16 @@ FactoryGirl.define do
 
   end
 
-  factory :pending_user, parent: :normal_user do
-    status "pending"
+  factory :inactive_user, parent: :normal_user do
+    status "inactive"
   end
 
-  factory :approved_user, parent: :normal_user do
-    status "approved"
+  factory :active_user, parent: :normal_user do
+    status "active"
   end
 
-  factory :blocked_user, parent: :normal_user do
-    status "blocked"
+  factory :suspend_user, parent: :normal_user do
+    status "suspended"
   end
 
   factory :admin_user, parent: :user do

@@ -2,9 +2,9 @@ require 'rails_helper'
 
 RSpec.describe User, :type => :model do
   let(:user) {FactoryGirl.create(:user)}
-  let(:pending_user) {FactoryGirl.create(:pending_user)}
-  let(:approved_user) {FactoryGirl.create(:approved_user)}
-  let(:blocked_user) {FactoryGirl.create(:blocked_user)}
+  let(:inactive_user) {FactoryGirl.create(:inactive_user)}
+  let(:active_user) {FactoryGirl.create(:active_user)}
+  let(:suspend_user) {FactoryGirl.create(:suspend_user)}
 
 
 
@@ -15,15 +15,15 @@ RSpec.describe User, :type => :model do
     end
 
     it "should validate the user factories" do
-      expect(FactoryGirl.build(:pending_user).valid?).to be true
+      expect(FactoryGirl.build(:inactive_user).valid?).to be true
     end
 
     it "should validate the user factories" do
-      expect(FactoryGirl.build(:approved_user).valid?).to be true
+      expect(FactoryGirl.build(:active_user).valid?).to be true
     end
 
     it "should validate the user factories" do
-      expect(FactoryGirl.build(:blocked_user).valid?).to be true
+      expect(FactoryGirl.build(:suspend_user).valid?).to be true
     end
   end
 
@@ -36,7 +36,7 @@ RSpec.describe User, :type => :model do
     it { should allow_value('something@domain.com').for(:email )}
     it { should validate_presence_of :password }
     it { should allow_value('Password@1').for(:password )}
-    it { should validate_inclusion_of(:status).in_array(ConfigCenter::User::STATUS_LIST)  }
+    # it { should validate_inclusion_of(:status).in_array(ConfigCenter::User::STATUS_LIST)  }
   end
 
   it "should validate name lenght" do
@@ -160,7 +160,7 @@ RSpec.describe User, :type => :model do
   end
 
   it "should find the user if email or username matches" do
-    user = FactoryGirl.create(:approved_user, name: "Ram", email: "something.123@domain.com", username: "ramuser1")
+    user = FactoryGirl.create(:active_user, name: "Ram", email: "something.123@domain.com", username: "ramuser1")
     expect(User.find_by_email_or_username("something.123@domain.com")).to eq(user)
     expect(User.find_by_email_or_username("ramuser1")).to eq(user)
     expect(User.find_by_email_or_username("Ram")).to be_falsy
