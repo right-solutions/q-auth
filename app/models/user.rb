@@ -43,18 +43,18 @@ class User < ActiveRecord::Base
   belongs_to :department
   has_one :profile_picture, :as => :imageable, :dependent => :destroy, :class_name => "Image::ProfilePicture"
 
-  state_machine :status, :initial => :pending do
+  state_machine :status, :initial => :inactive do
 
-    event :approve do
-      transition :pending => :approved
+    event :active do
+      transition :inactive => :active
     end
 
-    event :block do
-      transition :approved => :blocked
+    event :suspend do
+      transition :active => :suspend
     end
 
-    event :unblock do
-      transition :blocked => :approved
+    event :active do
+      transition :suspend => :active
     end
 
   end
@@ -175,7 +175,7 @@ class User < ActiveRecord::Base
   #   >>> user.pending?
   #   => true
   def pending?
-    (status == ConfigCenter::User::PENDING)
+    (status == ConfigCenter::User::INACTIVE)
   end
 
   # * Return true if the user is approved, else false.
@@ -183,7 +183,7 @@ class User < ActiveRecord::Base
   #   >>> user.pending?
   #   => true
   def approved?
-    (status == ConfigCenter::User::APPROVED)
+    (status == ConfigCenter::User::ACTIVE)
   end
 
   # * Return true if the user is blocked, else false.
@@ -191,7 +191,7 @@ class User < ActiveRecord::Base
   #   >>> user.blocked?
   #   => true
   def blocked?
-    (status == ConfigCenter::User::BLOCKED)
+    (status == ConfigCenter::User::SUSPEND)
   end
 
   # change the status to :pending
@@ -200,7 +200,7 @@ class User < ActiveRecord::Base
   #   >>> user.pending!
   #   => "pending"
   def pending!
-    self.update_attribute(:status, ConfigCenter::User::PENDING)
+    self.update_attribute(:status, ConfigCenter::User::INACTIVE)
   end
 
   # change the status to :approve
@@ -209,7 +209,7 @@ class User < ActiveRecord::Base
   #   >>> user.approve!
   #   => "approved"
   def approve!
-    self.update_attribute(:status, ConfigCenter::User::APPROVED)
+    self.update_attribute(:status, ConfigCenter::User::ACTIVE)
   end
 
   # change the status to :approve
@@ -218,7 +218,7 @@ class User < ActiveRecord::Base
   #   >>> user.block!
   #   => "blocked"
   def block!
-    self.update_attribute(:status, ConfigCenter::User::BLOCKED)
+    self.update_attribute(:status, ConfigCenter::User::SUSPEND)
   end
 
   # Class variables
@@ -264,7 +264,7 @@ class User < ActiveRecord::Base
       # Check if the user is not approved (pending, locked or blocked)
       # Will allow to login only if status is approved
 
-      if user.status != ConfigCenter::User::APPROVED
+      if user.status != ConfigCenter::User::ACTIVE
         heading = translate("authentication.error")
         alert = translate("authentication.user_is_#{@user.status.downcase}")
         raise AuthenticationError(alert: alert, heading: heading, data: user)

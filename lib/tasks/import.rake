@@ -115,6 +115,7 @@ namespace 'import' do
       user.state = row[:state]
       user.country = row[:country]
       user.user_type = row[:user_type]
+      user.status = ConfigCenter::User::INACTIVE
       user.password = ConfigCenter::Defaults::PASSWORD
       user.password_confirmation = ConfigCenter::Defaults::PASSWORD
 
