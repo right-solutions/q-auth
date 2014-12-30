@@ -82,32 +82,32 @@
         <% case @user.user_type %>
         <% when "user", nil %>
           <li role="presentation">
-            <%= link_to raw("<i class=\"fa fa-plus mr-5\"></i> Make Admin"), "#", :remote=>true, role: "menuitem", tabindex: "-1" %>
+            <%= link_to raw("<i class=\"fa fa-plus mr-5\"></i> Make Admin"), admin_user_make_admin_path(user_id: @user.id), :remote=>true, role: "menuitem", tabindex: "-1" %>
           </li>
 
           <% if @current_user.is_super_admin? %>
             <li role="presentation">
-              <%= link_to raw("<i class=\"fa fa-plus-square mr-5\"></i> Make Super Admin"), "#", :remote=>true, role: "menuitem", tabindex: "-1" %>
+              <%= link_to raw("<i class=\"fa fa-plus-square mr-5\"></i> Make Super Admin"), admin_user_make_super_admin_path(user_id: @user.id), :remote=>true, role: "menuitem", tabindex: "-1" %>
             </li>
           <% end %>
 
         <% when "admin" %>
           <li role="presentation">
-            <%= link_to raw("<i class=\"fa fa-remove mr-5\"></i> Remove Admin"), "#", :remote=>true, role: "menuitem", tabindex: "-1" %>
+            <%= link_to raw("<i class=\"fa fa-remove mr-5\"></i> Remove Admin"), admin_user_remove_admin_path(user_id: @user.id), :remote=>true, role: "menuitem", tabindex: "-1" %>
           </li>
 
           <% if @current_user.is_super_admin? %>
             <li role="presentation">
-              <%= link_to raw("<i class=\"fa fa-plus-square mr-5\"></i> Make Super Admin"), "#", :remote=>true, role: "menuitem", tabindex: "-1" %>
+              <%= link_to raw("<i class=\"fa fa-plus-square mr-5\"></i> Make Super Admin"), admin_user_make_super_admin_path(user_id: @user.id), :remote=>true, role: "menuitem", tabindex: "-1" %>
             </li>
           <% end %>
         <% when "super_admin" %>
           <li role="presentation">
-            <%= link_to raw("<i class=\"fa fa-plus mr-5\"></i> Make Admin"), "#", :remote=>true, role: "menuitem", tabindex: "-1" %>
+            <%= link_to raw("<i class=\"fa fa-plus mr-5\"></i> Make Admin"), admin_user_make_admin_path(user_id: @user.id), :remote=>true, role: "menuitem", tabindex: "-1" %>
           </li>
           <% if @current_user.is_super_admin? %>
             <li role="presentation">
-              <%= link_to raw("<i class=\"fa fa-remove mr-5\"></i> Remove Super Admin"), "#", :remote=>true, role: "menuitem", tabindex: "-1" %>
+              <%= link_to raw("<i class=\"fa fa-remove mr-5\"></i> Remove Super Admin"), admin_user_remove_admin_path(user_id: @user.id), :remote=>true, role: "menuitem", tabindex: "-1" %>
             </li>
           <% end %>
         <% end %>

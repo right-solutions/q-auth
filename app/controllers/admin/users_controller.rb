@@ -177,6 +177,28 @@ class Admin::UsersController < Admin::BaseController
     end
   end
 
+  def make_admin
+    @user = User.find(params[:user_id])
+    @user.user_type="admin"
+    @user.save
+    redirect_to admin_users_url
+  end
+
+  def make_super_admin
+    @user = User.find(params[:user_id])
+    @user.user_type="super_admin"
+    @user.save
+    redirect_to admin_users_url
+  end
+
+  def remove_admin
+    @user = User.find(params[:user_id])
+    @user.user_type="user"
+    @user.save
+    redirect_to admin_users_url
+  end
+
+
   private
 
   def set_navs
