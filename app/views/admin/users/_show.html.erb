@@ -116,9 +116,15 @@
 
           <% case @user.status %>
           <% when "active" %>
+          <% form_tag admin_user_change_status_path(@user) do |f| %>
+          <% hidden_field_tag :status, :value =>"inactive" %>
             <li role="presentation">
-              <%= link_to raw("<i class=\"fa fa-circle mr-5\"></i> Inactivate"), "#", :remote=>true, role: "menuitem", tabindex: "-1" %>
-              <%= link_to raw("<i class=\"fa fa-edit mr-5\"></i> Suspend"), "#", :remote=>true, role: "menuitem", tabindex: "-1" %>
+              <%= submit_tag "Inactivate",:class =>"fa fa-circle mr-5", role: "menuitem", tabindex: "-1" %>
+              <% end %>
+              <% form_tag admin_user_change_status_path(@user) do |f| %>
+              <% hidden_field_tag :status, :value =>"suspended" %>
+              <%= submit_tag "Suspend",:class =>"fa fa-circle mr-5", role: "menuitem", tabindex: "-1" %>
+              <% end %>
             </li>
           <% when "inactive" %>
             <%= link_to raw("<i class=\"fa fa-circle-o mr-5\"></i> Activate"), "#", :remote=>true, role: "menuitem", tabindex: "-1" %>
