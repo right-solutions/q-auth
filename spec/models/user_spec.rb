@@ -36,7 +36,7 @@ RSpec.describe User, :type => :model do
     it { should allow_value('something@domain.com').for(:email )}
     it { should validate_presence_of :password }
     it { should allow_value('Password@1').for(:password )}
-    # it { should validate_inclusion_of(:status).in_array(ConfigCenter::User::STATUS_LIST)  }
+    it { should validate_inclusion_of(:status).in_array(ConfigCenter::User::STATUS_LIST)  }
   end
 
   it "should validate name lenght" do
