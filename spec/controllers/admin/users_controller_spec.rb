@@ -78,4 +78,24 @@ describe "GET index" do
   end
 end
 
+it "GET make_admin" do
+  get :make_admin, {:user_id => user.id.to_s}
+    expect(assigns(:user)).to eq (user)
+end
+
+it "GET make_super_admin" do
+  get :make_super_admin, {:user_id => user.id.to_s}
+    expect(assigns(:user)).to eq (user)
+end
+
+it "GET remove_admin" do
+  get :remove_admin, {:user_id => user.id.to_s}
+    expect(assigns(:user)).to eq (user)
+end
+
+it "GET remove_super_admin" do
+  get :remove_super_admin, {:user_id => user.id.to_s}
+    expect(assigns(:user)).to eq (user)
+end
+
 end
