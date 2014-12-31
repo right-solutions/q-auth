@@ -87,11 +87,10 @@ delete_link = admin_user_path(@user)
           <li role="presentation" class="divider"></li>
 
           <% if @current_user.is_super_admin? %>
-
-          <li role="presentation" class="divider"></li>
           <li role="presentation">
             <%= link_to raw("<i class=\"fa fa-plus-square mr-5\"></i> Make Super Admin"), admin_user_make_super_admin_path(user_id: @user.id), :remote=>true, role: "menuitem", tabindex: "-1" %>
           </li>
+          <li role="presentation" class="divider"></li>
           <% end %>
 
           <% when "admin" %>
@@ -101,22 +100,22 @@ delete_link = admin_user_path(@user)
           <li role="presentation" class="divider"></li>
 
           <% if @current_user.is_super_admin? %>
-          <li role="presentation" class="divider"></li>
           <li role="presentation">
             <%= link_to raw("<i class=\"fa fa-plus-square mr-5\"></i> Make Super Admin"), admin_user_make_super_admin_path(user_id: @user.id), :remote=>true, role: "menuitem", tabindex: "-1" %>
           </li>
+          <li role="presentation" class="divider"></li>
           <% end %>
+
           <% when "super_admin" %>
           <li role="presentation">
             <%= link_to raw("<i class=\"fa fa-plus mr-5\"></i> Make Admin"), admin_user_make_admin_path(user_id: @user.id), :remote=>true, role: "menuitem", tabindex: "-1" %>
           </li>
           <li role="presentation" class="divider"></li>
-          <% if @current_user.is_super_admin? %>
-          <li role="presentation" class="divider"></li>
-          <% end %>
+
           <li role="presentation">
             <%= link_to raw("<i class=\"fa fa-remove mr-5\"></i> Remove Super Admin"), admin_user_remove_super_admin_path(user_id: @user.id), :remote=>true, role: "menuitem", tabindex: "-1" %>
           </li>
+          <li role="presentation" class="divider"></li>
           <% end %>
 
 
@@ -151,12 +150,10 @@ delete_link = admin_user_path(@user)
           <li role="presentation">
             <%= link_to raw("<i class=\"fa fa-trash mr-5\"></i> Delete"), delete_link, method: :delete, role: "menuitem", tabindex: "-1", data: { confirm: 'Are you sure?' }, :remote=>true %>
           </li>
-
         </ul>
       </div>
       <div class="clearfix"></div>
     </div>
-
   </div>
 
   <div id="div_user_projects">
