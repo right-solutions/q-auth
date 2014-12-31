@@ -43,7 +43,7 @@ QAuth::Application.routes.draw do
 
   # Logout Url
   delete  '/sign_out' ,       to: "public/user_sessions#sign_out",        as:  :user_sign_out
-
+  put     '/admin/users/update_status/:user_id', to: "admin/users#update_status",        as:  :update_status
   # ------------
   # Admin pages
   # ------------
