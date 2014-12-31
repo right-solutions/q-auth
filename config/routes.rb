@@ -51,8 +51,13 @@ QAuth::Application.routes.draw do
   namespace :admin do
 
     resources :users do
+
       get :change_status, on: :member
       get 'masquerade'
+      get 'make_admin', to: "users#make_admin", as:  :make_admin
+      get 'make_super_admin', to: "users#make_super_admin",        as:  :make_super_admin
+      get 'remove_admin', to: "users#remove_admin",        as:  :remove_admin
+      get 'remove_super_admin', to: "users#remove_super_admin",        as:  :remove_super_admin
     end
 
     resources :projects do
