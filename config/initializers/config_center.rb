@@ -75,7 +75,7 @@ module ConfigCenter
     INACTIVE = "inactive"
     ACTIVE = "active"
     SUSPEND = "suspended"
-    STATUS_LIST = [INACTIVE, ACTIVE, SUSPEND]
+    STATUS_LIST = ["inactive", "active", "suspended"]
 
     EXCLUDED_JSON_ATTRIBUTES = [:designation_id, :department_id, :confirmation_token, :password_digest, :reset_password_token, :unlock_token, :status, :reset_password_sent_at, :remember_created_at, :sign_in_count, :current_sign_in_at, :last_sign_in_at, :current_sign_in_ip, :last_sign_in_ip, :confirmed_at, :confirmation_sent_at, :unconfirmed_email, :failed_attempts, :locked_at, :created_at, :updated_at]
 
