@@ -1,6 +1,7 @@
 class Admin::UsersController < Admin::BaseController
 
   before_filter :get_user, :only => [:masquerade]
+  before_filter :require_super_admin, only: [:make_admin, :make_super_admin, :remove_admin, :remove_super_admin]
 
   # GET /users
   # GET /users.js
@@ -102,7 +103,7 @@ class Admin::UsersController < Admin::BaseController
     @user = User.find(params[:id])
 
     ## Updating the @user object with params
-    @user.assign_attributes(params[:user].permit(:name, :username, :email, :phone, :designation_overridden, :linkedin, :skype, :department_id, :designation_id))
+    @user.assign_attributes(user_params)
 
     ## Validating the data
     @user.valid?
@@ -177,6 +178,35 @@ class Admin::UsersController < Admin::BaseController
     end
   end
 
+  def make_admin
+    @user = User.find(params[:user_id])
+    @user.user_type="admin"
+    @user.save
+    redirect_to admin_users_url
+  end
+
+  def make_super_admin
+    @user = User.find(params[:user_id])
+    @user.user_type="super_admin"
+    @user.save
+    redirect_to admin_users_url
+  end
+
+  def remove_admin
+    @user = User.find(params[:user_id])
+    @user.user_type="user"
+    @user.save
+    redirect_to admin_users_url
+  end
+
+  def remove_super_admin
+    @user = User.find(params[:user_id])
+    @user.user_type="user"
+    @user.save
+    redirect_to admin_users_url
+  end
+
+
   private
 
   def set_navs
@@ -190,6 +220,16 @@ class Admin::UsersController < Admin::BaseController
     if params[:query]
       @query = params[:query].strip
       relation = relation.search(@query) if !@query.blank?
+    end
+
+    if params[:status]
+      @status = params[:status].strip
+      relation = relation.status(@status) if !@status.blank?
+    end
+
+    if params[:user_type]
+      @user_type = params[:user_type].strip
+      relation = relation.user_type(@user_type) if !@user_type.blank?
     end
 
     @per_page = params[:per_page] || "20"
