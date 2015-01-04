@@ -21,6 +21,8 @@ FactoryGirl.define do
     password ConfigCenter::Defaults::PASSWORD
     password_confirmation ConfigCenter::Defaults::PASSWORD
 
+    auth_token {SecureRandom.hex}
+    token_created_at {Time.now}
   end
 
   factory :normal_user, parent: :user do

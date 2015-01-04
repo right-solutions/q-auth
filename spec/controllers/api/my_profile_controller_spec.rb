@@ -4,7 +4,7 @@ RSpec.describe Api::V1::MyProfileController, :type => :controller do
 
   let!(:department) { FactoryGirl.create(:department, name: "Politics")}
   let!(:designation) { FactoryGirl.create(:designation, title: "Leader")}
-  let!(:approved_user) { FactoryGirl.create(:approved_user,
+  let!(:active_user) { FactoryGirl.create(:active_user,
                                             name: "Mohandas Gandhi",
                                             username: "mohandas",
                                             email: "mohandas@gandhi.com",
@@ -18,12 +18,12 @@ RSpec.describe Api::V1::MyProfileController, :type => :controller do
                                             department: department,
                                             linkedin: "mohandas_linkedin",
                                             biography: "Father of the nation, India") }
-  let!(:token) { ActionController::HttpAuthentication::Token.encode_credentials(approved_user.auth_token) }
+  let!(:token) { ActionController::HttpAuthentication::Token.encode_credentials(active_user.auth_token) }
 
   describe "my_profile" do
     describe "Positive Case" do
       it "should return the user information with the for a valid auth token" do
-        approved_user
+        active_user
         request.env['HTTP_AUTHORIZATION'] = token
 
         get "my_profile", :format =>:json
@@ -43,9 +43,9 @@ RSpec.describe Api::V1::MyProfileController, :type => :controller do
         expect(response_body["data"]["designation"]["title"]).to  eq("Leader")
         expect(response_body["data"]["designation_overridden"]).to  eq("Leader of Opposition, Govt. India")
         expect(response_body["data"]["department"]["name"]).to  eq("Politics")
-        expect(response_body["data"]["user_type"]).to  eq(nil)
+        expect(response_body["data"]["user_type"]).to  eq("user")
         expect(response_body["data"]["biography"]).to  eq("Father of the nation, India")
-        expect(response_body["data"]["auth_token"]).to  eq(approved_user.auth_token)
+        expect(response_body["data"]["auth_token"]).to  eq(active_user.auth_token)
         expect(response_body["data"]["password"]).to  eq(nil)
         expect(response_body["data"]["password_digest"]).to  eq(nil)
       end
@@ -53,7 +53,7 @@ RSpec.describe Api::V1::MyProfileController, :type => :controller do
 
     describe "Negative Case" do
       it "should return the error the for no auth token" do
-        approved_user
+        active_user
 
         get "my_profile", :format =>:json
         response_body = JSON.parse(response.body)
@@ -65,7 +65,7 @@ RSpec.describe Api::V1::MyProfileController, :type => :controller do
       end
 
       it "should return the error the for a invalid auth token" do
-        approved_user
+        active_user
         request.env['HTTP_AUTHORIZATION'] = "invalid token"
 
         get "my_profile", :format =>:json
@@ -102,7 +102,7 @@ RSpec.describe Api::V1::MyProfileController, :type => :controller do
     describe "Positive Case" do
       it "should update the user information with the data sent for valid auth token" do
 
-        approved_user
+        active_user
         request.env['HTTP_AUTHORIZATION'] = token
 
         put "update", valid_user_information, :format =>:json
@@ -121,9 +121,9 @@ RSpec.describe Api::V1::MyProfileController, :type => :controller do
         expect(response_body["data"]["state"]).to  eq("Kerala")
         expect(response_body["data"]["country"]).to  eq("Bharath")
         expect(response_body["data"]["designation_overridden"]).to  eq("Leader of Opposition, Govt. India")
-        expect(response_body["data"]["user_type"]).to  eq(nil)
+        expect(response_body["data"]["user_type"]).to  eq("user")
         expect(response_body["data"]["biography"]).to  eq(biography)
-        expect(response_body["data"]["auth_token"]).to  eq(approved_user.auth_token)
+        expect(response_body["data"]["auth_token"]).to  eq(active_user.auth_token)
         expect(response_body["data"]["password"]).to  eq(nil)
         expect(response_body["data"]["password_digest"]).to  eq(nil)
 
@@ -135,7 +135,7 @@ RSpec.describe Api::V1::MyProfileController, :type => :controller do
     describe "Negative Case" do
 
       it "should return error without token" do
-        approved_user
+        active_user
 
         put "update", valid_user_information, :format =>:json
 
@@ -148,7 +148,7 @@ RSpec.describe Api::V1::MyProfileController, :type => :controller do
       end
 
       it "should return error for invalid token" do
-        approved_user
+        active_user
         request.env['HTTP_AUTHORIZATION'] = "invalid token"
 
         put "update", valid_user_information, :format =>:json
@@ -162,7 +162,7 @@ RSpec.describe Api::V1::MyProfileController, :type => :controller do
       end
 
       it "should return error for invalid name" do
-        approved_user
+        active_user
         request.env['HTTP_AUTHORIZATION'] = token
         invalid_info = valid_user_information.dup
         invalid_info[:user][:name] = nil
@@ -181,7 +181,7 @@ RSpec.describe Api::V1::MyProfileController, :type => :controller do
       end
 
       it "should return error for invalid password" do
-        approved_user
+        active_user
         request.env['HTTP_AUTHORIZATION'] = token
         invalid_info = valid_user_information.dup
         invalid_info[:user][:password] = "invalid password"
@@ -200,7 +200,7 @@ RSpec.describe Api::V1::MyProfileController, :type => :controller do
       end
 
       it "should return error for invalid password confirmation" do
-        approved_user
+        active_user
         request.env['HTTP_AUTHORIZATION'] = token
         invalid_info = valid_user_information.dup
         invalid_info[:user][:password] = "password 1"

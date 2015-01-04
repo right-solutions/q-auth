@@ -53,6 +53,8 @@ module ConfigCenter
     # Other constans should follow here.
     EXCLUDED_JSON_ATTRIBUTES = [:created_at, :updated_at]
 
+    SESSION_TIME_OUT = 30.minutes
+
     ##
     def host
       case Rails.env

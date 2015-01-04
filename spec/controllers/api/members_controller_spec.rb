@@ -2,9 +2,9 @@ require "rails_helper"
 
 RSpec.describe Api::V1::MembersController, :type => :controller do
 
-  let!(:ram) { FactoryGirl.create(:approved_user, name: "Ram Chandran") }
-  let!(:sita) { FactoryGirl.create(:approved_user, name: "Sita Lakshmi") }
-  let!(:lakshman) { FactoryGirl.create(:approved_user, name: "Lakshmana Simhan") }
+  let!(:ram) { FactoryGirl.create(:active_user, name: "Ram Chandran") }
+  let!(:sita) { FactoryGirl.create(:active_user, name: "Sita Lakshmi") }
+  let!(:lakshman) { FactoryGirl.create(:active_user, name: "Lakshmana Simhan") }
 
   let!(:admin) { FactoryGirl.create(:admin_user) }
   let!(:super_admin) { FactoryGirl.create(:admin_user) }

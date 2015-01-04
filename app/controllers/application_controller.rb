@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   include ParamsParserHelper
-  include FlashHelper
+  include NotificationHelper
   include NavigationHelper
   include TitleHelper
   include UrlHelper

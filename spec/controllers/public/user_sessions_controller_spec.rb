@@ -2,27 +2,25 @@ require 'rails_helper'
 
 describe Public::UserSessionsController, :type => :controller do
 
-  let(:user1){FactoryGirl.create(:user, :email => 'user1@domain.com', :status => 'approved', :password => "Password@1", :password_confirmation => "Password@1")}
-  let(:user2) {FactoryGirl.create(:user, :email => 'user2@domain.com', :status => 'pending', :password => "Password@1", :password_confirmation => "Password@1")}
+  let(:user){FactoryGirl.create(:active_user)}
 
   describe "create a session" do
 
     describe "positive case" do
       it "should create session" do
         sign_in_params = {
-          email: user1.email,
-          password: user1.password
+          email: user.email,
+          password: user.password
         }
-        session[:id] = nil
         post :create_session, sign_in_params
-        expect(session[:id]).not_to be_nil
+        expect(session[:id].to_s).to  eq(user.id.to_s)
       end
     end
 
     describe "negative case" do
       it "should fail to create session" do
         sign_in_params = {
-          email: user2.email,
+          email: user.email,
           password: "Invalid"
         }
         session[:id] = nil
@@ -34,9 +32,8 @@ describe Public::UserSessionsController, :type => :controller do
 
   describe "destroy a session" do
     it "should delete session of user" do
-      session[:id] = user1.id
-      delete :sign_out, :id => user1.id
-      expect(session[:id]).to be_nil
+      delete :sign_out, {:id => user.id}, {id: user.id}
+      expect(response).to redirect_to("/sign_in?")
     end
   end
 end
