@@ -50,7 +50,6 @@ describe Admin::UsersController, :type => :controller do
           designation_overridden: "alert",
           linkedin: "RaviShankar",
           skype: "RaviShankar",
-          status: "pending",
           department_id: department.id,
           designation_id: designation.id
         }
@@ -64,19 +63,60 @@ describe Admin::UsersController, :type => :controller do
   describe "PUT update" do
     it "super admin should be able to update user details" do
       user_params = {"name" => "Raghu",
-                    "username" => "Raghavendre",
-                    "email" => "adam@trimediatlantic.com",
-                    "phone" => "333-093-3334",
-                    "password" => ConfigCenter::Defaults::PASSWORD,
-                    "password_confirmation" => ConfigCenter::Defaults::PASSWORD,
-                    "designation_overridden" => "Some Designation",
-                    "linkedin" => "RaviShankar",
-                    "skype" => "RaviShankar",
-                    "status" => "pending",
-                    "department_id" => department.id,
-                    "designation_id" => designation.id}
-      put :update, {:id => user1.to_param, :user => user_params}, {id: super_admin.id}
-      expect(assigns(:user)).to eq (user1)
+        "username" => "Raghavendre",
+        "email" => "adam@trimediatlantic.com",
+        "phone" => "333-093-3334",
+        "password" => ConfigCenter::Defaults::PASSWORD,
+        "password_confirmation" => ConfigCenter::Defaults::PASSWORD,
+        "designation_overridden" => "Some Designation",
+        "linkedin" => "RaviShankar",
+        "skype" => "RaviShankar",
+        "department_id" => department.id,
+        "designation_id" => designation.id}
+        put :update, {:id => user1.to_param, :user => user_params}, {id: super_admin.id}
+        expect(assigns(:user)).to eq (user1)
+      end
+    end
+
+    describe "PUT update_status" do
+      describe "possitive cases" do
+        it "super admin should be able to update user status as active" do
+          put :update_status, {:format => :json, :user_id => user1.to_param, :status => "active"}, {id: super_admin.id}
+          expect(assigns(:user).status).to eq ("active")
+        end
+
+        it "super admin should be able to update user status as suspended" do
+         put :update_status, {:format => :json, :user_id => user1.to_param, :status => "suspended"}, {id: super_admin.id}
+         expect(assigns(:user).status).to eq ("suspended")
+       end
+
+       it "super admin should be able to update user status as inactive" do
+         put :update_status, {:format => :json, :user_id => user1.to_param, :status => "inactive"}, {id: super_admin.id}
+         expect(assigns(:user).status).to eq ("inactive")
+       end
+     end
+
+     describe "negative cases" do
+      it "super admin should not be able to update user status as pending" do
+        put :update_status, {:format => :json, :user_id => user1.to_param, :status => "pending"}, {id: super_admin.id}
+        response_body = JSON.parse(response.body)
+
+        expect(response_body["status"]).to eq(["is not included in the list", "pending valid name...", "is invalid"])
+      end
+
+      it "super admin should not be able to update user status as blocked" do
+        put :update_status, {:format => :json, :user_id => user1.to_param, :status => "blocked"}, {id: super_admin.id}
+        response_body = JSON.parse(response.body)
+
+        expect(response_body["status"]).to eq(["is not included in the list", "blocked valid name...", "is invalid"])
+      end
+
+      it "super admin should not be able to update user status as approved" do
+        put :update_status, {:format => :json, :user_id => user1.to_param, :status => "approved"}, {id: super_admin.id}
+        response_body = JSON.parse(response.body)
+
+        expect(response_body["status"]).to eq(["is not included in the list", "approved valid name...", "is invalid"])
+      end
     end
   end
 

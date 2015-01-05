@@ -140,6 +140,47 @@ class Admin::UsersController < Admin::BaseController
     end
   end
 
+  def update_status
+     ## Fetching the user
+     @user = User.find(params[:user_id])
+
+    ## Updating the @user object with status
+    @user.status = params[:status]
+
+    ## Validating the data
+    @user.valid?
+
+    respond_to do |format|
+      if @user.errors.blank?
+
+        # Saving the user object
+        @user.save
+        # Setting the flash message
+        message = translate("forms.updated_successfully", :item => "Status")
+        store_flash_message(message, :success)
+
+        format.html {
+
+        }
+        format.json { head :no_content }
+        format.js {render :update_status}
+
+      else
+
+        # Setting the flash message
+        message = @user.errors.full_messages.to_sentence
+        store_flash_message(message, :alert)
+
+        format.html {
+          render action: "edit"
+        }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+        format.js {}
+
+      end
+    end
+  end
+
   # DELETE /users/1
   # DELETE /users/1.js
   # DELETE /users/1.json
@@ -169,7 +210,7 @@ class Admin::UsersController < Admin::BaseController
     end
   end
 
-   def masquerade
+  def masquerade
     if ["development", "it", "test"].include?(Rails.env)
       message = translate("users.masquerade", user: @users_masq.name)
       session[:last_user_id] = current_user.id
