@@ -4,7 +4,7 @@ RSpec.describe Api::V1::AuthenticationsController, :type => :controller do
 
   let!(:department) { FactoryGirl.create(:department, name: "Politics")}
   let!(:designation) { FactoryGirl.create(:designation, title: "Leader")}
-  let!(:approved_user) { FactoryGirl.create(:approved_user,
+  let!(:active_user) { FactoryGirl.create(:active_user,
                                             name: "Mohandas Gandhi",
                                             username: "mohandas",
                                             email: "mohandas@gandhi.com",
@@ -21,16 +21,16 @@ RSpec.describe Api::V1::AuthenticationsController, :type => :controller do
   describe "create" do
     describe "Positive Case" do
       it "should return the user information with the for a valid auth token" do
-        approved_user
+        active_user
         #request.env['HTTP_AUTHORIZATION'] = token
-        credentials = {login_handle: approved_user.username, password: ConfigCenter::Defaults::PASSWORD}
+        credentials = {login_handle: active_user.username, password: ConfigCenter::Defaults::PASSWORD}
 
         post "create", credentials, :format =>:json
         response_body = JSON.parse(response.body)
 
         expect(response.status).to  eq(200)
         expect(response_body["success"]).to  eq(true)
-        expect(response_body["alert"]).to  eq("You have successfully logged in")
+        expect(response_body["alert"]).to  eq("You have successfully signed in")
         expect(response_body["data"]["name"]).to  eq("Mohandas Gandhi")
         expect(response_body["data"]["username"]).to  eq("mohandas")
         expect(response_body["data"]["email"]).to  eq("mohandas@gandhi.com")
@@ -43,17 +43,17 @@ RSpec.describe Api::V1::AuthenticationsController, :type => :controller do
         expect(response_body["data"]["designation"]["title"]).to  eq("Leader")
         expect(response_body["data"]["designation_overridden"]).to  eq("Leader of Opposition, Govt. India")
         expect(response_body["data"]["department"]["name"]).to  eq("Politics")
-        expect(response_body["data"]["user_type"]).to  eq(nil)
+        expect(response_body["data"]["user_type"]).to  eq("user")
         expect(response_body["data"]["biography"]).to  eq("Father of the nation, India")
-        expect(response_body["data"]["auth_token"]).to  eq(approved_user.auth_token)
+        expect(response_body["data"]["auth_token"]).to  eq(active_user.auth_token)
         expect(response_body["data"]["password"]).to  eq(nil)
         expect(response_body["data"]["password_digest"]).to  eq(nil)
       end
     end
     describe "Negative Case" do
       it "should return error for invalid username" do
-        approved_user
-        credentials = {login_handle: approved_user.username, password: "wrong password"}
+        active_user
+        credentials = {login_handle: active_user.username, password: "wrong password"}
 
         post "create", credentials, :format =>:json
         response_body = JSON.parse(response.body)
@@ -65,7 +65,7 @@ RSpec.describe Api::V1::AuthenticationsController, :type => :controller do
         expect(response_body["data"]["errors"]["description"]).to  eq("Invalid username/email or password.")
       end
       it "should return error for invalid password" do
-        approved_user
+        active_user
         credentials = {login_handle: "invalid username", password: ConfigCenter::Defaults::PASSWORD}
 
         post "create", credentials, :format =>:json
@@ -83,36 +83,36 @@ RSpec.describe Api::V1::AuthenticationsController, :type => :controller do
   describe "destroy" do
     describe "Positive Case" do
       it "should change the auth token on valid sign out request" do
-        approved_user
-        old_auth_token = approved_user.auth_token
-        request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Token.encode_credentials(approved_user.auth_token)
+        active_user
+        old_auth_token = active_user.auth_token
+        request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Token.encode_credentials(active_user.auth_token)
 
         delete "destroy", :format =>:json
         response_body = JSON.parse(response.body)
 
         expect(response.status).to  eq(200)
         expect(response_body["success"]).to  eq(true)
-        expect(response_body["alert"]).to  eq("You have successfully logged out")
+        expect(response_body["alert"]).to  eq("You have successfully signed out")
 
         # Checking if the Auth Token has changed
-        approved_user.reload
+        active_user.reload
         request.env['HTTP_AUTHORIZATION'] = nil
-        credentials = {login_handle: approved_user.username, password: ConfigCenter::Defaults::PASSWORD}
+        credentials = {login_handle: active_user.username, password: ConfigCenter::Defaults::PASSWORD}
 
         post "create", credentials, :format =>:json
         response_body = JSON.parse(response.body)
 
         expect(response.status).to  eq(200)
         expect(response_body["success"]).to  eq(true)
-        expect(response_body["alert"]).to  eq("You have successfully logged in")
+        expect(response_body["alert"]).to  eq("You have successfully signed in")
         expect(response_body["data"]["name"]).to  eq("Mohandas Gandhi")
         expect(response_body["data"]["auth_token"]).not_to  eq(old_auth_token)
       end
     end
     describe "Negative Case" do
       it "should not change the auth token and should render error for invalid request" do
-        approved_user
-        old_auth_token = approved_user.auth_token
+        active_user
+        old_auth_token = active_user.auth_token
 
         delete "destroy", :format =>:json
         response_body = JSON.parse(response.body)
@@ -124,15 +124,15 @@ RSpec.describe Api::V1::AuthenticationsController, :type => :controller do
         expect(response_body["data"]["errors"]["description"]).to  eq("403 Permission Denied! You don't have permission to perform this action.")
 
         # Checking if the Auth Token has changed
-        approved_user.reload
-        credentials = {login_handle: approved_user.username, password: ConfigCenter::Defaults::PASSWORD}
+        active_user.reload
+        credentials = {login_handle: active_user.username, password: ConfigCenter::Defaults::PASSWORD}
 
         post "create", credentials, :format =>:json
         response_body = JSON.parse(response.body)
 
         expect(response.status).to  eq(200)
         expect(response_body["success"]).to  eq(true)
-        expect(response_body["alert"]).to  eq("You have successfully logged in")
+        expect(response_body["alert"]).to  eq("You have successfully signed in")
         expect(response_body["data"]["name"]).to  eq("Mohandas Gandhi")
         expect(response_body["data"]["auth_token"]).to  eq(old_auth_token)
       end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141209074255) do
+ActiveRecord::Schema.define(version: 20141230100508) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -82,11 +82,11 @@ ActiveRecord::Schema.define(version: 20141209074255) do
 
   create_table "users", force: true do |t|
     t.string   "name"
-    t.string   "username",               limit: 32,                      null: false
-    t.string   "email",                                                  null: false
+    t.string   "username",               limit: 32,                       null: false
+    t.string   "email",                                                   null: false
     t.text     "biography"
     t.string   "phone",                  limit: 16
-    t.string   "status",                 limit: 16,  default: "pending", null: false
+    t.string   "status",                             default: "inactive", null: false
     t.string   "skype",                  limit: 128
     t.string   "linkedin",               limit: 128
     t.string   "city",                   limit: 128
@@ -95,7 +95,7 @@ ActiveRecord::Schema.define(version: 20141209074255) do
     t.integer  "designation_id"
     t.integer  "department_id"
     t.string   "designation_overridden", limit: 56
-    t.string   "password_digest",                                        null: false
+    t.string   "password_digest",                                         null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -112,9 +112,11 @@ ActiveRecord::Schema.define(version: 20141209074255) do
     t.string   "unlock_token"
     t.datetime "locked_at"
     t.string   "auth_token"
-    t.string   "user_type"
+    t.string   "user_type",                          default: "user"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "token_expires_at"
+    t.datetime "token_created_at"
   end
 
   add_index "users", ["auth_token"], name: "index_users_on_auth_token", unique: true, using: :btree

@@ -19,8 +19,8 @@ module AuthenticationHelper
     params_hsh = {}
     params_hsh[:client_app] = params[:client_app] if params[:client_app]
     params_hsh[:redirect_back_url] = params[:redirect_back_url] if params[:redirect_back_url]
-    sign_in_url = add_query_params(default_sign_in_url, params_hsh)
-    redirect_to sign_in_url
+    redirect_to add_query_params(default_sign_in_url, params_hsh)
+    return
   end
 
   # Method to redirect after successful authentication
@@ -32,6 +32,18 @@ module AuthenticationHelper
       redirect_to default_redirect_url_after_sign_in
     end
     return
+  end
+
+  def redirect_or_popup_to_default_sign_in_page
+    respond_to do |format|
+      format.html {
+        redirect_after_unsuccessful_authentication
+      }
+      format.json { render json: {heading: @heading, alert: @alert} }
+      format.js {
+        render(:partial => 'public/user_sessions/popup_sign_in_form.js.erb', :handlers => [:erb], :formats => [:js])
+      }
+    end
   end
 
   # This method is widely used to create the @current_user object from the session
@@ -46,54 +58,34 @@ module AuthenticationHelper
   def require_user
     current_user
     if @current_user
-      unless @current_user
-        @heading = translate("authentication.error")
-        @alert = translate("authentication.permission_denied")
-        store_flash_message("#{@heading}: #{@alert}", :errors)
+      if @current_user.token_expired?
+        @current_user = nil
+        session.delete(:id)
+        set_notification_messages(I18n.t("authentication.session_expired_heading"), I18n.t("authentication.session_expired_message"), :error)
         redirect_or_popup_to_default_sign_in_page
+        return
       end
     else
-      store_flash_message("Your session has been expired. Please Login.", :alert)
+      set_notification_messages(I18n.t("authentication.permission_denied_heading"), I18n.t("authentication.permission_denied_message"), :error)
       redirect_or_popup_to_default_sign_in_page
+      return
     end
   end
 
   # This method is usually used as a before filter from admin controllers to ensure that the logged in user is an admin
   def require_admin
-    current_user
-    if @current_user
-      unless @current_user.is_admin?
-        @heading = translate("authentication.error")
-        @alert = translate("authentication.permission_denied")
-        store_flash_message("#{@heading}: #{@alert}", :error)
-        redirect_or_popup_to_default_sign_in_page
-      end
-    else
-      store_flash_message("Your session has been expired. Please Login.", :alert)
+    unless @current_user.is_admin?
+      set_notification_messages(I18n.t("authentication.permission_denied_heading"), I18n.t("authentication.permission_denied_message"), :error)
       redirect_or_popup_to_default_sign_in_page
-    end
-  end
-
-  def redirect_or_popup_to_default_sign_in_page
-    respond_to do |format|
-      format.html {
-        redirect_to default_sign_in_url
-      }
-      format.json { render json: {heading: @heading, alert: @alert} }
-      format.js {
-        render(:partial => 'public/user_sessions/popup_sign_in_form.js.erb', :handlers => [:erb], :formats => [:js])
-      }
+      return
     end
   end
 
   # This method is usually used as a before filter from admin controllers to ensure that the logged in user is a super admin
   def require_super_admin
-    current_user
     unless @current_user.is_super_admin?
-      @heading = translate("authentication.error")
-      @alert = translate("authentication.permission_denied")
-      store_flash_message("#{@heading}: #{@alert}", :errors)
-      redirect_to default_sign_in_url
+      set_notification_messages(I18n.t("authentication.permission_denied_heading"), I18n.t("authentication.permission_denied_message"), :error)
+      redirect_or_popup_to_default_sign_in_page
     end
   end
 

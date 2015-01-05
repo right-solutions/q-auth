@@ -15,23 +15,23 @@ module Api
           if @user
             # Check if the user is not approved (pending, locked or blocked)
             # Will allow to login only if status is approved
-            if @user.status != ConfigCenter::User::APPROVED
-              @alert = I18n.translate("authentication.user_is_#{@user.status.downcase}")
+            if @user.status != ConfigCenter::User::ACTIVE
+              set_notification_messages(I18n.t("authentication.user_is_#{@user.status.downcase}_heading"), I18n.t("authentication.user_is_#{@user.status.downcase}_message"), :error)
               raise InvalidLoginError
             # Check if the password matches
             # Invalid Login: Password / Email doesn't match
             elsif @user.authenticate(params['password']) == false
-              @alert = I18n.translate("response.invalid_login_error")
+              set_notification_messages(I18n.t("authentication.invalid_login_heading"), I18n.t("authentication.invalid_login_message"), :error)
               raise InvalidLoginError
             end
           # If the user with provided email doesn't exist
           else
-            @alert = I18n.translate("response.invalid_login_error")
+            set_notification_messages(I18n.t("authentication.invalid_login_heading"), I18n.t("authentication.invalid_login_message"), :error)
             raise InvalidLoginError
           end
 
           # If successfully authenticated.
-          @alert = I18n.translate("authentication.logged_in_successfully")
+          set_notification_messages(I18n.t("authentication.logged_in_successfully_heading"), I18n.t("authentication.logged_in_successfully_message"), :success)
           @data = @user
           @success = true
 
@@ -42,13 +42,11 @@ module Api
       def destroy
         proc_code = Proc.new do
 
-          raise AuthenticationError unless @current_user
-
           # Reseting the auth token for user when he logs out.
           @current_user.update_attribute :auth_token, SecureRandom.hex
 
           # If successfully authenticated.
-          @alert = I18n.translate("authentication.logged_out_successfully")
+          set_notification_messages(I18n.t("authentication.logged_out_successfully_heading"), I18n.t("authentication.logged_out_successfully_message"), :success)
 
         end
 

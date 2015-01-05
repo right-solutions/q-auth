@@ -46,3 +46,8 @@ bower.json
 .ruby-version
 .capistrano
 /db/.capistrano/*
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml

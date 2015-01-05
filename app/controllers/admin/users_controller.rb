@@ -242,7 +242,7 @@ class Admin::UsersController < Admin::BaseController
 
   def remove_super_admin
     @user = User.find(params[:user_id])
-    @user.user_type="user"
+    @user.user_type="admin"
     @user.save
     redirect_to admin_users_url
   end

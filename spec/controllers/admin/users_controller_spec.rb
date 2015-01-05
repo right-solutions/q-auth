@@ -2,109 +2,131 @@ require 'rails_helper'
 
 describe Admin::UsersController, :type => :controller do
 
-  let(:designation) {FactoryGirl.create(:designation, :title => "senior Developer")}
-  let(:department) {FactoryGirl.create(:department, :name => "testing")}
-  let(:user) {FactoryGirl.create(:user)}
-  let(:super_admin_user) {FactoryGirl.create(:super_admin_user)}
-  let(:admin_user) {FactoryGirl.create(:admin_user)}
-  let(:user_1) {FactoryGirl.create(:user)}
-  let(:user_2) {FactoryGirl.create(:user)}
+  let(:department) {FactoryGirl.create(:department)}
+  let(:designation) {FactoryGirl.create(:designation)}
+  let(:super_admin) {FactoryGirl.create(:super_admin_user)}
+  let(:super_admin2) {FactoryGirl.create(:super_admin_user)}
+  let(:admin) {FactoryGirl.create(:admin_user)}
+  let(:user1) {FactoryGirl.create(:user)}
+  let(:user2) {FactoryGirl.create(:user)}
 
-  before(:each) do
-    session[:id] = super_admin_user.id
+  describe "GET index" do
+    it "super admin should be able to view all users" do
+      arr = [super_admin, admin, user1, user2]
+      get :index, nil, {id: super_admin.id}
+      expect(assigns[:users]).to match_array(arr)
+    end
+
+    it "admin should be able to view all users" do
+      arr = [super_admin, admin, user1, user2]
+      get :index, nil, {id: admin.id}
+      expect(assigns[:users]).to match_array(arr)
+    end
+  end
+
+  describe "GET show" do
+    it "super admin should be able to view details of a particular user" do
+      get :show, {:id => user1.to_param}, {id: super_admin.id}
+      expect(assigns(:user)).to eq (user1)
+    end
+
+    it "admin should be able to view details of a particular user" do
+      get :show, {:id => user1.to_param}, {id: admin.id}
+      expect(assigns(:user)).to eq (user1)
+    end
   end
 
   describe "POST create" do
-
-    it "should create user" do
-     user_params = {
-       user: {
-         name: "Bob Miller",
-         username: "RaviShankar",
-         email: "adam@trimediatlantic.com",
-         phone: "333-093-3334",
-         password: ConfigCenter::Defaults::PASSWORD,
-         password_confirmation: ConfigCenter::Defaults::PASSWORD,
-         designation_overridden: "alert",
-         linkedin: "RaviShankar",
-         skype: "RaviShankar",
-         status: "pending",
-         department_id: department.id,
-         designation_id: designation.id
-       }
-     }
-     post :create, user_params
-     expect(User.count).to  eq 2
-   end
- end
-
- describe "GET show" do
-  it "assigns the requested user as @user" do
-    get :show, {:id => user.to_param}
-    expect(assigns(:user)).to eq (user)
-  end
-end
-
-describe "PUT update" do
-  it "assigns the requested user as @user" do
-   put :update, {:id => user.to_param, :user => {"name" => "Raghu",
-     "username" => "Raghavendre","email" => "adam@trimediatlantic.com","phone" => "333-093-3334","password" => ConfigCenter::Defaults::PASSWORD,"password_confirmation" => ConfigCenter::Defaults::PASSWORD,"designation_overridden" => "alert","linkedin" => "RaviShankar","skype" => "RaviShankar","status" => "pending","department_id" => department.id,
-     "designation_id" => designation.id}}
-     expect(assigns(:user)).to eq (user)
-   end
- end
-
- describe "GET edit" do
-  it "assigns the requested user as @user" do
-    get :edit, {:id => user.to_param}
-    expect(assigns(:user)).to eq (user)
-  end
-end
-
-describe "DELETE destroy" do
-  it "destroys the requested user" do
-    expect do
-      delete :destroy, {:id => user.to_param}
-      expect(User.count).to  eq 1
+    it "super admin should be able to create user" do
+      [super_admin, user1, user2]
+      user_params = {
+        user: {
+          name: "Bob Miller",
+          username: "RaviShankar",
+          email: "adam@trimediatlantic.com",
+          phone: "333-093-3334",
+          password: ConfigCenter::Defaults::PASSWORD,
+          password_confirmation: ConfigCenter::Defaults::PASSWORD,
+          designation_overridden: "alert",
+          linkedin: "RaviShankar",
+          skype: "RaviShankar",
+          status: "pending",
+          department_id: department.id,
+          designation_id: designation.id
+        }
+      }
+      expect do
+        post :create, user_params, {id: super_admin.id}
+      end.to change(User, :count).by(1)
     end
   end
-end
 
-
-describe "GET index" do
-  it "assigns all users as @user" do
-    [designation,user_1, user_2]
-    get :index
-    expect(assigns[:users]).to match_array([super_admin_user,user_1, user_2])
+  describe "PUT update" do
+    it "super admin should be able to update user details" do
+      user_params = {"name" => "Raghu",
+                    "username" => "Raghavendre",
+                    "email" => "adam@trimediatlantic.com",
+                    "phone" => "333-093-3334",
+                    "password" => ConfigCenter::Defaults::PASSWORD,
+                    "password_confirmation" => ConfigCenter::Defaults::PASSWORD,
+                    "designation_overridden" => "Some Designation",
+                    "linkedin" => "RaviShankar",
+                    "skype" => "RaviShankar",
+                    "status" => "pending",
+                    "department_id" => department.id,
+                    "designation_id" => designation.id}
+      put :update, {:id => user1.to_param, :user => user_params}, {id: super_admin.id}
+      expect(assigns(:user)).to eq (user1)
+    end
   end
-end
 
-describe "Get admin" do
-  it "GET make_admin" do
-    get :make_admin, {:user_id => user.id}
-    expect(assigns[:user].user_type).to eq("admin")
+  describe "GET edit" do
+    it "assigns the requested user as @user" do
+      get :edit, {:id => user1.to_param}, {id: super_admin.id}
+      expect(assigns(:user)).to eq (user1)
+    end
   end
-end
 
-describe "Get super admin" do
-  it "GET make_super_admin" do
-    get :make_super_admin, {:user_id => user.id.to_s}
-    expect(assigns[:user].user_type).to eq("super_admin")
+  describe "DELETE destroy" do
+    it "super admin should be able to destroy the user" do
+      expect do
+        delete :destroy, {:id => user1.to_param}, {id: super_admin.id}
+        expect(User.count).to  eq 1
+      end
+    end
   end
-end
 
-describe "Get remove admin" do
-  it "GET remove_admin" do
-    get :remove_admin, {:user_id => user.id.to_s}
-    expect(assigns[:user].user_type).to eq("user")
+  describe "Make admin" do
+    it "super admin should be able to upgrade a user to admin" do
+      get :make_admin, {:user_id => user1.id}, {id: super_admin.id}
+      expect(assigns[:user].user_type).to eq("admin")
+    end
   end
-end
 
-describe "Get remove super admin" do
-  it "GET remove_super_admin" do
-    get :remove_super_admin, {:user_id => user.id.to_s}
-    expect(assigns[:user].user_type).to eq("user")
+  describe "Make super admin" do
+    it "super admin should be able to upgdate a user to super admin" do
+      get :make_super_admin, {:user_id => user1.id}, {id: super_admin.id}
+      expect(assigns[:user].user_type).to eq("super_admin")
+    end
+
+    it "super admin should be able to upgdate an admin to super admin" do
+      get :make_super_admin, {:user_id => admin.id}, {id: super_admin.id}
+      expect(assigns[:user].user_type).to eq("super_admin")
+    end
   end
-end
+
+  describe "Get remove admin" do
+    it "super admin should be able to downgrade an admin to user" do
+      get :remove_admin, {:user_id => admin.id}, {id: super_admin.id}
+      expect(assigns[:user].user_type).to eq("user")
+    end
+  end
+
+  describe "Get remove super admin" do
+    it "super admin should be able to downgrade a super admin to admin" do
+      get :remove_super_admin, {:user_id => super_admin2.id}, {id: super_admin.id}
+      expect(assigns[:user].user_type).to eq("admin")
+    end
+  end
 
 end

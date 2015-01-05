@@ -100,8 +100,6 @@ class User < ActiveRecord::Base
                         }
 
   scope :status, lambda { |status| where ("LOWER(status)='#{status}'") }
-  scope :user_type, lambda { |user_type| where ("LOWER(user_type)='#{user_type}'")
-                        }
 
   # * Return full name
   # == Examples
@@ -251,6 +249,14 @@ class User < ActiveRecord::Base
     self.password_confirmation = ConfigCenter::Defaults::PASSWORD
   end
 
+  def start_session
+    self.update_attribute :token_created_at, Time.now
+  end
+
+  def token_expired?
+    return self.token_created_at.nil? || (Time.now > self.token_created_at + ConfigCenter::Defaults::SESSION_TIME_OUT)
+  end
+
   private
 
   def generate_auth_token
@@ -269,20 +275,20 @@ class User < ActiveRecord::Base
       # Will allow to login only if status is approved
 
       if user.status != ConfigCenter::User::ACTIVE
-        heading = translate("authentication.error")
-        alert = translate("authentication.user_is_#{@user.status.downcase}")
+        heading = I18n.t("authentication.error")
+        alert = I18n.t("authentication.user_is_#{@user.status.downcase}")
         raise AuthenticationError(alert: alert, heading: heading, data: user)
       # Check if the password matches
       # Invalid Login: Password / Username doesn't match
       elsif user.authenticate(params['password']) == false
-        heading = translate("authentication.error")
-        alert = translate("authentication.invalid_login")
+        heading = I18n.t("authentication.error")
+        alert = I18n.t("authentication.invalid_login")
         raise AuthenticationError(alert: alert, heading: heading, data: user)
       end
     # If the user with provided email doesn't exist
     else
-      heading = translate("authentication.error")
-      alert = translate("authentication.user_not_found")
+      heading = I18n.t("authentication.error")
+      alert = I18n.t("authentication.user_not_found")
       raise AuthenticationError(alert: alert, heading: heading, data: user)
     end
     return user

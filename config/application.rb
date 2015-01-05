@@ -29,19 +29,5 @@ module QAuth
       Dir[*dirs].each {|file| require file }
     end
 
-    config.to_prepare do
-      # Base layout. Uses app/views/layouts/my_layout.html.erb
-      Doorkeeper::ApplicationController.layout "sign_in"
-
-      # Only Applications list
-      Doorkeeper::ApplicationsController.layout "admin"
-
-      # Only Authorization endpoint
-      Doorkeeper::AuthorizationsController.layout "sign_in"
-
-      # Only Authorized Applications
-      Doorkeeper::AuthorizedApplicationsController.layout "sign_in"
-    end
-
   end
 end

@@ -11,7 +11,7 @@ module ApiHelper
     current_user
     unless @current_user
       proc_code = Proc.new do
-        @alert = I18n.translate("response.authentication_error")
+        set_notification_messages(I18n.t("response.error"), I18n.t("response.authentication_error"), :error)
         raise AuthenticationError
       end
       render_json_response(proc_code)
@@ -23,7 +23,7 @@ module ApiHelper
     current_user
     unless @current_user && @current_user.is_super_admin?
       proc_code = Proc.new do
-        @alert = I18n.translate("response.authentication_error")
+        set_notification_messages(I18n.t("response.error"), I18n.t("response.authentication_error"), :error)
         raise AuthenticationError
       end
       render_json_response(proc_code)
@@ -35,7 +35,7 @@ module ApiHelper
     current_user
     unless @current_user && @current_user.is_admin?
       proc_code = Proc.new do
-        @alert = I18n.translate("response.authentication_error")
+        set_notification_messages(I18n.t("response.error"), I18n.t("response.authentication_error"), :error)
         raise AuthenticationError
       end
       render_json_response(proc_code)
