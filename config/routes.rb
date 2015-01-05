@@ -37,7 +37,6 @@ QAuth::Application.routes.draw do
 
   # Logout Url
   delete  '/sign_out' ,       to: "public/user_sessions#sign_out",        as:  :user_sign_out
-  put     '/admin/users/update_status/:user_id', to: "admin/users#update_status",        as:  :update_status
   # ------------
   # Admin pages
   # ------------
@@ -52,6 +51,7 @@ QAuth::Application.routes.draw do
       get 'make_super_admin', to: "users#make_super_admin",        as:  :make_super_admin
       get 'remove_admin', to: "users#remove_admin",        as:  :remove_admin
       get 'remove_super_admin', to: "users#remove_super_admin",        as:  :remove_super_admin
+      put 'update_status/:user_id', to: "users#update_status",   as:  :update_status
     end
 
     resources :projects do

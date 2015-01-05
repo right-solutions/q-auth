@@ -122,21 +122,21 @@ delete_link = admin_user_path(@user)
           <% case @user.status %>
           <% when "active" %>
           <li role="presentation">
-            <%= link_to raw("<i class=\"fa fa-circle mr-5\"></i> Inactivate"), update_status_path(:user_id =>@user.id, :status =>'inactive'), :method =>'PUT', :remote=>true, role: "menuitem", tabindex: "-1", :class=>"user_status" %>
+            <%= link_to raw("<i class=\"fa fa-circle mr-5\"></i> Inactivate"), admin_user_update_status_path(:user_id =>@user.id, :status =>'inactive'), :method =>'PUT', :remote=>true, role: "menuitem", tabindex: "-1", :class=>"user_status" %>
           </li>
           <li role="presentation" class="divider"></li>
           <li role="presentation">
-            <%= link_to raw("<i class=\"fa fa-edit mr-5\"></i> Suspend"), update_status_path(:user_id =>@user.id, :status =>'suspended'), :method =>'PUT', :remote=>true, role: "menuitem", tabindex: "-1", :class=>"user_status" %>
+            <%= link_to raw("<i class=\"fa fa-edit mr-5\"></i> Suspend"), admin_user_update_status_path(:user_id =>@user.id, :status =>'suspended'), :method =>'PUT', :remote=>true, role: "menuitem", tabindex: "-1", :class=>"user_status" %>
           </li>
           <li role="presentation" class="divider"></li>
           <% when "inactive" %>
           <li role="presentation">
-            <%= link_to raw("<i class=\"fa fa-circle-o mr-5\"></i> Activate"), update_status_path(:user_id =>@user.id, :status =>'active'), :method =>'PUT', :remote=>true, role: "menuitem", tabindex: "-1", :class=>"user_status" %>
+            <%= link_to raw("<i class=\"fa fa-circle-o mr-5\"></i> Activate"), admin_user_update_status_path(:user_id =>@user.id, :status =>'active'), :method =>'PUT', :remote=>true, role: "menuitem", tabindex: "-1", :class=>"user_status" %>
           </li>
           <li role="presentation" class="divider"></li>
           <% when "suspended" %>
           <li role="presentation">
-            <%= link_to raw("<i class=\"fa fa-circle-o mr-5\"></i> Activate"), update_status_path(:user_id =>@user.id, :status =>'active'), :method =>'PUT', :remote=>true, role: "menuitem", tabindex: "-1",:class=>"user_status" %>
+            <%= link_to raw("<i class=\"fa fa-circle-o mr-5\"></i> Activate"), admin_user_update_status_path(:user_id =>@user.id, :status =>'active'), :method =>'PUT', :remote=>true, role: "menuitem", tabindex: "-1",:class=>"user_status" %>
           </li>
           <li role="presentation" class="divider"></li>
           <% end %>

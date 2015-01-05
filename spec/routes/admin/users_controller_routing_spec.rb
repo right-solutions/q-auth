@@ -21,5 +21,8 @@ describe Admin::UsersController, :type => :controller do
     expect(:get => admin_user_remove_super_admin_path(user)).to route_to(:action => 'remove_super_admin', :controller => 'admin/users', :user_id => user.id.to_s)
   end
 
+  it "update status" do
+    expect(:put => admin_user_update_status_path(user)).to route_to(:action => 'update_status', :controller => 'admin/users', :user_id => user.id.to_s)
+  end
 
 end
