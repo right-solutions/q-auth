@@ -80,9 +80,10 @@ describe Admin::UsersController, :type => :controller do
 
     describe "PUT update_status" do
       it "super admin should be able to update user status" do
-        user_params = {"status" => "active"}
-        put :update, {:id => user1.to_param, :user => user_params}, {id: super_admin.id}
-        expect(assigns(:user)).to eq (user1)
+        ["active", "suspended","inactive"].each do |status|
+          put :update_status, {:format => :js, :user_id => user1.to_param, :status => status}, {id: super_admin.id}
+          expect(assigns(:user)).to eq (user1)
+        end
       end
     end
 
