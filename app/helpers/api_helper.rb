@@ -90,7 +90,6 @@ module ApiHelper
 
     render status: @status, json: response_hash
     return
-
   end
 
 end
