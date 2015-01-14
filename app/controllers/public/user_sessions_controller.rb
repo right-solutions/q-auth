@@ -7,7 +7,7 @@ module Public
     layout 'sign_in'
 
     def sign_in
-      redirect_to_appropriate_page_after_sign_in if @current_user
+      redirect_to_appropriate_page_after_sign_in if @current_user && !@current_user.token_expired?
     end
 
     ## This method will accept a proc, execute it and render the json
