@@ -41,19 +41,15 @@ module Api
 
       def destroy
         proc_code = Proc.new do
-
           # Reseting the auth token for user when he logs out.
           @current_user.update_attribute :auth_token, SecureRandom.hex
 
           # If successfully authenticated.
           set_notification_messages(I18n.t("authentication.logged_out_successfully_heading"), I18n.t("authentication.logged_out_successfully_message"), :success)
-
         end
 
         render_json_response(proc_code)
-
       end
-
     end
   end
 end

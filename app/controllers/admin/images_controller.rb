@@ -1,17 +1,11 @@
 class Admin::ImagesController < Admin::BaseController
 
   skip_before_filter :set_navs, :parse_pagination_params
-
   before_filter :get_user_Profile_picture, :only => [:edit, :update]
-
   before_filter :delete_pictures, :only => [:new, :edit]
 
-
-  # GET /istadium_admin/images/new
-  # GET /istadium_admin/images/new.json
   def new
     ## Intitializing the image object
-
     image_type = params[:image_type] || "Image::Base"
 
     @image = image_type.constantize.new
@@ -22,10 +16,6 @@ class Admin::ImagesController < Admin::BaseController
       format.js {}
     end
   end
-
-  # GET /istadium_admin/images/1/edit
-  # GET /istadium_admin/images/1/edit.js
-  # GET /istadium_admin/images/1/edit.json
 
   def edit
     ## Fetching the image object
@@ -38,9 +28,6 @@ class Admin::ImagesController < Admin::BaseController
     end
   end
 
-  # POST /istadium_admin/images/
-  # POST /istadium_admin/images.js
-  # POST /istadium_admin/images.json
   def create
     ## Creating the photo object
       ## Creating the image object
@@ -86,11 +73,7 @@ class Admin::ImagesController < Admin::BaseController
 
   end
 
-  # PUT /istadium_admin/images/1
-  # PUT /istadium_admin/images/1.js
-  # PUT /istadium_admin/images/1.json
   def update
-
     # Get the image object and assign new image path to it
     image_type = params[:image_type] || "Image::Base"
     @image = image_type.constantize.find(params[:id])

@@ -3,11 +3,7 @@ class Admin::UsersController < Admin::BaseController
   before_filter :get_user, :only => [:masquerade]
   before_filter :require_super_admin, only: [:make_admin, :make_super_admin, :remove_admin, :remove_super_admin]
 
-  # GET /users
-  # GET /users.js
-  # GET /users.json
   def index
-
     get_collections
 
     respond_to do |format|
@@ -17,9 +13,6 @@ class Admin::UsersController < Admin::BaseController
     end
   end
 
-  # GET /users/1
-  # GET /users/1.js
-  # GET /users/1.json
   def show
     ## Creating the user object
     @user = User.find(params[:id])
@@ -31,8 +24,6 @@ class Admin::UsersController < Admin::BaseController
     end
   end
 
-  # GET /users/new
-  # GET /users/new.json
   def new
     ## Intitializing the user object
     @user = User.new
@@ -56,9 +47,6 @@ class Admin::UsersController < Admin::BaseController
     end
   end
 
-  # POST /users
-  # POST /users.js
-  # POST /users.json
   def create
     ## Creating the user object
     @user = User.new(user_params)
@@ -95,9 +83,6 @@ class Admin::UsersController < Admin::BaseController
     end
   end
 
-  # PUT /users/1
-  # PUT /users/1.js
-  # PUT /users/1.json
   def update
     ## Fetching the user
     @user = User.find(params[:id])
@@ -181,9 +166,6 @@ class Admin::UsersController < Admin::BaseController
     end
   end
 
-  # DELETE /users/1
-  # DELETE /users/1.js
-  # DELETE /users/1.json
   def destroy
     ## Fetching the user
     @user = User.find(params[:id])

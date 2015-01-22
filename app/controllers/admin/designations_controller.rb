@@ -3,9 +3,7 @@ class Admin::DesignationsController < Admin::BaseController
   skip_before_filter :require_admin
   before_filter :require_super_admin
 
-  # GET /designations
   def index
-
     get_collections
 
     respond_to do |format|
@@ -14,7 +12,6 @@ class Admin::DesignationsController < Admin::BaseController
     end
   end
 
-  # GET /designations/1
   def show
     ## Creating the designation object
     @designation = Designation.find(params[:id])
@@ -25,8 +22,6 @@ class Admin::DesignationsController < Admin::BaseController
     end
   end
 
-  # GET /designations/new
-  # GET /designations/new.json
   def new
     ## Intitializing the designation object
     @designation = Designation.new
@@ -37,7 +32,6 @@ class Admin::DesignationsController < Admin::BaseController
     end
   end
 
-  # GET /designations/1/edit
   def edit
     ## Fetching the designation object
     @designation = Designation.find(params[:id])
@@ -48,7 +42,6 @@ class Admin::DesignationsController < Admin::BaseController
     end
   end
 
-  # POST /designations
   def create
     ## Creating the designation object
     @designation = Designation.new(params[:designation].permit(:title, :responsibilities))
@@ -84,8 +77,6 @@ class Admin::DesignationsController < Admin::BaseController
     end
   end
 
-  # PUT /designations/1
-  # PUT /designations/1.js
   def update
     ## Fetching the designation
     @designation = Designation.find(params[:id])
@@ -128,9 +119,6 @@ class Admin::DesignationsController < Admin::BaseController
     end
   end
 
-  # DELETE /designations/1
-  # DELETE /designations/1.js
-  # DELETE /designations/1.json
   def destroy
     ## Fetching the designation
     @designation = Designation.find(params[:id])
@@ -179,7 +167,6 @@ class Admin::DesignationsController < Admin::BaseController
     @designation = @designations.first unless @designation
 
     return true
-
   end
 
 end

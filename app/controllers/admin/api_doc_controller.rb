@@ -1,5 +1,4 @@
 class Admin::ApiDocController < Admin::BaseController
-
   def index
   end
 
@@ -8,5 +7,4 @@ class Admin::ApiDocController < Admin::BaseController
   def set_navs
     set_nav("admin/api_doc")
   end
-
 end

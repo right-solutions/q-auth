@@ -3,11 +3,7 @@ class Admin::DepartmentsController < Admin::BaseController
   skip_before_filter :require_admin
   before_filter :require_super_admin
 
-  # GET /departments
-  # GET /departments.js
-  # GET /departments.json
   def index
-
     get_collections
 
     respond_to do |format|
@@ -17,9 +13,6 @@ class Admin::DepartmentsController < Admin::BaseController
     end
   end
 
-  # GET /departments/1
-  # GET /departments/1.js
-  # GET /departments/1.json
   def show
     ## Creating the department object
     @department = Department.find(params[:id])
@@ -31,8 +24,6 @@ class Admin::DepartmentsController < Admin::BaseController
     end
   end
 
-  # GET /departments/new
-  # GET /departments/new.json
   def new
     ## Intitializing the department object
     @department = Department.new
@@ -44,7 +35,6 @@ class Admin::DepartmentsController < Admin::BaseController
     end
   end
 
-  # GET /departments/1/edit
   def edit
     ## Fetching the department object
     @department = Department.find(params[:id])
@@ -56,9 +46,6 @@ class Admin::DepartmentsController < Admin::BaseController
     end
   end
 
-  # POST /departments
-  # POST /departments.js
-  # POST /departments.json
   def create
     ## Creating the department object
     @department = Department.new(params[:department].permit(:name, :description))
@@ -94,7 +81,6 @@ class Admin::DepartmentsController < Admin::BaseController
     end
   end
 
-  # PUT /departments/1
   def update
     ## Fetching the department
     @department = Department.find(params[:id])
@@ -137,9 +123,6 @@ class Admin::DepartmentsController < Admin::BaseController
     end
   end
 
-  # DELETE /departments/1
-  # DELETE /departments/1.js
-  # DELETE /departments/1.json
   def destroy
     ## Fetching the department
     @department = Department.find(params[:id])
@@ -188,7 +171,6 @@ class Admin::DepartmentsController < Admin::BaseController
     @department = @departments.first unless @department
 
     return true
-
   end
 
 end

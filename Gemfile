@@ -35,6 +35,11 @@ gem 'jquery-rails'
 
 gem 'jbuilder'
 
+#gem 'q_auth_ruby_client', '~> 0.0.2'
+#gem 'q_auth_ruby_client', path: "/Users/kvarma/Projects/QwinixLabs/q-apps/q_auth_ruby_client"
+gem 'poodle-rb', '~> 0.0.5'
+#gem 'poodle-rb', path: "/Users/kvarma/Projects/QwinixLabs/q-apps/poodle"
+
 # To use ActiveModel has_secure_password
 #gem 'bcrypt-ruby'
 gem 'bcrypt-ruby', '3.1.2'
