@@ -1,7 +1,6 @@
 FactoryGirl.define do
-  factory :picture, :class => Image::DepartmentPicture do
-    image { Rack::Test::UploadedFile.new('test/fixtures/test.jpg', 'image/jpg') }
-    department
+  factory :picture, :class => Image::Base do
+    image { Rack::Test::UploadedFile.new('spec/factories/test.jpg', 'image/jpg') }
   end
 
   factory :department_picture, parent: :picture do

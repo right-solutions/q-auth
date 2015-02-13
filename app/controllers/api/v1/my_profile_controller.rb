@@ -3,14 +3,7 @@ module Api
     class MyProfileController < Api::V1::BaseController
       def my_profile
         proc_code = Proc.new do
-
-          if @current_user
-            @data = @current_user
-          else
-            @success = false
-            @alert = I18n.translate("response.authentication_error")
-            raise AuthenticationError
-          end
+          @data = @current_user
         end
         render_json_response(proc_code)
       end

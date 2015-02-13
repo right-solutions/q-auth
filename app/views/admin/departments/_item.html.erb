@@ -1,14 +1,18 @@
-<%# describes about each department %>
 <div class="panel panel-default media p-5">
   <a class="media-left" href="#" style="width:15%;">
     <%= display_image(department, "picture.image.url",
-                        place_holder: {width: 50, height: 50, text: "<No Image>"}
-                        ) %>
+                      width: "40px",
+                      place_holder: {
+                        width: 40,
+                        height: 30,
+                        text: "<No Image>"}
+                      ) %>
   </a>
   <div class="media-body">
-    <%= link_to department.name, admin_department_path(department), :remote=>true, :class=>"text-color-blue fs-14" %>
-    <div class="text-color-gray fs-12"> <%= scrap_word(department.description, 120) %></div>
+    <%= theme_item_title(department.name, admin_department_path(department)) %>
+    <%= theme_item_description(department.description, 120) %>
   </div>
+
 </div>
 
 

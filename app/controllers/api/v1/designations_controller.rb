@@ -1,7 +1,6 @@
 module Api
   module V1
     class DesignationsController < Api::V1::BaseController
-      include ParamsParserHelper
 
       skip_before_filter :require_auth_token
       before_filter :parse_pagination_params, only: :index

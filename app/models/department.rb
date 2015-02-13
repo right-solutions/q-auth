@@ -1,7 +1,9 @@
 class Department < ActiveRecord::Base
 
   # Validations
-  validates :name, presence: true
+  extend PoodleValidators
+  validate_string :name, mandatory: true
+  validate_string :description, max_length: 2056
 
   # Associations
   has_many :users
