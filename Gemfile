@@ -3,46 +3,44 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.5'
 gem 'rails-api'
-gem 'pg'
-gem 'thin'
-gem 'warden'
-gem 'state_machine'
 
-gem 'linkedin'
-gem 'carrierwave'
+# Database
+gem 'pg'
+
+# Development Server
+gem 'thin'
+
+# To use ActiveModel has_secure_password
+gem 'bcrypt-ruby', '3.1.2'
 
 # Oauth provider 7 client
 gem 'oauth2'
+
+# Image Upload and manipulations
+gem 'carrierwave'
 gem 'fog'
 gem 'rmagick', :require => 'RMagick'
-gem 'aws-sdk' # for heroku
 gem 'jquery-fileupload-rails'
 
-# Use SCSS for stylesheets
-# gem 'sass-rails'
+# AWS SDK for elastic beanstalk
+gem 'aws-sdk' # for heroku
 
-# Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '>= 1.3.0'
 
-# Use CoffeeScript for .js.coffee assets and views
-gem 'coffee-rails'
-
-# See https://github.com/sstephenson/execjs#readme for more supported runtimes
-gem 'therubyracer', platforms: :ruby
-
-# Use jquery as the JavaScript library
+# Other Dependencies
 gem 'jquery-rails'
-
+gem 'state_machine'
+gem 'uglifier', '>= 1.3.0'
+gem 'coffee-rails'
+gem 'therubyracer', platforms: :ruby
 gem 'jbuilder'
 
-#gem 'q_auth_ruby_client', '~> 0.0.2'
-#gem 'q_auth_ruby_client', path: "/Users/kvarma/Projects/QwinixLabs/q-apps/q_auth_ruby_client"
-gem 'poodle-rb', '~> 0.0.5'
+# Code Climate
+gem "codeclimate-test-reporter", group: :test, require: nil
+
+gem 'poodle-rb', '~> 0.1.0'
 #gem 'poodle-rb', path: "/Users/kvarma/Projects/QwinixLabs/q-apps/poodle"
 
-# To use ActiveModel has_secure_password
-#gem 'bcrypt-ruby'
-gem 'bcrypt-ruby', '3.1.2'
+# Poodle Dependencies
 gem "handy-css-rails", "0.0.7"
 gem "kaminari"
 gem "bootstrap-kaminari-views"
@@ -73,12 +71,12 @@ group :development, :test do
   gem "spork", "~> 1.0rc"
   gem "better_errors"
   gem "binding_of_caller"
-  gem 'rspec-rails', '~> 3.0' # Needed for rake stats to calculate test coverage
+  gem 'rspec-rails'
   gem "awesome_print"
   gem "quiet_assets"
 end
 
-gem 'rails_12factor', group: :production
+#gem 'rails_12factor', group: :production
 
 group :it, :staging, :development, :test, :uat, :production do
   gem 'ruby-progressbar'
