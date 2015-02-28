@@ -23,8 +23,7 @@ gem 'rmagick', :require => 'RMagick'
 gem 'jquery-fileupload-rails'
 
 # AWS SDK for elastic beanstalk
-gem 'aws-sdk' # for heroku
-
+# gem 'aws-sdk' # for heroku
 
 # Other Dependencies
 gem 'jquery-rails'
@@ -37,7 +36,7 @@ gem 'jbuilder'
 # Code Climate
 gem "codeclimate-test-reporter", group: :test, require: nil
 
-gem 'poodle-rb', '~> 0.1.0'
+gem 'poodle-rb', '~> 0.1.3'
 #gem 'poodle-rb', path: "/Users/kvarma/Projects/QwinixLabs/q-apps/poodle"
 
 # Poodle Dependencies

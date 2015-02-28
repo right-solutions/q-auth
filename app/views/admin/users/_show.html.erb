@@ -3,11 +3,7 @@
 <div class="panel panel-default">
   <div class="panel-body" style="height:auto;">
     <div class="pull-left" style="width:30%;">
-      <%
-        redirect_url = admin_user_path(@user)
-        change_picture_url = upload_image_link(@user, redirect_url, :profile_picture)
-      %>
-      <%= theme_image(@user, redirect_url, :profile_picture, "profile_picture.image.large.url", change_picture_url: change_picture_url) %>
+      <%= edit_image(@user, "profile_picture.image.large.url", upload_image_link(@user, :profile_picture)) %>
     </div>
     <div class="pull-left ml-10" style="width:65%;">
       <%= theme_panel_heading(@user.name) %>

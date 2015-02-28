@@ -2,7 +2,7 @@
   redirect_back_url = params[:redirect_back_url] unless defined?(redirect_back_url)
 %>
 
-<%= form_tag create_session_path, :role=>"form", id: "form_sign_in", class: "m-30" do %>
+<%= form_tag main_app.create_session_path, :role=>"form", id: "form_sign_in", class: "m-30" do %>
 
   <%= hidden_field_tag :client_app, params[:client_app] if params[:client_app] %>
   <%= hidden_field_tag :redirect_back_url, params[:redirect_back_url] if params[:redirect_back_url] %>

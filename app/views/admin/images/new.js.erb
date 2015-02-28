@@ -2,5 +2,6 @@
 heading = "Add a photo";
 bodyContent = "<%= escape_javascript(render(:partial=>"form")) %>";
 showModal(heading, bodyContent);
-deleteImages();
-ProfilePictureupload(true);
+
+// When the image upload form is submitted, the server response will appear in this iframe -->
+var $div = $('<iframe id="iframe_photo" name="iframe_photo" width="100%" style="display:none"></iframe>').appendTo('body');

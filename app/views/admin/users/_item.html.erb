@@ -2,7 +2,7 @@
 
 <div class="panel panel-default media p-5 <%= user_color %>">
   <a class="media-left" href="#" style="width:25%;">
-    <%= theme_user_image(user, "profile_picture.image.thumb.url", width: 80) %>
+    <%= display_user_image(user, "profile_picture.image.thumb.url", width: 80) %>
   </a>
   <div class="media-body">
     <%= theme_item_title(user.name, admin_user_path(user)) %>

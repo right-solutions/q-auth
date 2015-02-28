@@ -26,7 +26,6 @@ RSpec.describe Department, :type => :model do
 
   context "Associations" do
     it { should have_many(:users) }
-    it { should have_one(:picture) }
   end
 
   context "Class Methods" do

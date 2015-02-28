@@ -7,7 +7,6 @@ class Department < ActiveRecord::Base
 
   # Associations
   has_many :users
-  has_one :picture, :as => :imageable, :dependent => :destroy, :class_name => "Image::DepartmentPicture"
 
   # return an active record relation object with the search query in its where clause
   # Return the ActiveRecord::Relation object

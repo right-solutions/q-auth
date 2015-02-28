@@ -44,7 +44,7 @@ QAuth::Application.routes.draw do
   namespace :admin do
     resources :users do
       member do
-        get :masquerade, as: :masquerade
+        put :masquerade, as: :masquerade
         put :update_status, as:  :update_status
         put :make_admin, as:  :make_admin
         put :make_super_admin, as:  :make_super_admin
@@ -60,12 +60,12 @@ QAuth::Application.routes.draw do
     end
 
     resources :images do
-      collection do
-        delete :destroy_pictures
+      member do
+        put :crop
       end
-   end
-   resources :departments
-   resources :designations
+    end
+    resources :departments
+    resources :designations
 
  end
 
@@ -81,11 +81,12 @@ QAuth::Application.routes.draw do
     put   '/update',            to: "profile#update",   as:   :update
     get   '/members',           to: "members#index",    as:   :members
     get   '/member/:id',        to: "members#show",     as:   :member
+
     resources :images do
-     collection do
-       delete :destroy_pictures
-     end
-   end
+      member do
+        put :crop
+      end
+    end
  end
 
   # User Pages for teams and user profiles
