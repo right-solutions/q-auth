@@ -212,7 +212,17 @@ class User < ActiveRecord::Base
   end
 
   def start_session
-    self.update_attribute :token_created_at, Time.now
+    # FIX ME - specs are not written to ensure that all these data are saved
+    self.token_created_at = Time.now
+    self.sign_in_count = self.sign_in_count ? self.sign_in_count + 1 : 1
+    self.last_sign_in_at = self.current_sign_in_at
+    self.last_sign_in_ip = self.current_sign_in_ip
+    self.current_sign_in_at = self.token_created_at
+
+    # FIX ME - pass remote_ip to this method.
+    # Make necessary changes to authentication service to make it work
+    # self.current_sign_in_ip = remote_ip if remote_ip
+    self.save
   end
 
   def assign_default_password_if_nil
