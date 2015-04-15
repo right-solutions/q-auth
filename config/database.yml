@@ -23,7 +23,7 @@ test:
   adapter: postgresql
   encoding: unicode
   reconnect: false
-  database: q_auth_test_<%= ENV['TEST_ENV_NUMBER'] %>
+  database: q_auth_test
   pool: 5
   username: kvarma
   host: localhost

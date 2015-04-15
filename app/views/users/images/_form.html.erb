@@ -7,9 +7,6 @@
 
     <%= @image.errors[:base].to_sentence %>
 
-    <%= hidden_field_tag :faction, @image.new_record? ? main_app.admin_images_path : main_app.admin_image_path(@image) %>
-    <%= hidden_field_tag :fmethod, @image.new_record? ? "POST" : "PUT" %>
-
     <%= hidden_field_tag :imageable_id, params[:imageable_id] %>
     <%= hidden_field_tag :imageable_type, params[:imageable_type] %>
     <%= hidden_field_tag :redirect_url, params[:redirect_url] %>

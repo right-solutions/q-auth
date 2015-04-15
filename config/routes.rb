@@ -87,7 +87,7 @@ QAuth::Application.routes.draw do
         put :crop
       end
     end
- end
+  end
 
   # User Pages for teams and user profiles
   get   '/team',               to: "user/team#index",   as:  :team
