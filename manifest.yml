@@ -6,4 +6,4 @@ applications:
   path: .
   command: bundle exec rake db:migrate && bundle exec rake import:all && bundle exec rails s -p $PORT
   services:
-    - q-apps-postgres
+    - q-auth-postgres
