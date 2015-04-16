@@ -2,8 +2,8 @@ require 'rails_helper'
 
 describe Users::MembersController, :type => :controller do
   let(:admin_user) {FactoryGirl.create(:admin_user)}
-  let(:user_1) {FactoryGirl.create(:user)}
-  let(:user_2) {FactoryGirl.create(:user)}
+  let(:user_1) {FactoryGirl.create(:active_user)}
+  let(:user_2) {FactoryGirl.create(:active_user)}
 
   describe "GET show" do
     it "assigns the requested user as @user" do

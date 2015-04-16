@@ -1,14 +1,5 @@
 <div class="panel panel-default media p-5">
-  <a class="media-left" href="#" style="width:15%;">
-    <%= display_image(department, "picture.image.url",
-                      width: "40px",
-                      place_holder: {
-                        width: 40,
-                        height: 30,
-                        text: "<No Image>"}
-                      ) %>
-  </a>
-  <div class="media-body">
+  <div class="media-body pl-10">
     <%= theme_item_title(department.name, admin_department_path(department)) %>
     <%= theme_item_description(department.description, 120) %>
   </div>

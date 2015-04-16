@@ -3,13 +3,6 @@
 <div class="panel panel-default">
   <div class="panel-body" style="height:auto;">
     <div style="height:auto;">
-      <div class="pull-left" style="width:30%;">
-        <%
-          redirect_url = admin_designation_path(@designation)
-          change_picture_url = upload_image_link(@designation, redirect_url, :picture)
-        %>
-        <%= theme_image(@designation, redirect_url, :picture, "picture.image.url", change_picture_url: change_picture_url) %>
-      </div>
       <div class="pull-left ml-10 text-color-gray" style="width:65%">
         <%= theme_panel_heading(@designation.title) %>
         <%= theme_panel_description(@designation.responsibilities) %>

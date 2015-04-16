@@ -12,14 +12,14 @@
  *= require poodle/bootstrap-theme
  *= require poodle/font-awesome
  *= require poodle/poodle-theme
+ *= require poodle/cropper
  *= require handycss.css
- *= require cropper
  *= require_self
 
  */
 
- .login-box {
-  width: 400px;
-  margin: 0px auto;
-  padding: 20px;
- }
+img.centered {
+  display: block;
+  margin-left: auto;
+  margin-right: auto
+}
