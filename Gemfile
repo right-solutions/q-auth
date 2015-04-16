@@ -23,7 +23,9 @@ gem 'rmagick', :require => 'RMagick'
 gem 'jquery-fileupload-rails'
 
 # AWS SDK for elastic beanstalk
-# gem 'aws-sdk' # for heroku
+gem 'aws-sdk' # for heroku
+gem 'cf-app-utils'
+gem 'rails_12factor'
 
 # Other Dependencies
 gem 'jquery-rails'
