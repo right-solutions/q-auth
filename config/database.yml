@@ -15,8 +15,7 @@ development:
   reconnect: false
   database: q_auth_development
   pool: 5
-  username: postgres
-  password: password
+  username: kvarma
   host: localhost
   port: 5432
 
@@ -24,10 +23,9 @@ test:
   adapter: postgresql
   encoding: unicode
   reconnect: false
-  database: q_auth_test
+  database: q_auth_test_<%= ENV['TEST_ENV_NUMBER'] %>
   pool: 5
-  username: postgres
-  password: password
+  username: kvarma
   host: localhost
   port: 5432
 
