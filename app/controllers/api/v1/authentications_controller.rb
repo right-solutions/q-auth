@@ -2,7 +2,7 @@ module Api
   module V1
     class AuthenticationsController < Api::V1::BaseController
 
-      skip_before_filter :require_auth_token, :only => :create
+      skip_before_filter :require_auth_token, :only => [:create]
 
       def create
         proc_code = Proc.new do
@@ -22,8 +22,7 @@ module Api
       def destroy
         proc_code = Proc.new do
           set_notification_messages("authentication.logged_out", :success)
-          # Reseting the auth token for user when he logs out.
-          @current_user.update_attributes auth_token: SecureRandom.hex, token_created_at: nil
+          @current_user.end_session
         end
         render_json_response(proc_code)
       end

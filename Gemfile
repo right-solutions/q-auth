@@ -38,7 +38,7 @@ gem 'jbuilder'
 # Code Climate
 gem "codeclimate-test-reporter", group: :test, require: nil
 
-gem 'poodle-rb', '~> 0.1.9'
+gem 'poodle-rb', '~> 0.2.1'
 #gem 'poodle-rb', path: "/Users/kvarma/Projects/QwinixLabs/q-apps/poodle"
 
 # Poodle Dependencies
@@ -76,8 +76,6 @@ group :development, :test do
   gem "awesome_print"
   gem "quiet_assets"
 end
-
-gem 'rails_12factor', group: :production
 
 group :it, :staging, :development, :test, :uat, :production do
   gem 'ruby-progressbar'
