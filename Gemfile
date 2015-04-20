@@ -19,7 +19,7 @@ gem 'oauth2'
 # Image Upload and manipulations
 gem 'carrierwave'
 gem 'fog'
-gem 'rmagick', :require => 'RMagick'
+gem 'rmagick', :require => 'rmagick'
 gem 'jquery-fileupload-rails'
 
 # AWS SDK for elastic beanstalk
