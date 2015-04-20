@@ -27,8 +27,7 @@ module Public
 
     def sign_out
       set_notification_messages("authentication.logged_out", :success)
-      # Reseting the auth token for user when he logs out.
-      @current_user.update_attributes auth_token: SecureRandom.hex, token_created_at: nil
+      @current_user.end_session
       session.delete(:id)
       restore_last_user
       redirect_after_unsuccessful_authentication

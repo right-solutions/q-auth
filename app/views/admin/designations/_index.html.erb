@@ -6,5 +6,4 @@
 <% end %>
 <%= theme_panel_message(I18n.translate("forms.no_results")) if @designations.blank? %>
 
-<% #binding.pry %>
 <%= theme_paginate(@designations) %>

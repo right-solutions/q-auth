@@ -225,6 +225,12 @@ class User < ActiveRecord::Base
     self.save
   end
 
+  def end_session
+    # Reseting the auth token for user when he logs out.
+    # (Time.now - 1.second)
+    self.update_attributes auth_token: SecureRandom.hex, token_created_at: nil
+  end
+
   def assign_default_password_if_nil
     self.password = DEFAULT_PASSWORD
     self.password_confirmation = DEFAULT_PASSWORD
