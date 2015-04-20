@@ -38,7 +38,7 @@ gem 'jbuilder'
 # Code Climate
 gem "codeclimate-test-reporter", group: :test, require: nil
 
-gem 'poodle-rb', '~> 0.2.1'
+gem 'poodle-rb', '~> 0.2.2'
 #gem 'poodle-rb', path: "/Users/kvarma/Projects/QwinixLabs/q-apps/poodle"
 
 # Poodle Dependencies
