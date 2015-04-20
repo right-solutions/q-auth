@@ -85,6 +85,7 @@ namespace 'import' do
       user = User.find_by_username(row[:username]) || User.new
       user.name = row[:name]
       user.username = row[:username]
+      user.designation_overridden = row[:designation]
       user.email = row[:email]
       user.phone = row[:phone]
       user.skype = row[:skype]
