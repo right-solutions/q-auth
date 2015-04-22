@@ -11,7 +11,6 @@
       </div>
 
       <div class="form-inputs mb-30 mt-30">
-
         <%= theme_form_field(@user, 'name') %>
         <%= theme_form_field(@user, 'email') %>
         <%= theme_form_field(@user, 'username') %>
@@ -21,6 +20,8 @@
         <%= theme_form_field(@user, 'city', required: false) %>
         <%= theme_form_field(@user, 'state', required: false) %>
         <%= theme_form_field(@user, 'country', required: false) %>
+        <%= theme_form_field(@user, 'password', required: false, html_options: {type: 'password'}) %>
+        <%= theme_form_field(@user, 'password_confirmation', required: false, html_options: {type: 'password'}) %>
 
         <% options = {assoc_collection: Designation.select("id, title").order("title ASC").all, required: true, editable: true, assoc_display_method: :title} %>
         <%= theme_form_assoc_group(@user, :designation_id, **options) %>
