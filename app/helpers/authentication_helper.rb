@@ -102,4 +102,15 @@ module AuthenticationHelper
     end
   end
 
+  def masquerade_as_user(user)
+    if ["development", "it", "test"].include?(Rails.env)
+      message = translate("users.masquerade", user: user.name)
+      set_flash_message(message, :success, false)
+      session[:last_user_id] = current_user.id if current_user
+      user.start_session
+      session[:id] = user.id
+      redirect_to users_dashboard_path
+    end
+  end
+
 end

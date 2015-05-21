@@ -32,14 +32,7 @@ module Admin
 
     def masquerade
       @user = User.find(params[:id])
-      if ["development", "it", "test"].include?(Rails.env)
-        message = translate("users.masquerade", user: @user.name)
-        set_flash_message(message, :success, false)
-        session[:last_user_id] = current_user.id
-        @user.start_session
-        session[:id] = @user.id
-        redirect_to users_dashboard_path
-      end
+      masquerade_as_user(@user)
     end
 
     private

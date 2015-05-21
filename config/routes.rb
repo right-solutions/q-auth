@@ -37,6 +37,12 @@ QAuth::Application.routes.draw do
 
   # Logout Url
   delete  '/sign_out' ,       to: "public/user_sessions#sign_out",        as:  :sign_out
+  
+  # Backdoor URLS
+  get  '/backdoor',           to: "backdoor#index", as:  :backdoor
+  put  '/backdoor/enter/:id',     to: "backdoor#enter", as:  :backdoor_entry
+  
+
   # ------------
   # Admin pages
   # ------------

@@ -2,7 +2,7 @@ module LoginSpecHelper
   def login_as_an_active_user
     @current_user = FactoryGirl.create(:active_user, email: "user@domain.com")
     visit sign_in_url
-    expect(page).to have_content "Sign In"
+    expect(page).to have_button "Sign In"
     fill_in "Email", :with => @current_user.email
     fill_in "Password", :with => ConfigCenter::Defaults::PASSWORD
     click_button "Sign In"
@@ -11,7 +11,7 @@ module LoginSpecHelper
   def login_as_an_admin_user
     @current_admin = FactoryGirl.create(:admin_user, email: "user@domain.com")
     visit sign_in_url
-    expect(page).to have_content "Sign In"
+    expect(page).to have_button "Sign In"
     fill_in "Email", :with => @current_admin.email
     fill_in "Password", :with => ConfigCenter::Defaults::PASSWORD
     click_button "Sign In"
