@@ -54,8 +54,6 @@ RSpec.describe Api::V1::MembersController, :type => :controller do
       end
       it "should not return the list of users for ram" do
         users = [ram, sita, lakshman, admin, super_admin]
-        token = ActionController::HttpAuthentication::Token.encode_credentials(ram.auth_token)
-        request.env['HTTP_AUTHORIZATION'] = token
 
         get "index", :format =>:json
         response_body = JSON.parse(response.body)
