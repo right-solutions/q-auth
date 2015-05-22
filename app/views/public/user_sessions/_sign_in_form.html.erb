@@ -16,8 +16,9 @@
     <label for="sign_in_password">Password</label>
     <%= password_field_tag :password, '', :placeholder=> "Password", :name => "password", :class=>"form-control"%>
   </div>
-
+<div><%= link_to 'Forgot password', forgot_password_form_path %>
   <%= submit_tag "Sign In", :class => "btn btn-primary pull-right" %>
+  </div>
   <div class="cl-10"></div>
 
 <% end %>

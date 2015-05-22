@@ -19,6 +19,7 @@
 // For jQery validations - http://jqueryvalidation.org/documentation/
 //= require jquery.validate
 //= require jquery.validate.additional-methods
+//= require utility
 //
 // include validation init functions
 //= require_tree ./validations
