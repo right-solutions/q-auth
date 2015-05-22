@@ -240,6 +240,11 @@ class User < ActiveRecord::Base
     return self.token_created_at.nil? || (Time.now > self.token_created_at + SESSION_TIME_OUT)
   end
 
+  def generate_reset_password_token
+     self.reset_password_token = SecureRandom.hex unless self.reset_password_token
+     self.reset_password_sent_at = Time.now unless self.reset_password_sent_at
+  end
+
   private
 
   def should_validate_password?

@@ -34,7 +34,10 @@ QAuth::Application.routes.draw do
   # Sign In URLs for users
   get     '/sign_in',         to: "public/user_sessions#sign_in",         as:  :sign_in
   post    '/create_session',  to: "public/user_sessions#create_session",  as:  :create_session
-
+  get     '/forgot_password_form', to: "public/user_sessions#forgot_password_form", as:  :forgot_password_form
+  post  '/forgot_password', to: "public/user_sessions#forgot_password", as: :forgot_password
+  get   '/reset_password_form/:id',  to: "public/user_sessions#reset_password_form",  as:  :reset_password_form
+  put  '/reset_password_update/:id',   to: "public/user_sessions#reset_password_update", as: :reset_password_update
   # Logout Url
   delete  '/sign_out' ,       to: "public/user_sessions#sign_out",        as:  :sign_out
   
@@ -87,7 +90,7 @@ QAuth::Application.routes.draw do
     put   '/update',            to: "profile#update",   as:   :update
     get   '/members',           to: "members#index",    as:   :members
     get   '/member/:id',        to: "members#show",     as:   :member
-
+    
     resources :images do
       member do
         put :crop
