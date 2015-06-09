@@ -1,13 +1,12 @@
 # config valid only for Capistrano 3.1
 set :application, 'q-auth'
-set :repo_url, 'git@github.com:QwinixLabs/q-auth.git'
+set :repo_url, 'https://github.com/QwinixLabs/q-auth.git'
 
 
 set :format, :pretty
 
 set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/uploads}
-set :linked_files, %w{config/database.yml}
-#set :linked_files, %w{config/database.yml config/security.yml}
+set :linked_files, %w{config/database.yml config/security.yml}
 
 set :default_env, { path: "~/.rbenv/shims:~/.rbenv/bin:$PATH" }
 
@@ -31,6 +30,17 @@ namespace :deploy do
       # Your restart mechanism here, for example:
       execute :touch, release_path.join('tmp/restart.txt')
       puts "RESTARTED SUCCESSFULLY"
+    end
+  end
+
+  after :publishing, :restart
+
+  after :restart, :clear_cache do
+    on roles(:web), in: :groups, limit: 3, wait: 10 do
+      # Here we can do anything such as:
+      # within release_path do
+      #   execute :rake, 'cache:clear'
+      # end
     end
   end
 
