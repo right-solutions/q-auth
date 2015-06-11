@@ -6,7 +6,7 @@ set :repo_url, 'https://github.com/QwinixLabs/q-auth.git'
 set :format, :pretty
 
 set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/uploads}
-set :linked_files, %w{config/database.example.yml config/security.yml}
+set :linked_files, %w{config/database.yml config/security.yml}
 
 set :default_env, { path: "~/.rbenv/shims:~/.rbenv/bin:$PATH" }
 

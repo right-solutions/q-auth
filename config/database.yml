@@ -29,3 +29,12 @@ test:
   host: localhost
   port: 5432
 
+qa:
+  adapter: postgresql
+  encoding: unicode
+  reconnect: false
+  database: q_auth_qa
+  pool: 5
+  username: q_auth_user
+  host: localhost
+  port: 5432
